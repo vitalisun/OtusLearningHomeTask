@@ -16,6 +16,7 @@ namespace ShootEmUp
         [SerializeField]
         private SpriteRenderer spriteRenderer;
 
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
             this.OnCollisionEntered?.Invoke(this, collision);
@@ -41,4 +42,6 @@ namespace ShootEmUp
             this.spriteRenderer.color = color;
         }
     }
+
+    
 }

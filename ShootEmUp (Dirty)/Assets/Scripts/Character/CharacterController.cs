@@ -42,16 +42,16 @@ namespace ShootEmUp
 
             if (FireRequired)
             {
-                OnFlyBullet();
+                OnFireBullet();
                 FireRequired = false;
             }
         }
 
         private void OnCharacterDeath(GameObject _) => _gameManager.FinishGame();
 
-        private void OnFlyBullet()
+        private void OnFireBullet()
         {
-            _bulletSystem.FlyBulletByArgs(new BulletSystem.Args
+            _bulletSystem.FireBullet(new BulletArgs
             {
                 isPlayer = true,
                 physicsLayer = (int) _bulletConfig.physicsLayer,
