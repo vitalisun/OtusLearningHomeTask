@@ -5,40 +5,40 @@ namespace ShootEmUp
 {
     public sealed class CharacterController : MonoBehaviour
     {
-        [SerializeField] private GameObject _character; 
-        [SerializeField] private GameManager _gameManager;
-        [SerializeField] private BulletSystem _bulletSystem;
-        [SerializeField] private BulletConfig _bulletConfig;
+        [SerializeField] private GameObject character; 
+        [SerializeField] private GameManager gameManager;
+        [SerializeField] private BulletSystem bulletSystem;
+        [SerializeField] private BulletConfig bulletConfig;
 
         [HideInInspector]
         public bool FireRequired;
         [HideInInspector]
         public float HorizontalDirection;
 
-        private MoveComponent _moveComponent;
-        private HitPointsComponent _hitPointsComponent;
-        private WeaponComponent _weaponComponent;
+        private MoveComponent moveComponent;
+        private HitPointsComponent hitPointsComponent;
+        private WeaponComponent weaponComponent;
 
         void Awake()
         {
-            _hitPointsComponent = _character.GetComponent<HitPointsComponent>();
-            _moveComponent = _character.GetComponent<MoveComponent>();
-            _weaponComponent = _character.GetComponent<WeaponComponent>();
+            hitPointsComponent = character.GetComponent<HitPointsComponent>();
+            moveComponent = character.GetComponent<MoveComponent>();
+            weaponComponent = character.GetComponent<WeaponComponent>();
         }
 
         private void OnEnable()
         {
-            _hitPointsComponent.hpEmpty += OnCharacterDeath;
+            hitPointsComponent.hpEmpty += OnCharacterDeath;
         }
 
         private void OnDisable()
         {
-            _hitPointsComponent.hpEmpty -= OnCharacterDeath;
+            hitPointsComponent.hpEmpty -= OnCharacterDeath;
         }
 
         private void FixedUpdate()
         {
-            _moveComponent.MoveByRigidbodyVelocity(new Vector2(HorizontalDirection, 0) * Time.fixedDeltaTime);
+            moveComponent.MoveByRigidbodyVelocity(new Vector2(HorizontalDirection, 0) * Time.fixedDeltaTime);
 
             if (FireRequired)
             {
@@ -47,18 +47,18 @@ namespace ShootEmUp
             }
         }
 
-        private void OnCharacterDeath(GameObject _) => _gameManager.FinishGame();
+        private void OnCharacterDeath(GameObject _) => gameManager.FinishGame();
 
         private void OnFireBullet()
         {
-            _bulletSystem.FireBullet(new BulletArgs
+            bulletSystem.FireBullet(new BulletArgs
             {
                 isPlayer = true,
-                physicsLayer = (int) _bulletConfig.physicsLayer,
-                color = _bulletConfig.color,
-                damage = _bulletConfig.damage,
-                position = _weaponComponent.Position,
-                velocity = _weaponComponent.Rotation * Vector3.up * _bulletConfig.speed
+                physicsLayer = (int) bulletConfig.physicsLayer,
+                color = bulletConfig.color,
+                damage = bulletConfig.damage,
+                position = weaponComponent.Position,
+                velocity = weaponComponent.Rotation * Vector3.up * bulletConfig.speed
             });
         }
     }

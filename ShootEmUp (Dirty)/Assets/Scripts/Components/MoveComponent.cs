@@ -1,3 +1,4 @@
+using Assets.Scripts.Common;
 using UnityEngine;
 
 namespace ShootEmUp
@@ -8,12 +9,12 @@ namespace ShootEmUp
         private new Rigidbody2D rigidbody2D;
 
         [SerializeField]
-        private float speed = 5.0f;
+        private float speed = Consts.MoveComponentSpeed;
         
         public void MoveByRigidbodyVelocity(Vector2 vector)
         {
-            var nextPosition = this.rigidbody2D.position + vector * this.speed;
-            this.rigidbody2D.MovePosition(nextPosition);
+            var nextPosition = rigidbody2D.position + vector * speed;
+            rigidbody2D.MovePosition(nextPosition);
         }
     }
 }

@@ -1,3 +1,4 @@
+using Assets.Scripts.Common;
 using UnityEngine;
 
 namespace ShootEmUp
@@ -6,7 +7,7 @@ namespace ShootEmUp
     {
         public bool IsReached
         {
-            get { return this.isReached; }
+            get { return isReached; }
         }
 
         [SerializeField] private MoveComponent moveComponent;
@@ -17,26 +18,26 @@ namespace ShootEmUp
 
         public void SetDestination(Vector2 endPoint)
         {
-            this.destination = endPoint;
-            this.isReached = false;
+            destination = endPoint;
+            isReached = false;
         }
 
         private void FixedUpdate()
         {
-            if (this.isReached)
+            if (isReached)
             {
                 return;
             }
             
-            var vector = this.destination - (Vector2) this.transform.position;
-            if (vector.magnitude <= 0.25f)
+            var vector = destination - (Vector2) transform.position;
+            if (vector.magnitude <= Consts.ReachDistanseThreshold)
             {
-                this.isReached = true;
+                isReached = true;
                 return;
             }
 
             var direction = vector.normalized * Time.fixedDeltaTime;
-            this.moveComponent.MoveByRigidbodyVelocity(direction);
+            moveComponent.MoveByRigidbodyVelocity(direction);
         }
     }
 }

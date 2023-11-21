@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assets.Scripts.Common;
 using ShootEmUp;
 using UnityEngine;
 
@@ -10,22 +11,26 @@ namespace Assets.Scripts.Bullets
 {
     internal class BulletPool
     {
-        private readonly int _initialCount = 50;
+        private readonly int initialCount;
+        private readonly Queue<Bullet> pool = new();
 
-        private readonly Queue<Bullet> _bulletPool = new();
+        public BulletPool(int initialCount)
+        {
+            this.initialCount = initialCount;
+        }
 
         public void InitPool(Bullet prefab, Transform container)
         {
-            for (var i = 0; i < this._initialCount; i++)
+            for (var i = 0; i < initialCount; i++)
             {
                 var bullet = UnityEngine.Object.Instantiate(prefab, container);
-                this._bulletPool.Enqueue(bullet);
+                pool.Enqueue(bullet);
             }
         }
 
         public Bullet GetBulletFromPool(Bullet prefab, Transform worldTransform)
         {
-            if (_bulletPool.TryDequeue(out var bullet))
+            if (pool.TryDequeue(out var bullet))
             {
                 bullet.transform.SetParent(worldTransform);
             }
@@ -40,7 +45,7 @@ namespace Assets.Scripts.Bullets
         public void ReturnBulletToPool(Bullet bullet, Transform container)
         {
             bullet.transform.SetParent(container);
-            _bulletPool.Enqueue(bullet);
+            pool.Enqueue(bullet);
         }
     }
 }
