@@ -5,7 +5,7 @@ namespace Assets.Scripts.Components
 {
     public sealed class HitPointsComponent : MonoBehaviour
     {
-        public event Action<GameObject> HpEmpty;
+        public event Action<GameObject> OnDeath;
 
         [SerializeField] private int _hitPoints;
 
@@ -19,7 +19,7 @@ namespace Assets.Scripts.Components
             _hitPoints -= damage;
             if (_hitPoints <= 0)
             {
-                HpEmpty?.Invoke(gameObject);
+                OnDeath?.Invoke(gameObject);
             }
         }
     }

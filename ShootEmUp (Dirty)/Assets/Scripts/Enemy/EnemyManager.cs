@@ -34,7 +34,7 @@ namespace Assets.Scripts.Enemy
                 {
                     if (_activeEnemies.Add(enemy))
                     {
-                        enemy.GetComponent<HitPointsComponent>().HpEmpty += OnDestroyed;
+                        enemy.GetComponent<HitPointsComponent>().OnDeath += OnDestroyed;
                         enemy.GetComponent<EnemyAttackAgent>().OnFire += OnFire;
                     }
                 }
@@ -45,7 +45,7 @@ namespace Assets.Scripts.Enemy
         {
             if (_activeEnemies.Remove(enemy))
             {
-                enemy.GetComponent<HitPointsComponent>().HpEmpty -= OnDestroyed;
+                enemy.GetComponent<HitPointsComponent>().OnDeath -= OnDestroyed;
                 enemy.GetComponent<EnemyAttackAgent>().OnFire -= OnFire;
 
                 _enemyPool.UnspawnEnemy(enemy);

@@ -29,29 +29,31 @@ namespace Assets.Scripts.Character
 
         private void OnEnable()
         {
-            _hitPointsComponent.HpEmpty += OnCharacterDeath;
+            _hitPointsComponent.OnDeath += OnCharacterDeath;
         }
 
         private void OnDisable()
         {
-            _hitPointsComponent.HpEmpty -= OnCharacterDeath;
+            _hitPointsComponent.OnDeath -= OnCharacterDeath;
         }
 
         private void FixedUpdate()
         {
             _moveComponent.MoveByRigidbodyVelocity(new Vector2(HorizontalDirection, 0) * Time.fixedDeltaTime);
 
-            if (FireRequired)
-            {
-                OnFireBullet();
-                FireRequired = false;
-            }
+            Fire();
         }
 
-        private void OnCharacterDeath(GameObject _) => _gameManager.FinishGame();
-
-        private void OnFireBullet()
+        private void OnCharacterDeath(GameObject _)
         {
+            _gameManager.FinishGame();
+        }
+
+        private void Fire()
+        {
+            if (!FireRequired) 
+                return;
+
             _bulletSystem.FireBullet(new BulletArgs
             {
                 IsPlayer = true,
@@ -61,6 +63,8 @@ namespace Assets.Scripts.Character
                 Position = _weaponComponent.Position,
                 Velocity = _weaponComponent.Rotation * Vector3.up * _bulletConfig.Speed
             });
+
+            FireRequired = false;
         }
     }
 }
