@@ -8,21 +8,21 @@ namespace ShootEmUp
     public sealed partial class BulletSystem : MonoBehaviour
     {
         [SerializeField]
-        private int initialCount = Consts.BulletPoolInitialCount;
+        private int _initialCount = Consts.BulletPoolInitialCount;
 
-        [SerializeField] private Transform container;
-        [SerializeField] private Bullet prefab;
-        [SerializeField] private Transform worldTransform;
-        [SerializeField] private LevelBounds levelBounds;
+        [SerializeField] private Transform _container;
+        [SerializeField] private Bullet _prefab;
+        [SerializeField] private Transform _worldTransform;
+        [SerializeField] private LevelBounds _levelBounds;
 
-        private readonly HashSet<Bullet> activeBullets = new();
-        private readonly List<Bullet> cache = new();
-        private BulletPool bulletPool;
+        private readonly HashSet<Bullet> _activeBullets = new();
+        private readonly List<Bullet> _cache = new();
+        private BulletPool _bulletPool;
 
         private void Awake()
         {
-            bulletPool = new BulletPool(initialCount);
-            bulletPool.InitPool(prefab, container);
+            _bulletPool = new BulletPool(_initialCount);
+            _bulletPool.InitPool(_prefab, _container);
         }
 
         private void FixedUpdate()
@@ -32,11 +32,11 @@ namespace ShootEmUp
 
         public void FireBullet(BulletArgs args)
         {
-            var bullet = bulletPool.GetBulletFromPool(prefab, worldTransform);
+            var bullet = _bulletPool.GetBulletFromPool(_prefab, _worldTransform);
 
             SetBulletFlying(args, bullet);
 
-            if (activeBullets.Add(bullet))
+            if (_activeBullets.Add(bullet))
             {
                 bullet.OnCollisionEntered += OnBulletCollision;
             }
@@ -44,11 +44,11 @@ namespace ShootEmUp
 
         private void RemoveBullet(Bullet bullet)
         {
-            if (activeBullets.Remove(bullet))
+            if (_activeBullets.Remove(bullet))
             {
                 bullet.OnCollisionEntered -= OnBulletCollision;
 
-                bulletPool.ReturnBulletToPool(bullet, container);
+                _bulletPool.ReturnBulletToPool(bullet, _container);
             }
         }
 
@@ -60,12 +60,12 @@ namespace ShootEmUp
 
         private void RemoveOutBoundBullets()
         {
-            cache.Clear();
-            cache.AddRange(activeBullets);
+            _cache.Clear();
+            _cache.AddRange(_activeBullets);
 
-            foreach (var activeBullet in cache)
+            foreach (var activeBullet in _cache)
             {
-                if (!levelBounds.InBounds(activeBullet.transform.position))
+                if (!_levelBounds.InBounds(activeBullet.transform.position))
                 {
                     RemoveBullet(activeBullet);
                 }
@@ -92,12 +92,12 @@ namespace ShootEmUp
 
         private void SetBulletFlying(BulletArgs args, Bullet bullet)
         {
-            bullet.SetPosition(args.position);
-            bullet.SetColor(args.color);
-            bullet.SetPhysicsLayer(args.physicsLayer);
-            bullet.Damage = args.damage;
-            bullet.IsPlayer = args.isPlayer;
-            bullet.SetVelocity(args.velocity);
+            bullet.SetPosition(args.Position);
+            bullet.SetColor(args.Color);
+            bullet.SetPhysicsLayer(args.PhysicsLayer);
+            bullet.Damage = args.Damage;
+            bullet.IsPlayer = args.IsPlayer;
+            bullet.SetVelocity(args.Velocity);
         }
     }
 }

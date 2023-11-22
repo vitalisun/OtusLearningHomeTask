@@ -6,26 +6,26 @@ namespace Assets.Scripts.Bullets
 {
     internal class BulletPool
     {
-        private readonly int initialCount;
-        private readonly Queue<Bullet> pool = new();
+        private readonly int _initialCount;
+        private readonly Queue<Bullet> _pool = new();
 
         public BulletPool(int initialCount)
         {
-            this.initialCount = initialCount;
+            this._initialCount = initialCount;
         }
 
         public void InitPool(Bullet prefab, Transform container)
         {
-            for (var i = 0; i < initialCount; i++)
+            for (var i = 0; i < _initialCount; i++)
             {
                 var bullet = UnityEngine.Object.Instantiate(prefab, container);
-                pool.Enqueue(bullet);
+                _pool.Enqueue(bullet);
             }
         }
 
         public Bullet GetBulletFromPool(Bullet prefab, Transform worldTransform)
         {
-            if (pool.TryDequeue(out var bullet))
+            if (_pool.TryDequeue(out var bullet))
             {
                 bullet.transform.SetParent(worldTransform);
             }
@@ -40,7 +40,7 @@ namespace Assets.Scripts.Bullets
         public void ReturnBulletToPool(Bullet bullet, Transform container)
         {
             bullet.transform.SetParent(container);
-            pool.Enqueue(bullet);
+            _pool.Enqueue(bullet);
         }
     }
 }

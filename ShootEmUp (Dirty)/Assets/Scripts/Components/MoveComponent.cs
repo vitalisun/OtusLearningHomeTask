@@ -6,15 +6,15 @@ namespace ShootEmUp
     public sealed class MoveComponent : MonoBehaviour
     {
         [SerializeField]
-        private new Rigidbody2D rigidbody2D;
+        private new Rigidbody2D _rigidbody2D;
 
         [SerializeField]
-        private float speed = Consts.MoveComponentSpeed;
+        private float _speed = Consts.MoveComponentSpeed;
 
         public void MoveByRigidbodyVelocity(Vector2 vector)
         {
-            var nextPosition = rigidbody2D.position + vector * speed;
-            rigidbody2D.MovePosition(nextPosition);
+            var nextPosition = _rigidbody2D.position + vector * _speed;
+            _rigidbody2D.MovePosition(nextPosition);
         }
     }
 }
