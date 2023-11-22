@@ -28,8 +28,8 @@ namespace ShootEmUp
             {
                 return;
             }
-            
-            var vector = destination - (Vector2) transform.position;
+
+            var vector = destination - (Vector2)transform.position;
             if (vector.magnitude <= Consts.ReachDistanseThreshold)
             {
                 isReached = true;

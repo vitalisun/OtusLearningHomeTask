@@ -9,14 +9,14 @@ namespace ShootEmUp
     {
         [SerializeField]
         private int initialCount = Consts.BulletPoolInitialCount;
-        
+
         [SerializeField] private Transform container;
         [SerializeField] private Bullet prefab;
         [SerializeField] private Transform worldTransform;
         [SerializeField] private LevelBounds levelBounds;
 
         private readonly HashSet<Bullet> activeBullets = new();
-        private readonly List<Bullet> cache= new();
+        private readonly List<Bullet> cache = new();
         private BulletPool bulletPool;
 
         private void Awake()
@@ -24,7 +24,7 @@ namespace ShootEmUp
             bulletPool = new BulletPool(initialCount);
             bulletPool.InitPool(prefab, container);
         }
-        
+
         private void FixedUpdate()
         {
             RemoveOutBoundBullets();
@@ -32,7 +32,7 @@ namespace ShootEmUp
 
         public void FireBullet(BulletArgs args)
         {
-           var bullet = bulletPool.GetBulletFromPool(prefab, worldTransform);
+            var bullet = bulletPool.GetBulletFromPool(prefab, worldTransform);
 
             SetBulletFlying(args, bullet);
 
@@ -47,7 +47,7 @@ namespace ShootEmUp
             if (activeBullets.Remove(bullet))
             {
                 bullet.OnCollisionEntered -= OnBulletCollision;
-                
+
                 bulletPool.ReturnBulletToPool(bullet, container);
             }
         }

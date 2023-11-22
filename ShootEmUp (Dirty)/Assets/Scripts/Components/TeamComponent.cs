@@ -8,7 +8,7 @@ namespace ShootEmUp
         {
             get { return isPlayer; }
         }
-        
+
         [SerializeField]
         private bool isPlayer;
     }

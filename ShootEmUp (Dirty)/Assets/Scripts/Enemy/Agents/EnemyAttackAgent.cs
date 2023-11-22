@@ -31,7 +31,7 @@ namespace ShootEmUp
             {
                 return;
             }
-            
+
             if (!target.GetComponent<HitPointsComponent>().IsHitPointsExists())
             {
                 return;
@@ -48,7 +48,7 @@ namespace ShootEmUp
         private void Fire()
         {
             var startPosition = weaponComponent.Position;
-            var vector = (Vector2) target.transform.position - startPosition;
+            var vector = (Vector2)target.transform.position - startPosition;
             var direction = vector.normalized;
             OnFire?.Invoke(gameObject, startPosition, direction);
         }

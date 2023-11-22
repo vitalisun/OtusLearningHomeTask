@@ -10,7 +10,7 @@ namespace ShootEmUp
 
         [SerializeField]
         private float speed = Consts.MoveComponentSpeed;
-        
+
         public void MoveByRigidbodyVelocity(Vector2 vector)
         {
             var nextPosition = rigidbody2D.position + vector * speed;

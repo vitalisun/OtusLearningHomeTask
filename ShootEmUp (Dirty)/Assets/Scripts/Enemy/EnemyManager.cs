@@ -11,7 +11,7 @@ namespace ShootEmUp
 
         [SerializeField]
         private BulletSystem bulletSystem;
-        [SerializeField] 
+        [SerializeField]
         private BulletConfig bulletConfig;
 
         private readonly HashSet<GameObject> activeEnemies = new();
@@ -33,7 +33,7 @@ namespace ShootEmUp
                     {
                         enemy.GetComponent<HitPointsComponent>().hpEmpty += OnDestroyed;
                         enemy.GetComponent<EnemyAttackAgent>().OnFire += OnFire;
-                    }    
+                    }
                 }
             }
         }

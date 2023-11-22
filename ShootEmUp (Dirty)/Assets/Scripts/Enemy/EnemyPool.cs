@@ -24,7 +24,7 @@ namespace ShootEmUp
         private GameObject prefab;
 
         private readonly Queue<GameObject> enemyPool = new();
-        
+
         private void Awake()
         {
             for (var i = 0; i < Consts.EnemyPoolInitialCount; i++)
@@ -45,7 +45,7 @@ namespace ShootEmUp
 
             var spawnPosition = enemyPositions.RandomSpawnPosition();
             enemy.transform.position = spawnPosition.position;
-            
+
             var attackPosition = enemyPositions.RandomAttackPosition();
             enemy.GetComponent<EnemyMoveAgent>().SetDestination(attackPosition.position);
 

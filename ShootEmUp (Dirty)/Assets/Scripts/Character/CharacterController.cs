@@ -1,11 +1,10 @@
-using System;
 using UnityEngine;
 
 namespace ShootEmUp
 {
     public sealed class CharacterController : MonoBehaviour
     {
-        [SerializeField] private GameObject character; 
+        [SerializeField] private GameObject character;
         [SerializeField] private GameManager gameManager;
         [SerializeField] private BulletSystem bulletSystem;
         [SerializeField] private BulletConfig bulletConfig;
@@ -19,7 +18,7 @@ namespace ShootEmUp
         private HitPointsComponent hitPointsComponent;
         private WeaponComponent weaponComponent;
 
-        void Awake()
+        private void Awake()
         {
             hitPointsComponent = character.GetComponent<HitPointsComponent>();
             moveComponent = character.GetComponent<MoveComponent>();
@@ -54,7 +53,7 @@ namespace ShootEmUp
             bulletSystem.FireBullet(new BulletArgs
             {
                 isPlayer = true,
-                physicsLayer = (int) bulletConfig.physicsLayer,
+                physicsLayer = (int)bulletConfig.physicsLayer,
                 color = bulletConfig.color,
                 damage = bulletConfig.damage,
                 position = weaponComponent.Position,
