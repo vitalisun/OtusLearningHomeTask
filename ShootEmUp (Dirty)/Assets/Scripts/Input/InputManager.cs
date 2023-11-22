@@ -1,6 +1,7 @@
 using UnityEngine;
+using CharacterController = Assets.Scripts.Character.CharacterController;
 
-namespace ShootEmUp
+namespace Assets.Scripts.Input
 {
     public sealed class InputManager : MonoBehaviour
     {
@@ -9,16 +10,16 @@ namespace ShootEmUp
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (UnityEngine.Input.GetKeyDown(KeyCode.Space))
             {
                 _characterController.FireRequired = true;
             }
 
-            if (Input.GetKey(KeyCode.LeftArrow))
+            if (UnityEngine.Input.GetKey(KeyCode.LeftArrow))
             {
                 _characterController.HorizontalDirection = -1;
             }
-            else if (Input.GetKey(KeyCode.RightArrow))
+            else if (UnityEngine.Input.GetKey(KeyCode.RightArrow))
             {
                 _characterController.HorizontalDirection = 1;
             }

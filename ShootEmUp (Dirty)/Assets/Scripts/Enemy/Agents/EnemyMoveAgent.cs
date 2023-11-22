@@ -1,7 +1,8 @@
 using Assets.Scripts.Common;
+using Assets.Scripts.Components;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace Assets.Scripts.Enemy.Agents
 {
     public sealed class EnemyMoveAgent : MonoBehaviour
     {

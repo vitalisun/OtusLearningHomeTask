@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Bullets;
+using Assets.Scripts.Components;
+using Assets.Scripts.Enemy.Agents;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace Assets.Scripts.Enemy
 {
     public sealed class EnemyManager : MonoBehaviour
     {

@@ -1,8 +1,9 @@
-using Assets.Scripts.Common;
 using System.Collections.Generic;
+using Assets.Scripts.Common;
+using Assets.Scripts.Enemy.Agents;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace Assets.Scripts.Enemy
 {
     public sealed class EnemyPool : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ShootEmUp
+namespace Assets.Scripts.Level
 {
     public sealed class LevelBounds : MonoBehaviour
     {

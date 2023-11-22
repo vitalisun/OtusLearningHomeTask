@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace Assets.Scripts.Level
 {
     public sealed class LevelBackground : MonoBehaviour
     {
@@ -52,13 +52,10 @@ namespace ShootEmUp
         [Serializable]
         public sealed class Params
         {
-            [SerializeField]
             public float MStartPositionY;
 
-            [SerializeField]
             public float MEndPositionY;
 
-            [SerializeField]
             public float MMovingSpeedY;
         }
     }

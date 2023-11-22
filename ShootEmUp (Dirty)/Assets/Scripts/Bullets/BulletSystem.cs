@@ -1,9 +1,10 @@
 using System.Collections.Generic;
-using Assets.Scripts.Bullets;
 using Assets.Scripts.Common;
+using Assets.Scripts.Components;
+using Assets.Scripts.Level;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace Assets.Scripts.Bullets
 {
     public sealed partial class BulletSystem : MonoBehaviour
     {
