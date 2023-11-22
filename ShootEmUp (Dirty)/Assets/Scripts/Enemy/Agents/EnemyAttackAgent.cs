@@ -1,13 +1,12 @@
 using Assets.Scripts.Components;
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemy.Agents
 {
     public sealed class EnemyAttackAgent : MonoBehaviour
     {
-        public delegate void FireHandler(GameObject enemy, Vector2 position, Vector2 direction);
-
-        public event FireHandler OnFire;
+        public event Action<GameObject, Vector2, Vector2> OnFire;
 
         [SerializeField] private WeaponComponent _weaponComponent;
         [SerializeField] private EnemyMoveAgent _moveAgent;
@@ -33,9 +32,12 @@ namespace Assets.Scripts.Enemy.Agents
                 return;
             }
 
-            if (!_target.GetComponent<HitPointsComponent>().IsHitPointsExists())
+            if (_target.TryGetComponent(out HitPointsComponent hitPointsComponent))
             {
-                return;
+                if (!hitPointsComponent.IsHitPointsExists())
+                {
+                    return;
+                }
             }
 
             _currentTime -= Time.fixedDeltaTime;

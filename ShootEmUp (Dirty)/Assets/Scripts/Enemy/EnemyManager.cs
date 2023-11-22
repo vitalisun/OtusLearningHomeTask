@@ -9,28 +9,26 @@ namespace Assets.Scripts.Enemy
 {
     public sealed class EnemyManager : MonoBehaviour
     {
+        public int SpawnInterval = 1;
+
         [SerializeField]
         private EnemyPool _enemyPool;
 
         [SerializeField]
         private BulletSystem _bulletSystem;
+
         [SerializeField]
         private BulletConfig _bulletConfig;
 
         private readonly HashSet<GameObject> _activeEnemies = new();
 
-        private void Start()
-        {
-            StartCoroutine(EnemySpawnCycle());
-        }
-
-        private IEnumerator EnemySpawnCycle()
+        private IEnumerator Start()
         {
             while (true)
             {
-                yield return new WaitForSeconds(1);
-                var enemy = _enemyPool.SpawnEnemy();
-                if (enemy != null)
+                yield return new WaitForSeconds(SpawnInterval);
+
+                if (_enemyPool.SpawnEnemy(out var enemy))
                 {
                     if (_activeEnemies.Add(enemy))
                     {

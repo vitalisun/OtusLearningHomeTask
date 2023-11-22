@@ -38,23 +38,37 @@ namespace Assets.Scripts.Enemy
             }
         }
 
-        public GameObject SpawnEnemy()
+        public bool SpawnEnemy(out GameObject enemy)
         {
-            if (!_enemyPool.TryDequeue(out var enemy))
+            if (!_enemyPool.TryDequeue(out enemy))
             {
-                return null;
+                return false;
             }
 
             enemy.transform.SetParent(_worldTransform);
-
             var spawnPosition = _enemyPositions.RandomSpawnPosition();
             enemy.transform.position = spawnPosition.position;
-
             var attackPosition = _enemyPositions.RandomAttackPosition();
-            enemy.GetComponent<EnemyMoveAgent>().SetDestination(attackPosition.position);
 
-            enemy.GetComponent<EnemyAttackAgent>().SetTarget(_character);
-            return enemy;
+            if (enemy.TryGetComponent<EnemyMoveAgent>(out var enemyAttackAgent))
+            {
+                enemyAttackAgent.SetDestination(attackPosition.position);
+            }
+            else
+            {
+                Debug.LogError("EnemyAttackAgent not found");
+            }
+
+            if (enemy.TryGetComponent<EnemyAttackAgent>(out var hitPointsComponent))
+            {
+                hitPointsComponent.SetTarget(_character);
+            }
+            else
+            {
+                Debug.LogError("HitPointsComponent not found");
+            }
+
+            return true;
         }
 
         public void UnspawnEnemy(GameObject enemy)
