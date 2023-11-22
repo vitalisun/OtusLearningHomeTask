@@ -6,10 +6,7 @@ namespace Assets.Scripts.Enemy.Agents
 {
     public sealed class EnemyMoveAgent : MonoBehaviour
     {
-        public bool IsReached
-        {
-            get { return _isReached; }
-        }
+        public bool IsReached { get; private set; }
 
         [SerializeField] 
         private MoveComponent _moveComponent;
@@ -19,17 +16,15 @@ namespace Assets.Scripts.Enemy.Agents
 
         private Vector2 _destination;
 
-        private bool _isReached;
-
         public void SetDestination(Vector2 endPoint)
         {
             _destination = endPoint;
-            _isReached = false;
+            IsReached = false;
         }
 
         private void FixedUpdate()
         {
-            if (_isReached)
+            if (IsReached)
             {
                 return;
             }
@@ -37,7 +32,7 @@ namespace Assets.Scripts.Enemy.Agents
             var vector = _destination - (Vector2)transform.position;
             if (vector.magnitude <= ReachDistanseThreshold)
             {
-                _isReached = true;
+                IsReached = true;
                 return;
             }
 

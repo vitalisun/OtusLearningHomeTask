@@ -18,13 +18,13 @@ namespace Assets.Scripts.Level
         private Transform _myTransform;
 
         [SerializeField]
-        private Params _mParams;
+        private Params _params;
 
         private void Awake()
         {
-            _startPositionY = _mParams.MStartPositionY;
-            _endPositionY = _mParams.MEndPositionY;
-            _movingSpeedY = _mParams.MMovingSpeedY;
+            _startPositionY = _params.StartPositionY;
+            _endPositionY = _params.EndPositionY;
+            _movingSpeedY = _params.MovingSpeedY;
             _myTransform = transform;
             var position = _myTransform.position;
             _positionX = position.x;
@@ -52,11 +52,11 @@ namespace Assets.Scripts.Level
         [Serializable]
         public sealed class Params
         {
-            public float MStartPositionY;
+            public float StartPositionY;
 
-            public float MEndPositionY;
+            public float EndPositionY;
 
-            public float MMovingSpeedY;
+            public float MovingSpeedY;
         }
     }
 }
