@@ -73,7 +73,7 @@ namespace Assets.Scripts.Bullets
             }
         }
 
-        private void DealDamage(Bullet bullet, GameObject other)
+        private static void DealDamage(Bullet bullet, GameObject other)
         {
             if (!other.TryGetComponent(out TeamComponent team))
             {
@@ -91,7 +91,7 @@ namespace Assets.Scripts.Bullets
             }
         }
 
-        private void SetBulletFlying(BulletArgs args, Bullet bullet)
+        private static void SetBulletFlying(BulletArgs args, Bullet bullet)
         {
             bullet.SetPosition(args.Position);
             bullet.SetColor(args.Color);
