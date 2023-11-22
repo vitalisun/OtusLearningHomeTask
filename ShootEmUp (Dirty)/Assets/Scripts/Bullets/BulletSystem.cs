@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Bullets
 {
-    public sealed partial class BulletSystem : MonoBehaviour
+    public sealed class BulletSystem : MonoBehaviour
     {
         [SerializeField]
         private int _initialCount = Consts.BulletPoolInitialCount;
