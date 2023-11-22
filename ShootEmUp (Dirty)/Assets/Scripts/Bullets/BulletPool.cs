@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Bullets
 {
-    internal class BulletPool
+    internal sealed class BulletPool
     {
         private readonly int _initialCount;
         private readonly Queue<Bullet> _pool = new();
