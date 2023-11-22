@@ -1,5 +1,6 @@
 using Assets.Scripts.Bullets;
 using Assets.Scripts.Components;
+using Assets.Scripts.Input;
 using UnityEngine;
 
 namespace Assets.Scripts.Character
@@ -7,6 +8,7 @@ namespace Assets.Scripts.Character
     public sealed class CharacterController : MonoBehaviour
     {
         [SerializeField] private GameObject _character;
+        [SerializeField] private InputManager _inputManager;
         [SerializeField] private GameManager.GameManager _gameManager;
         [SerializeField] private BulletSystem _bulletSystem;
         [SerializeField] private BulletConfig _bulletConfig;
@@ -30,11 +32,12 @@ namespace Assets.Scripts.Character
         private void OnEnable()
         {
             _hitPointsComponent.OnDeath += OnCharacterDeath;
+            _inputManager.OnMoveEvent += UpdateHorisontalDirection;
         }
-
         private void OnDisable()
         {
             _hitPointsComponent.OnDeath -= OnCharacterDeath;
+            _inputManager.OnMoveEvent -= UpdateHorisontalDirection;
         }
 
         private void FixedUpdate()
@@ -65,6 +68,11 @@ namespace Assets.Scripts.Character
             });
 
             FireRequired = false;
+        }
+
+        private void UpdateHorisontalDirection(float directionValue)
+        {
+            HorizontalDirection = directionValue;
         }
     }
 }
