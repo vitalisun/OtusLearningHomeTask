@@ -11,7 +11,11 @@ namespace Assets.Scripts.Enemy.Agents
             get { return _isReached; }
         }
 
-        [SerializeField] private MoveComponent _moveComponent;
+        [SerializeField] 
+        private MoveComponent _moveComponent;
+
+        [SerializeField]
+        private const float ReachDistanseThreshold = 0.25f;
 
         private Vector2 _destination;
 
@@ -31,7 +35,7 @@ namespace Assets.Scripts.Enemy.Agents
             }
 
             var vector = _destination - (Vector2)transform.position;
-            if (vector.magnitude <= Consts.ReachDistanseThreshold)
+            if (vector.magnitude <= ReachDistanseThreshold)
             {
                 _isReached = true;
                 return;

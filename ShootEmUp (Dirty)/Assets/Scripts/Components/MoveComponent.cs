@@ -9,11 +9,11 @@ namespace Assets.Scripts.Components
         private new Rigidbody2D _rigidbody2D;
 
         [SerializeField]
-        private float _speed = Consts.MoveComponentSpeed;
+        private const float Speed = 5f;
 
         public void MoveByRigidbodyVelocity(Vector2 vector)
         {
-            var nextPosition = _rigidbody2D.position + vector * _speed;
+            var nextPosition = _rigidbody2D.position + vector * Speed;
             _rigidbody2D.MovePosition(nextPosition);
         }
     }

@@ -24,11 +24,14 @@ namespace Assets.Scripts.Enemy
         [SerializeField]
         private GameObject _prefab;
 
+        [SerializeField]
+        private const int EnemyPoolInitialCount = 7;
+
         private readonly Queue<GameObject> _enemyPool = new();
 
         private void Awake()
         {
-            for (var i = 0; i < Consts.EnemyPoolInitialCount; i++)
+            for (var i = 0; i < EnemyPoolInitialCount; i++)
             {
                 var enemy = Instantiate(_prefab, _container);
                 _enemyPool.Enqueue(enemy);

@@ -9,7 +9,7 @@ namespace Assets.Scripts.Bullets
     public sealed class BulletSystem : MonoBehaviour
     {
         [SerializeField]
-        private int _initialCount = Consts.BulletPoolInitialCount;
+        private const int InitialCount = 50;
 
         [SerializeField] private Transform _container;
         [SerializeField] private Bullet _prefab;
@@ -22,7 +22,7 @@ namespace Assets.Scripts.Bullets
 
         private void Awake()
         {
-            _bulletPool = new BulletPool(_initialCount);
+            _bulletPool = new BulletPool(InitialCount);
             _bulletPool.InitPool(_prefab, _container);
         }
 
