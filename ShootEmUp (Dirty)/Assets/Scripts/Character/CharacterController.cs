@@ -32,12 +32,17 @@ namespace Assets.Scripts.Character
         private void OnEnable()
         {
             _hitPointsComponent.OnDeath += OnCharacterDeath;
-            _inputManager.OnMoveEvent += UpdateHorisontalDirection;
+            _inputManager.OnMoveEvent += OnMoveEventHandler;
+            _inputManager.OnFireEvent += OnFireEventHandler;
         }
+
+
+
         private void OnDisable()
         {
             _hitPointsComponent.OnDeath -= OnCharacterDeath;
-            _inputManager.OnMoveEvent -= UpdateHorisontalDirection;
+            _inputManager.OnMoveEvent -= OnMoveEventHandler;
+            _inputManager.OnFireEvent -= OnFireEventHandler;
         }
 
         private void FixedUpdate()
@@ -49,6 +54,7 @@ namespace Assets.Scripts.Character
 
         private void OnCharacterDeath(GameObject _)
         {
+            Debug.Log("Character is dead");
             _gameManager.FinishGame();
         }
 
@@ -70,9 +76,14 @@ namespace Assets.Scripts.Character
             FireRequired = false;
         }
 
-        private void UpdateHorisontalDirection(float directionValue)
+        private void OnMoveEventHandler(float directionValue)
         {
             HorizontalDirection = directionValue;
+        }
+
+        private void OnFireEventHandler(bool value)
+        {
+            FireRequired = value;
         }
     }
 }
