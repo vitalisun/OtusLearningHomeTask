@@ -1,10 +1,14 @@
 using Assets.Scripts.Components;
 using System;
+using Assets.Scripts.GameManager;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemy.Agents
 {
-    public sealed class EnemyAttackAgent : MonoBehaviour
+    public sealed class EnemyAttackAgent : MonoBehaviour,
+        Listeners.IGamePauseListener,
+        Listeners.IGameResumeListener,
+        Listeners.IGameFixedUpdateListener
     {
         public event Action<GameObject, Vector2, Vector2> OnFire;
 
@@ -25,9 +29,14 @@ namespace Assets.Scripts.Enemy.Agents
             _currentTime = _countdown;
         }
 
-        private void FixedUpdate()
+        public void OnFixedUpdate(float deltaTime)
         {
             if (!_moveAgent.IsReached)
+            {
+                return;
+            }
+
+            if (_target == null)
             {
                 return;
             }
@@ -54,6 +63,16 @@ namespace Assets.Scripts.Enemy.Agents
             var vector = (Vector2)_target.transform.position - startPosition;
             var direction = vector.normalized;
             OnFire?.Invoke(gameObject, startPosition, direction);
+        }
+
+        public void OnPause()
+        {
+            enabled = false;
+        }
+
+        public void OnResume()
+        {
+            enabled = true;
         }
     }
 }

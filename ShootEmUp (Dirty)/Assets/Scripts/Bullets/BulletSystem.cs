@@ -1,12 +1,16 @@
 using System.Collections.Generic;
 using Assets.Scripts.Common;
 using Assets.Scripts.Components;
+using Assets.Scripts.GameManager;
 using Assets.Scripts.Level;
 using UnityEngine;
 
 namespace Assets.Scripts.Bullets
 {
-    public sealed class BulletSystem : MonoBehaviour
+    public sealed class BulletSystem : MonoBehaviour,
+        IInstaller,
+        Listeners.IGameFinishListener,
+        Listeners.IGameFixedUpdateListener
     {
         [SerializeField]
         private const int InitialCount = 50;
@@ -20,13 +24,24 @@ namespace Assets.Scripts.Bullets
         private readonly List<Bullet> _cache = new();
         private BulletPool _bulletPool;
 
-        private void Awake()
+        public void Install()
         {
             _bulletPool = new BulletPool(InitialCount);
             _bulletPool.InitPool(_prefab, _container);
         }
 
-        private void FixedUpdate()
+        public void OnFinish()
+        {
+            _cache.Clear();
+            _cache.AddRange(_activeBullets);
+
+            foreach (var activeBullet in _cache)
+            {
+                RemoveBullet(activeBullet);
+            }
+        }
+
+        public void OnFixedUpdate(float deltaTime)
         {
             RemoveOutBoundBullets();
         }

@@ -1,11 +1,18 @@
 using Assets.Scripts.Bullets;
 using Assets.Scripts.Components;
+using Assets.Scripts.GameManager;
 using Assets.Scripts.Input;
 using UnityEngine;
 
 namespace Assets.Scripts.Character
 {
-    public sealed class CharacterController : MonoBehaviour
+    public sealed class CharacterController : MonoBehaviour,
+        IInstaller,
+        Listeners.IGameStartListener,
+        Listeners.IGameFinishListener,
+        Listeners.IGamePauseListener,
+        Listeners.IGameResumeListener,
+        Listeners.IGameFixedUpdateListener
     {
         [SerializeField] private GameObject _character;
         [SerializeField] private InputManager _inputManager;
@@ -22,45 +29,63 @@ namespace Assets.Scripts.Character
         private HitPointsComponent _hitPointsComponent;
         private WeaponComponent _weaponComponent;
 
-        private void Awake()
+        public void Install()
         {
             _hitPointsComponent = _character.GetComponent<HitPointsComponent>();
             _moveComponent = _character.GetComponent<MoveComponent>();
             _weaponComponent = _character.GetComponent<WeaponComponent>();
         }
 
-        private void OnEnable()
+
+        public void OnStart()
         {
             _hitPointsComponent.OnDeath += OnCharacterDeath;
             _inputManager.OnMoveEvent += OnMoveEventHandler;
             _inputManager.OnFireEvent += OnFireEventHandler;
         }
 
-
-
-        private void OnDisable()
+        public void OnFinish()
         {
             _hitPointsComponent.OnDeath -= OnCharacterDeath;
             _inputManager.OnMoveEvent -= OnMoveEventHandler;
             _inputManager.OnFireEvent -= OnFireEventHandler;
+
+
+            ResetCharacterState();
         }
 
-        private void FixedUpdate()
+        private void ResetCharacterState()
+        {
+            _hitPointsComponent.ResetHitPoints();
+            _character.transform.position = new Vector3(0, _character.transform.position.y, 0);
+        }
+
+
+        public void OnPause()
+        {
+            enabled = false;
+        }
+
+        public void OnResume()
+        {
+            enabled = true;
+        }
+
+        public void OnFixedUpdate(float deltaTime)
         {
             _moveComponent.MoveByRigidbodyVelocity(new Vector2(HorizontalDirection, 0) * Time.fixedDeltaTime);
 
             Fire();
         }
 
-        private void OnCharacterDeath(GameObject _)
+        private void OnCharacterDeath(GameObject _) 
         {
-            Debug.Log("Character is dead");
-            _gameManager.FinishGame();
+            _gameManager.Finish();
         }
 
         private void Fire()
         {
-            if (!FireRequired) 
+            if (!FireRequired)
                 return;
 
             _bulletSystem.FireBullet(new BulletArgs

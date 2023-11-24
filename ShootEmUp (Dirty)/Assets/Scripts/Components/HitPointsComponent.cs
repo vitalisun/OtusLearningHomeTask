@@ -9,6 +9,8 @@ namespace Assets.Scripts.Components
 
         [SerializeField] private int _hitPoints;
 
+        private const int DefaultHitPoints = 5;
+
         public bool IsHitPointsExists()
         {
             return _hitPoints > 0;
@@ -21,6 +23,11 @@ namespace Assets.Scripts.Components
             {
                 OnDeath?.Invoke(gameObject);
             }
+        }
+
+        public void ResetHitPoints()
+        {
+            _hitPoints = DefaultHitPoints;
         }
     }
 }

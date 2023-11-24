@@ -1,16 +1,18 @@
 using System;
+using Assets.Scripts.GameManager;
 using UnityEngine;
 using CharacterController = Assets.Scripts.Character.CharacterController;
 
 namespace Assets.Scripts.Input
 {
-    public sealed class InputManager : MonoBehaviour
+    public sealed class InputManager : MonoBehaviour,
+        Listeners.IGameUpdateListener
     {
         public event Action<bool> OnFireEvent;
 
         public event Action<float> OnMoveEvent;
 
-        private void Update()
+        public void OnUpdate(float deltaTime)
         {
             if (UnityEngine.Input.GetKeyDown(KeyCode.Space))
             {

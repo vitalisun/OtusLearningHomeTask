@@ -1,14 +1,18 @@
 using Assets.Scripts.Common;
 using Assets.Scripts.Components;
+using Assets.Scripts.GameManager;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemy.Agents
 {
-    public sealed class EnemyMoveAgent : MonoBehaviour
+    public sealed class EnemyMoveAgent : MonoBehaviour,
+        Listeners.IGamePauseListener,
+        Listeners.IGameResumeListener,
+        Listeners.IGameFixedUpdateListener
     {
         public bool IsReached { get; private set; }
 
-        [SerializeField] 
+        [SerializeField]
         private MoveComponent _moveComponent;
 
         [SerializeField]
@@ -22,7 +26,7 @@ namespace Assets.Scripts.Enemy.Agents
             IsReached = false;
         }
 
-        private void FixedUpdate()
+        public void OnFixedUpdate(float deltaTime)
         {
             if (IsReached)
             {
@@ -38,6 +42,16 @@ namespace Assets.Scripts.Enemy.Agents
 
             var direction = vector.normalized * Time.fixedDeltaTime;
             _moveComponent.MoveByRigidbodyVelocity(direction);
+        }
+
+        public void OnPause()
+        {
+            enabled = false;
+        }
+
+        public void OnResume()
+        {
+            enabled = true;
         }
     }
 }

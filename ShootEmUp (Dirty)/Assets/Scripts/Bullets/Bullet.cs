@@ -1,9 +1,12 @@
 using System;
+using Assets.Scripts.GameManager;
 using UnityEngine;
 
 namespace Assets.Scripts.Bullets
 {
-    public sealed class Bullet : MonoBehaviour
+    public sealed class Bullet : MonoBehaviour,
+        Listeners.IGamePauseListener,
+        Listeners.IGameResumeListener
     {
         public event Action<Bullet, Collision2D> OnCollisionEntered;
 
@@ -16,6 +19,29 @@ namespace Assets.Scripts.Bullets
         [SerializeField]
         private SpriteRenderer _spriteRenderer;
 
+        private Vector2 _pausedVelocity;
+        private bool _isPaused;
+
+        public void OnPause()
+        {
+            if (!_isPaused)
+            {
+                _pausedVelocity = _rigidbody2D.velocity;
+                _rigidbody2D.velocity = Vector2.zero;
+                _rigidbody2D.simulated = false;
+                _isPaused = true;
+            }
+        }
+
+        public void OnResume()
+        {
+            if (_isPaused)
+            {
+                _rigidbody2D.velocity = _pausedVelocity;
+                _isPaused = false;
+                _rigidbody2D.simulated = true;
+            }
+        }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
@@ -24,7 +50,14 @@ namespace Assets.Scripts.Bullets
 
         public void SetVelocity(Vector2 velocity)
         {
-            _rigidbody2D.velocity = velocity;
+            if (_isPaused)
+            {
+                _pausedVelocity = velocity;
+            }
+            else
+            {
+                _rigidbody2D.velocity = velocity;
+            }
         }
 
         public void SetPhysicsLayer(int physicsLayer)

@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using Assets.Scripts.Common;
 using Assets.Scripts.Enemy.Agents;
+using Assets.Scripts.GameManager;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemy
 {
-    public sealed class EnemyPool : MonoBehaviour
+    public sealed class EnemyPool : MonoBehaviour,
+        IInstaller
     {
         [Header("Spawn")]
         [SerializeField]
@@ -29,7 +31,7 @@ namespace Assets.Scripts.Enemy
 
         private readonly Queue<GameObject> _enemyPool = new();
 
-        private void Awake()
+        public void Install()
         {
             for (var i = 0; i < EnemyPoolInitialCount; i++)
             {
@@ -50,18 +52,18 @@ namespace Assets.Scripts.Enemy
             enemy.transform.position = spawnPosition.position;
             var attackPosition = _enemyPositions.RandomAttackPosition();
 
-            if (enemy.TryGetComponent<EnemyMoveAgent>(out var enemyAttackAgent))
+            if (enemy.TryGetComponent<EnemyMoveAgent>(out var enemyMoveAgent))
             {
-                enemyAttackAgent.SetDestination(attackPosition.position);
+                enemyMoveAgent.SetDestination(attackPosition.position);
             }
             else
             {
                 Debug.LogError("EnemyAttackAgent not found");
             }
 
-            if (enemy.TryGetComponent<EnemyAttackAgent>(out var hitPointsComponent))
+            if (enemy.TryGetComponent<EnemyAttackAgent>(out var enemyAttackAgent))
             {
-                hitPointsComponent.SetTarget(_character);
+                enemyAttackAgent.SetTarget(_character);
             }
             else
             {

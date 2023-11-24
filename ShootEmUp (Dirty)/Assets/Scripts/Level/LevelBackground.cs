@@ -1,10 +1,18 @@
 using System;
+using Assets.Scripts.GameManager;
 using UnityEngine;
 
 namespace Assets.Scripts.Level
 {
-    public sealed class LevelBackground : MonoBehaviour
+    public sealed class LevelBackground : MonoBehaviour,
+        Listeners.IGamePauseListener,
+        Listeners.IGameResumeListener,
+        Listeners.IGameFinishListener,
+        Listeners.IGameStartListener,
+        Listeners.IGameFixedUpdateListener
     {
+        private const float InitialPositionY = 0;
+
         private float _startPositionY;
 
         private float _endPositionY;
@@ -20,8 +28,21 @@ namespace Assets.Scripts.Level
         [SerializeField]
         private Params _params;
 
+
+        [Serializable]
+        public sealed class Params
+        {
+            public float StartPositionY;
+
+            public float EndPositionY;
+
+            public float MovingSpeedY;
+        }
+
         private void Awake()
         {
+            enabled = false;
+
             _startPositionY = _params.StartPositionY;
             _endPositionY = _params.EndPositionY;
             _movingSpeedY = _params.MovingSpeedY;
@@ -31,7 +52,7 @@ namespace Assets.Scripts.Level
             _positionZ = position.z;
         }
 
-        private void FixedUpdate()
+        public void OnFixedUpdate(float deltaTime)
         {
             if (_myTransform.position.y <= _endPositionY)
             {
@@ -49,14 +70,25 @@ namespace Assets.Scripts.Level
             );
         }
 
-        [Serializable]
-        public sealed class Params
+        public void OnPause()
         {
-            public float StartPositionY;
+            enabled = false;
+        }
 
-            public float EndPositionY;
+        public void OnResume()
+        {
+            enabled = true;
+        }
 
-            public float MovingSpeedY;
+        public void OnFinish()
+        {
+            enabled = false;
+            _myTransform.position = new Vector3(_positionX, InitialPositionY, _positionZ);
+        }
+
+        public void OnStart()
+        {
+            enabled = true;
         }
     }
 }
