@@ -15,7 +15,6 @@ namespace Assets.Scripts.Enemy.Agents
         [SerializeField]
         private MoveComponent _moveComponent;
 
-        [SerializeField]
         private const float ReachDistanseThreshold = 0.25f;
 
         private Vector2 _destination;

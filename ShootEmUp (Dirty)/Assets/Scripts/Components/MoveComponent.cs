@@ -8,7 +8,6 @@ namespace Assets.Scripts.Components
         [SerializeField]
         private new Rigidbody2D _rigidbody2D;
 
-        [SerializeField]
         private const float Speed = 5f;
 
         public void MoveByRigidbodyVelocity(Vector2 vector)

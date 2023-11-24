@@ -12,7 +12,6 @@ namespace Assets.Scripts.Bullets
         Listeners.IGameFinishListener,
         Listeners.IGameFixedUpdateListener
     {
-        [SerializeField]
         private const int InitialCount = 50;
 
         [SerializeField] private Transform _container;

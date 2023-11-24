@@ -26,7 +26,6 @@ namespace Assets.Scripts.Enemy
         [SerializeField]
         private GameObject _prefab;
 
-        [SerializeField]
         private const int EnemyPoolInitialCount = 7;
 
         private readonly Queue<GameObject> _enemyPool = new();
