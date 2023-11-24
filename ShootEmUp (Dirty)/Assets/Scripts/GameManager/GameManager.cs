@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static Assets.Scripts.GameManager.Listeners;
@@ -9,6 +10,8 @@ namespace Assets.Scripts.GameManager
         public GameState State => this._state;
 
         private GameState _state;
+
+        public event Action OnFinish;
 
         private List<Listeners.IGameListener> _listeners = new();
         private List<Listeners.IGameUpdateListener> _updateListeners = new();
@@ -133,6 +136,7 @@ namespace Assets.Scripts.GameManager
             }
 
             _state = GameState.FINISHED;
+            OnFinish?.Invoke();
         }
 
         public void Pause()
