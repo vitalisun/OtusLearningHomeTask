@@ -1,5 +1,6 @@
 using Assets.Scripts.Bullets;
 using Assets.Scripts.Components;
+using Assets.Scripts.DI;
 using Assets.Scripts.GameManager;
 using Assets.Scripts.Input;
 using UnityEngine;
@@ -29,6 +30,7 @@ namespace Assets.Scripts.Character
         private HitPointsComponent _hitPointsComponent;
         private WeaponComponent _weaponComponent;
 
+        [Inject]
         public void Construct(IInputManager inputManager)
         {
             Debug.Log("CharacterController.Construct");

@@ -17,7 +17,7 @@ namespace Assets.Scripts.DI
 
             foreach (MethodInfo method in methods)
             {
-                if (method.Name == "Construct")
+                if (method.IsDefined(typeof(InjectAttribute)))
                 {
                     InvokeConstruct(method, target);
                 }
