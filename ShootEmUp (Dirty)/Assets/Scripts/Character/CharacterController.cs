@@ -15,7 +15,7 @@ namespace Assets.Scripts.Character
         Listeners.IGameFixedUpdateListener
     {
         [SerializeField] private GameObject _character;
-        [SerializeField] private InputManager _inputManager;
+        private IInputManager _inputManager;
         [SerializeField] private GameManager.GameManager _gameManager;
         [SerializeField] private BulletSystem _bulletSystem;
         [SerializeField] private BulletConfig _bulletConfig;
@@ -28,6 +28,12 @@ namespace Assets.Scripts.Character
         private MoveComponent _moveComponent;
         private HitPointsComponent _hitPointsComponent;
         private WeaponComponent _weaponComponent;
+
+        public void Construct(IInputManager inputManager)
+        {
+            Debug.Log($"inputManager.GetType().Name - {inputManager.GetType().Name})");
+            _inputManager = inputManager;
+        }   
 
         public void Install()
         {

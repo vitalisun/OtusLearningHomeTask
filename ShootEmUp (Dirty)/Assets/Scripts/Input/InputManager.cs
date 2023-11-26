@@ -5,8 +5,14 @@ using CharacterController = Assets.Scripts.Character.CharacterController;
 
 namespace Assets.Scripts.Input
 {
-    public sealed class InputManager : MonoBehaviour,
-        Listeners.IGameUpdateListener
+    public interface IInputManager : Listeners.IGameUpdateListener
+    {
+        event Action<bool> OnFireEvent;
+        event Action<float> OnMoveEvent;
+        void OnUpdate(float deltaTime);
+    }
+
+    public sealed class InputManager : MonoBehaviour, IInputManager
     {
         public event Action<bool> OnFireEvent;
 

@@ -34,7 +34,7 @@ namespace Assets.Scripts.GameManager
 
         public interface IGameUpdateListener : IGameListener
         {
-            void OnUpdate(float deltaTime);
+            public void OnUpdate(float deltaTime);
         }
 
         public interface IGameFixedUpdateListener : IGameListener
