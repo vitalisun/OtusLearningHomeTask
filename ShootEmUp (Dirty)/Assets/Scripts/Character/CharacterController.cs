@@ -31,7 +31,7 @@ namespace Assets.Scripts.Character
 
         public void Construct(IInputManager inputManager)
         {
-            Debug.Log($"inputManager.GetType().Name - {inputManager.GetType().Name})");
+            Debug.Log("CharacterController.Construct");
             _inputManager = inputManager;
         }   
 

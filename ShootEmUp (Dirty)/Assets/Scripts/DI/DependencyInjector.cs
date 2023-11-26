@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Reflection;
-using UnityEngine;
 
-namespace Assets.Scripts.DI._1
+namespace Assets.Scripts.DI
 {
     public static class DependencyInjector
     {
         public static void Inject(object target)
         {
             Type type = target.GetType();
-
-            Debug.Log($"type.Name - {type.Name}");
 
             MethodInfo[] methods = type.GetMethods(
                 BindingFlags.Instance | 

@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts.Input;
 using UnityEngine;
 
-namespace Assets.Scripts.DI._1
+namespace Assets.Scripts.DI
 {
     public sealed class ServiceLocatorInstaller : MonoBehaviour
     {
