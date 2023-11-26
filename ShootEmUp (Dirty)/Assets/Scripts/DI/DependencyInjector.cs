@@ -5,7 +5,7 @@ namespace Assets.Scripts.DI
 {
     public static class DependencyInjector
     {
-        public static void Inject(object target)
+        public static void Inject(object target, ServiceLocator locator)
         {
             Type type = target.GetType();
 
@@ -19,12 +19,12 @@ namespace Assets.Scripts.DI
             {
                 if (method.IsDefined(typeof(InjectAttribute)))
                 {
-                    InvokeConstruct(method, target);
+                    InvokeConstruct(method, target, locator);
                 }
             }
         }
 
-        private static void InvokeConstruct(MethodInfo method, object target)
+        private static void InvokeConstruct(MethodInfo method, object target, ServiceLocator locator)
         {
             ParameterInfo[] parameters = method.GetParameters();
             int count = parameters.Length;
@@ -34,7 +34,7 @@ namespace Assets.Scripts.DI
             {
                 ParameterInfo parameter = parameters[i];
                 Type parameterType = parameter.ParameterType;
-                object service = ServiceLocator.GetService(parameterType);
+                object service = locator.GetService(parameterType);
                 args[i] = service;
             }
 

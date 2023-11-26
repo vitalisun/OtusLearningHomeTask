@@ -4,6 +4,9 @@ namespace Assets.Scripts.DI
 {
     public sealed class DependencyAssembler : MonoBehaviour
     {
+        [SerializeField]
+        private ServiceLocator _serviceLocator;
+
         private void Start()
         {
             GameObject[] gameObjects = this.gameObject.scene.GetRootGameObjects();
@@ -19,7 +22,7 @@ namespace Assets.Scripts.DI
             var targets = targetTransform.GetComponents<MonoBehaviour>();
             foreach (var target in targets)
             {
-                DependencyInjector.Inject(target);
+                DependencyInjector.Inject(target, _serviceLocator);
             }
 
             foreach (Transform child in targetTransform)

@@ -1,20 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Scripts.DI
 {
-    public static class ServiceLocator
+    public class ServiceLocator : MonoBehaviour
     {
-        private static readonly Dictionary<Type, object> _services = new();
+        private readonly Dictionary<Type, object> services = new();
 
-        public static object GetService(Type type)
+        public object GetService(Type type)
         {
-            return _services[type];
+            return services[type];
         }
 
-        public static void BindService(Type type, object service)
+        public T GetService<T>() where T : class
         {
-            _services.Add(type, service);
+            return services[typeof(T)] as T;
+        }
+
+        public void BindService(Type type, object service)
+        {
+            services.Add(type, service);
         }
     }
+
 }

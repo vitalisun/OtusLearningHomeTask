@@ -6,11 +6,14 @@ namespace Assets.Scripts.DI
     public sealed class ServiceLocatorInstaller : MonoBehaviour
     {
         [SerializeField]
+        private ServiceLocator _serviceLocator;
+
+        [SerializeField]
         private InputManager inputManager;
 
         private void Awake()
         {
-            ServiceLocator.BindService(typeof(IInputManager), inputManager);
+            _serviceLocator.BindService(typeof(IInputManager), inputManager);
         }
     }
 }
