@@ -7,18 +7,22 @@ namespace Assets.Scripts.Bullets
     {
         private readonly int _initialCount;
         private readonly Queue<Bullet> _pool = new();
+        private readonly GameManager.GameSystem.GameManager _gameManager;
 
-        public BulletPool(int initialCount)
+        public BulletPool(int initialCount, GameManager.GameSystem.GameManager gameManager)
         {
-            this._initialCount = initialCount;
+            _initialCount = initialCount;
+            _gameManager = gameManager;
         }
 
         public void InitPool(Bullet prefab, Transform container)
         {
             for (var i = 0; i < _initialCount; i++)
             {
-                var bullet = UnityEngine.Object.Instantiate(prefab, container);
+                var bullet = Object.Instantiate(prefab, container);
+                bullet.Number = i;
                 _pool.Enqueue(bullet);
+                _gameManager.AddListener(bullet);
             }
         }
 
@@ -30,7 +34,8 @@ namespace Assets.Scripts.Bullets
             }
             else
             {
-                bullet = UnityEngine.Object.Instantiate(prefab, worldTransform);
+                bullet = Object.Instantiate(prefab, worldTransform);
+                _gameManager.AddListener(bullet);
             }
 
             return bullet;

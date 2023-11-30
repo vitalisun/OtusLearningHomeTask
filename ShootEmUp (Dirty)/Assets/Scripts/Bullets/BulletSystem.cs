@@ -1,32 +1,50 @@
 using System.Collections.Generic;
 using Assets.Scripts.Common;
 using Assets.Scripts.Components;
-using Assets.Scripts.GameManager;
+using Assets.Scripts.GameManager.DI;
+using Assets.Scripts.GameManager.GameSystem.Interfaces;
 using Assets.Scripts.Level;
 using UnityEngine;
 
 namespace Assets.Scripts.Bullets
 {
-    public sealed class BulletSystem : MonoBehaviour,
+    public sealed class BulletSystem :
         IInstaller,
         Listeners.IGameFinishListener,
         Listeners.IGameFixedUpdateListener
     {
         private const int InitialCount = 50;
 
-        [SerializeField] private Transform _container;
-        [SerializeField] private Bullet _prefab;
-        [SerializeField] private Transform _worldTransform;
-        [SerializeField] private LevelBounds _levelBounds;
-
         private readonly HashSet<Bullet> _activeBullets = new();
         private readonly List<Bullet> _cache = new();
         private BulletPool _bulletPool;
 
+        private Transform _bulletsContainer;
+        private WorldContainer _worldContainer;
+        private Bullet _prefab;
+        private LevelBounds _levelBounds;
+        private GameManager.GameSystem.GameManager _gameManager;
+
+        [Inject]
+        public void Construct(
+            WorldContainer worldContainer,
+            Bullet prefab,
+            LevelBounds levelBounds,
+            BulletPoolContainer bulletPoolContainer,
+            GameManager.GameSystem.GameManager gameManager
+            )
+        {
+            _worldContainer = worldContainer;
+            _prefab = prefab;
+            _levelBounds = levelBounds;
+            _bulletsContainer = bulletPoolContainer.transform;
+            _gameManager = gameManager;
+        }
+
         public void Install()
         {
-            _bulletPool = new BulletPool(InitialCount);
-            _bulletPool.InitPool(_prefab, _container);
+            _bulletPool = new BulletPool(InitialCount, _gameManager);
+            _bulletPool.InitPool(_prefab, _bulletsContainer);
         }
 
         public void OnFinish()
@@ -47,7 +65,7 @@ namespace Assets.Scripts.Bullets
 
         public void FireBullet(BulletArgs args)
         {
-            var bullet = _bulletPool.GetBulletFromPool(_prefab, _worldTransform);
+            var bullet = _bulletPool.GetBulletFromPool(_prefab, _worldContainer.transform);
 
             SetBulletFlying(args, bullet);
 
@@ -61,9 +79,10 @@ namespace Assets.Scripts.Bullets
         {
             if (_activeBullets.Remove(bullet))
             {
+
                 bullet.OnCollisionEntered -= OnBulletCollision;
 
-                _bulletPool.ReturnBulletToPool(bullet, _container);
+                _bulletPool.ReturnBulletToPool(bullet, _bulletsContainer);
             }
         }
 
@@ -107,12 +126,18 @@ namespace Assets.Scripts.Bullets
 
         private static void SetBulletFlying(BulletArgs args, Bullet bullet)
         {
+
             bullet.SetPosition(args.Position);
             bullet.SetColor(args.Color);
             bullet.SetPhysicsLayer(args.PhysicsLayer);
             bullet.Damage = args.Damage;
             bullet.IsPlayer = args.IsPlayer;
             bullet.SetVelocity(args.Velocity);
+        }
+
+        private static string LogArgs(BulletArgs args)
+        {
+            return $"Position: {args.Position}, Color: {args.Color}, PhysicsLayer: {args.PhysicsLayer}, Damage: {args.Damage}, IsPlayer: {args.IsPlayer}, Velocity: {args.Velocity}";
         }
     }
 }

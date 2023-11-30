@@ -1,5 +1,5 @@
 using System;
-using Assets.Scripts.GameManager;
+using Assets.Scripts.GameManager.GameSystem.Interfaces;
 using UnityEngine;
 
 namespace Assets.Scripts.Level

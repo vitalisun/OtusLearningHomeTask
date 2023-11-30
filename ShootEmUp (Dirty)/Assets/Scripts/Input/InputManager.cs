@@ -1,12 +1,11 @@
 using System;
-using Assets.Scripts.GameManager;
+using Assets.Scripts.GameManager.GameSystem.Interfaces;
 using UnityEngine;
-using CharacterController = Assets.Scripts.Character.CharacterController;
 
 namespace Assets.Scripts.Input
 {
-    public sealed class InputManager : MonoBehaviour,
-        Listeners.IGameUpdateListener
+    public sealed class InputManager :
+        Listeners.IGameUpdateListener, IInputManager
     {
         public event Action<bool> OnFireEvent;
 

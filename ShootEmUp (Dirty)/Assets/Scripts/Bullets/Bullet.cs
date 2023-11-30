@@ -1,5 +1,6 @@
 using System;
-using Assets.Scripts.GameManager;
+using Assets.Scripts.GameManager.GameSystem.Interfaces;
+using Unity.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.Bullets
@@ -21,6 +22,14 @@ namespace Assets.Scripts.Bullets
 
         private Vector2 _pausedVelocity;
         private bool _isPaused;
+
+        [ReadOnly]
+        public int Number;
+
+        private void Awake()
+        {
+            _isPaused = false;
+        }
 
         public void OnPause()
         {
@@ -53,10 +62,12 @@ namespace Assets.Scripts.Bullets
             if (_isPaused)
             {
                 _pausedVelocity = velocity;
+                _rigidbody2D.simulated = false;
             }
             else
             {
                 _rigidbody2D.velocity = velocity;
+                _rigidbody2D.simulated = true;
             }
         }
 
