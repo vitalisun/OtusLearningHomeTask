@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Assets.Scripts.Common;
 using Assets.Scripts.Components;
@@ -11,7 +12,9 @@ namespace Assets.Scripts.Bullets
     public sealed class BulletSystem :
         IInstaller,
         Listeners.IGameFinishListener,
-        Listeners.IGameFixedUpdateListener
+        Listeners.IGameFixedUpdateListener,
+        Listeners.IGamePauseListener,
+        Listeners.IGameResumeListener
     {
         private const int InitialCount = 50;
 
@@ -23,7 +26,6 @@ namespace Assets.Scripts.Bullets
         private WorldContainer _worldContainer;
         private Bullet _prefab;
         private LevelBounds _levelBounds;
-        private GameManager.GameSystem.GameManager _gameManager;
 
         [Inject]
         public void Construct(
@@ -38,12 +40,11 @@ namespace Assets.Scripts.Bullets
             _prefab = prefab;
             _levelBounds = levelBounds;
             _bulletsContainer = bulletPoolContainer.transform;
-            _gameManager = gameManager;
         }
 
         public void Install()
         {
-            _bulletPool = new BulletPool(InitialCount, _gameManager);
+            _bulletPool = new BulletPool(InitialCount);
             _bulletPool.InitPool(_prefab, _bulletsContainer);
         }
 
@@ -138,6 +139,22 @@ namespace Assets.Scripts.Bullets
         private static string LogArgs(BulletArgs args)
         {
             return $"Position: {args.Position}, Color: {args.Color}, PhysicsLayer: {args.PhysicsLayer}, Damage: {args.Damage}, IsPlayer: {args.IsPlayer}, Velocity: {args.Velocity}";
+        }
+
+        public void OnPause()
+        {
+            foreach (var activeBullet in _activeBullets)
+            {
+                activeBullet.OnPause();
+            }
+        }
+
+        public void OnResume()
+        {
+            foreach (var activeBullet in _activeBullets)
+            {
+                activeBullet.OnResume();
+            }
         }
     }
 }
