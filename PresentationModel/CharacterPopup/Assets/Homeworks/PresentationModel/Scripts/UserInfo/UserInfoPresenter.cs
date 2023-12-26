@@ -1,4 +1,5 @@
 using System;
+using Assets.Homeworks.PresentationModel.Scripts;
 using UnityEngine;
 
 namespace Lessons.Architecture.PM
@@ -19,7 +20,6 @@ namespace Lessons.Architecture.PM
             Description = model.Description;
             Icon = model.Icon;
 
-            //todo: спросить как отписываться в презентерах - деструктор или реализация Idisposable ?
             model.OnNameChanged += OnNameChangedHandler;
             model.OnDescriptionChanged += OnDescriptionChangedHandler;
             model.OnIconChanged += OnIconChangedHandler;

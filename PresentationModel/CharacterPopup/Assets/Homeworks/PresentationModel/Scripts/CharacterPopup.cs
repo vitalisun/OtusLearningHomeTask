@@ -8,14 +8,17 @@ namespace Assets.Homeworks.PresentationModel.Scripts
     {
         [SerializeField] private UserInfoView _userInfoView;
 
+        [SerializeField] private PlayerLevelView _playerLevelView;
+
         [SerializeField] private Button _closeButton;
 
-        public void Show(UserInfoPresenter presenter)
+        public void Show(UserInfoPresenter userInfoPresenter, PlayerLevelPresenter playerLevelPresenter)
         {
             gameObject.SetActive(true);
             _closeButton.onClick.AddListener(Hide);
 
-            _userInfoView.Initialized(presenter);
+            _userInfoView.Initialized(userInfoPresenter);
+            _playerLevelView.Initialized(playerLevelPresenter);
         }
 
         public void Hide()

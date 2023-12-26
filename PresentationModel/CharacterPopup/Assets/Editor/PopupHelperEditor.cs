@@ -16,5 +16,12 @@ public class PopupHelperEditor : Editor
         {
             popupHelper.ShowPopup();
         }
+
+        if (GUILayout.Button("Add Experience"))
+        {
+            var randomRange = Random.Range(10, 70);
+
+            popupHelper.AddExperience(randomRange);
+        }
     }
 }

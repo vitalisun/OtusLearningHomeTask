@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace Lessons.Architecture.PM
 {
-    public sealed class PlayerLevel : MonoBehaviour
+    public sealed class PlayerLevelModel : MonoBehaviour
     {
         public event Action OnLevelUp;
         public event Action<int> OnExperienceChanged;
 
         public int CurrentLevel { get; private set; } = 1;
 
-        public int CurrentExperience { get; private set; }
+        public int CurrentExperience { get; private set; } = 0;
 
         public int RequiredExperience
         {
@@ -26,7 +26,9 @@ namespace Lessons.Architecture.PM
 
         public void LevelUp()
         {
-            if (CanLevelUp())
+            var canLevelUp = CanLevelUp();  
+
+            if (canLevelUp)
             {
                 CurrentExperience = 0;
                 CurrentLevel++;
@@ -34,7 +36,7 @@ namespace Lessons.Architecture.PM
             }
         }
 
-        public bool CanLevelUp()
+        private bool CanLevelUp()
         {
             return CurrentExperience == RequiredExperience;
         }
