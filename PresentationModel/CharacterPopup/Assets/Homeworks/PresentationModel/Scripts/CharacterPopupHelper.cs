@@ -8,18 +8,18 @@ namespace Assets.Homeworks.PresentationModel.Scripts
     public class CharacterPopupHelper : MonoBehaviour
     {
         [SerializeField]
-        private CharacterPopup _characterPopup;
-
-        [SerializeField]
         private UserInfoModelFactory _userInfoModelFactory;
 
+        private CharacterPopup _characterPopup;
         private PlayerLevelPresenter _playerLevelPresenter;
         private UserInfoPresenter _userInfoPresenter;
         private CharacterInfoPresenter _characterInfoPresenter;
 
         public void ShowPopup()
         {
-            if (_characterPopup.gameObject.activeSelf)
+            _characterPopup = GetComponentInChildren<CharacterPopup>();
+
+            if (_characterPopup.Root.activeSelf)
             {
                 return;
             }
@@ -29,6 +29,13 @@ namespace Assets.Homeworks.PresentationModel.Scripts
             _characterInfoPresenter ??= CreateCharacterInfoPresenter();
 
             _characterPopup.Show(_userInfoPresenter, _playerLevelPresenter, _characterInfoPresenter);
+        }
+
+        public void ResetPopupPresenters()
+        {
+            _userInfoPresenter = null;
+            _playerLevelPresenter = null;
+            _characterInfoPresenter = null;
         }
 
         public void AddExperience(int range)
@@ -83,7 +90,7 @@ namespace Assets.Homeworks.PresentationModel.Scripts
 
         public void AddDefaultStats()
         {
-            if (!_characterPopup.gameObject.activeSelf)
+            if (!_characterPopup.Root.activeSelf)
             {
                 Debug.Log("Popup is not active");
                 return;
@@ -99,7 +106,7 @@ namespace Assets.Homeworks.PresentationModel.Scripts
 
         public void ClearAllStats()
         {
-            if (!_characterPopup.gameObject.activeSelf)
+            if (!_characterPopup.Root.activeSelf)
             {
                 Debug.Log("Popup is not active");
                 return;
@@ -115,7 +122,7 @@ namespace Assets.Homeworks.PresentationModel.Scripts
 
         public void GetAllStats()
         {
-            if (!_characterPopup.gameObject.activeSelf)
+            if (!_characterPopup.Root.activeSelf)
             {
                 Debug.Log("Popup is not active");
                 return;

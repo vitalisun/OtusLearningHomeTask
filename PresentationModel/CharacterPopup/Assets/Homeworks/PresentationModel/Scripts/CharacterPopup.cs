@@ -6,20 +6,20 @@ namespace Assets.Homeworks.PresentationModel.Scripts
 {
     public class CharacterPopup : MonoBehaviour
     {
+        [SerializeField] private GameObject _root;
         [SerializeField] private UserInfoView _userInfoView;
-
         [SerializeField] private PlayerLevelView _playerLevelView;
-
         [SerializeField] private CharacterInfoView _characterInfoView;
-
         [SerializeField] private Button _closeButton;
+
+        public GameObject Root => _root;
 
         public void Show(
             UserInfoPresenter userInfoPresenter, 
             PlayerLevelPresenter playerLevelPresenter, 
             CharacterInfoPresenter characterInfoPresenter)
         {
-            gameObject.SetActive(true);
+            _root.SetActive(true);
             _closeButton.onClick.AddListener(Hide);
 
             _userInfoView.Initialize(userInfoPresenter);
@@ -29,7 +29,7 @@ namespace Assets.Homeworks.PresentationModel.Scripts
 
         public void Hide()
         {
-            gameObject.SetActive(false);
+            _root.SetActive(false);
         }
     }
 }
