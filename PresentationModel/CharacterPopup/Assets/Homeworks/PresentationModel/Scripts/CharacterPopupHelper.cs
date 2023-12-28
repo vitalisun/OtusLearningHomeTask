@@ -19,9 +19,10 @@ namespace Assets.Homeworks.PresentationModel.Scripts
         {
             _characterPopup = GetComponentInChildren<CharacterPopup>();
 
-            if (_characterPopup.Root.activeSelf)
+            if (_characterPopup == null)
             {
-                return;
+               Debug.Log("CharacterPopup not found");
+               return;
             }
 
             _userInfoPresenter ??= CreateUserInfoPresenter();
@@ -40,11 +41,17 @@ namespace Assets.Homeworks.PresentationModel.Scripts
 
         public void AddExperience(int range)
         {
+            if (IsPopupHidden()) 
+                return;
+
             _playerLevelPresenter.AddExperience(range);
         }
 
         public void AddStat(string name)
         {
+            if (IsPopupHidden())
+                return;
+
             var stat = _characterInfoPresenter.GetStat(name);
 
             if (stat == null)
@@ -60,6 +67,9 @@ namespace Assets.Homeworks.PresentationModel.Scripts
 
         public void RemoveStat(string name)
         {
+            if (IsPopupHidden())
+                return;
+
             var stats = _characterInfoPresenter.GetStats();
             var stat = stats.FirstOrDefault(s => s.Name?.ToLower() == name.ToLower());
 
@@ -75,6 +85,9 @@ namespace Assets.Homeworks.PresentationModel.Scripts
 
         public void ChangeStatValue(string name, int val)
         {
+            if (IsPopupHidden())
+                return;
+
             var stats = _characterInfoPresenter.GetStats();
             var stat = stats.FirstOrDefault(s => s.Name?.ToLower() == name.ToLower());
 
@@ -90,11 +103,8 @@ namespace Assets.Homeworks.PresentationModel.Scripts
 
         public void AddDefaultStats()
         {
-            if (!_characterPopup.Root.activeSelf)
-            {
-                Debug.Log("Popup is not active");
+            if (IsPopupHidden())
                 return;
-            }
 
             AddStat("Endurance");
             AddStat("Luck");
@@ -106,11 +116,8 @@ namespace Assets.Homeworks.PresentationModel.Scripts
 
         public void ClearAllStats()
         {
-            if (!_characterPopup.Root.activeSelf)
-            {
-                Debug.Log("Popup is not active");
+            if (IsPopupHidden())
                 return;
-            }
 
             var stats = _characterInfoPresenter.GetStats().ToList(); // Creating a copy of the stats list
 
@@ -122,11 +129,9 @@ namespace Assets.Homeworks.PresentationModel.Scripts
 
         public void GetAllStats()
         {
-            if (!_characterPopup.Root.activeSelf)
-            {
-                Debug.Log("Popup is not active");
+            if (IsPopupHidden())
                 return;
-            }
+
             var stats = _characterInfoPresenter.GetStats();
             foreach (var stat in stats)
             {
@@ -152,6 +157,17 @@ namespace Assets.Homeworks.PresentationModel.Scripts
         {
             var characterInfoModel = new CharacterInfoModel();
             return new CharacterInfoPresenter(characterInfoModel);
+        }
+
+        private bool IsPopupHidden()
+        {
+            if (!_characterPopup.Root.activeSelf)
+            {
+                Debug.Log("Popup is not active");
+                return true;
+            }
+
+            return false;
         }
     }
 }

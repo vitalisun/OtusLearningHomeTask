@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Lessons.Architecture.PM
 {
-    public sealed class PlayerLevelModel : MonoBehaviour
+    public sealed class PlayerLevelModel
     {
         public event Action OnLevelUp;
         public event Action<int> OnExperienceChanged;

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Lessons.Architecture.PM
 {
-    public sealed class UserInfoModel : MonoBehaviour
+    public sealed class UserInfoModel
     {
         public event Action<string> OnNameChanged;
         public event Action<string> OnDescriptionChanged;

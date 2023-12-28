@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Lessons.Architecture.PM
 {
-    public sealed class CharacterInfoModel : MonoBehaviour
+    public sealed class CharacterInfoModel
     {
         public event Action<CharacterStatModel> OnStatAdded;
         public event Action<CharacterStatModel> OnStatRemoved;
@@ -17,6 +17,7 @@ namespace Lessons.Architecture.PM
         {
             if (stats.Count >= _maxAmount)
             {
+                Debug.Log("Max amount of stats reached");
                 return;
             }
 

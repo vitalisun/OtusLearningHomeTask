@@ -19,6 +19,17 @@ namespace Assets.Homeworks.PresentationModel.Scripts
             PlayerLevelPresenter playerLevelPresenter, 
             CharacterInfoPresenter characterInfoPresenter)
         {
+            if (_root == null)
+            {
+                Debug.Log("Root not found");
+                return;
+            }
+
+            if (_root.activeSelf)
+            {
+                return;
+            }
+
             _root.SetActive(true);
             _closeButton.onClick.AddListener(Hide);
 
@@ -29,6 +40,17 @@ namespace Assets.Homeworks.PresentationModel.Scripts
 
         public void Hide()
         {
+            if (_root == null)
+            {
+                Debug.Log("Root not found");
+                return;
+            }
+
+            if (!_root.activeSelf)
+            {
+                return;
+            }
+
             _root.SetActive(false);
         }
     }
