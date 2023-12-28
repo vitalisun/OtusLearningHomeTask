@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Lessons.Architecture.PM
 {
-    public sealed class CharacterStatModel : MonoBehaviour
+    public sealed class CharacterStatModel
     {
         public event Action<int> OnValueChanged; 
 
@@ -11,10 +11,9 @@ namespace Lessons.Architecture.PM
 
         public int Value { get; private set; }
 
-        public CharacterStatModel(string name, int value)
+        public CharacterStatModel(string name)
         {
             Name = name;
-            Value = value;
         }
 
         public void ChangeValue(int value)

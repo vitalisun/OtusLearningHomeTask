@@ -27,7 +27,7 @@ public class CharacterInfoEditor : Editor
         {
             // Here you would create a new CharacterStat instance based on the name
             // For demo purposes, assuming a simple constructor
-            CharacterStatModel newStat = new CharacterStatModel(statNameToAdd, default);
+            CharacterStatModel newStat = new CharacterStatModel(statNameToAdd);
             characterInfo.AddStat(newStat);
         }
 

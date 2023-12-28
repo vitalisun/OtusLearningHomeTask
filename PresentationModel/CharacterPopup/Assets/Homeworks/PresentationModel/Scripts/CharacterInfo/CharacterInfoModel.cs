@@ -9,11 +9,17 @@ namespace Lessons.Architecture.PM
     {
         public event Action<CharacterStatModel> OnStatAdded;
         public event Action<CharacterStatModel> OnStatRemoved;
-    
+
+        private readonly int _maxAmount = 6;
         private readonly HashSet<CharacterStatModel> stats = new();
 
         public void AddStat(CharacterStatModel stat)
         {
+            if (stats.Count >= _maxAmount)
+            {
+                return;
+            }
+
             if (stats.Add(stat))
             {
                 OnStatAdded?.Invoke(stat);
@@ -38,7 +44,7 @@ namespace Lessons.Architecture.PM
                 }
             }
 
-            throw new Exception($"Stat {name} is not found!");
+            return null;
         }
 
         public CharacterStatModel[] GetStats()

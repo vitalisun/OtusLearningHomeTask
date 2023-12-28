@@ -21,7 +21,7 @@ namespace Lessons.Architecture.PM
 
         private PlayerLevelPresenter _presenter;
 
-        public void Initialized(PlayerLevelPresenter presenter)
+        public void Initialize(PlayerLevelPresenter presenter)
         {
             _presenter = presenter;
 

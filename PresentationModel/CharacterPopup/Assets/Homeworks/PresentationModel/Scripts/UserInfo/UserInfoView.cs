@@ -17,7 +17,7 @@ namespace Lessons.Architecture.PM
 
         private UserInfoPresenter _presenter;
 
-        public void Initialized(UserInfoPresenter presenter)
+        public void Initialize(UserInfoPresenter presenter)
         {
             _presenter = presenter;
             SetName(_presenter.Name);
