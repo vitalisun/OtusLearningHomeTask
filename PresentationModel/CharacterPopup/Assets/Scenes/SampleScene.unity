@@ -379,6 +379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1272649217}
   - component: {fileID: 1272649216}
+  - component: {fileID: 1272649218}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -399,7 +400,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
-  _monoInstallers: []
+  _monoInstallers:
+  - {fileID: 1272649218}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -432,6 +434,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1272649218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272649215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 525538697e519c3448f93b55c9d4fcc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _userInfoData: {fileID: 11400000, guid: b57f1b62dbe7c2a4b8b7373041f66dfa, type: 2}
+  _popupPrefab: {fileID: 1538623418308401987, guid: ddbcdc844c2ebdf4785687390a096995, type: 3}
 --- !u!1 &1851920113
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,7 +459,6 @@ GameObject:
   - component: {fileID: 1851920115}
   - component: {fileID: 1851920114}
   - component: {fileID: 1851920117}
-  - component: {fileID: 1851920116}
   m_Layer: 0
   m_Name: PopupManager
   m_TagString: Untagged
@@ -463,7 +478,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9d0e9afd1c505842bd9c498627f04da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _popupPrefab: {fileID: 1538623418308401987, guid: ddbcdc844c2ebdf4785687390a096995, type: 3}
 --- !u!4 &1851920115
 Transform:
   m_ObjectHideFlags: 0
@@ -479,19 +493,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1851920116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1851920113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbfe440df5a6bb1438b312fff89f4cfa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _userInfoData: {fileID: 11400000, guid: b57f1b62dbe7c2a4b8b7373041f66dfa, type: 2}
 --- !u!114 &1851920117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,4 +505,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4b0cf724d621be47bc795ba60da2310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _userInfoModelFactory: {fileID: 1851920116}

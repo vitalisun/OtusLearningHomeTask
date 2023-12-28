@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Homeworks.PresentationModel.Scripts.CharacterStat
 {
-    public sealed class CharacterStatPresenter
+    public sealed class CharacterStatPresenter : IDisposable
     {
         private CharacterStatModel _model;
 
@@ -29,6 +29,12 @@ namespace Assets.Homeworks.PresentationModel.Scripts.CharacterStat
         public void ChangeStatValue(int newValue)
         {
             _model.ChangeValue(newValue);
+        }
+
+        public void Dispose()
+        {
+            _model.OnValueChanged -= OnValueChangedHandler;
+            _model = null;
         }
     }
 }

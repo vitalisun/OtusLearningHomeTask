@@ -562,7 +562,7 @@ GameObject:
   - component: {fileID: 1538623418308401990}
   - component: {fileID: 1538623418308401989}
   - component: {fileID: 1538623418308401988}
-  - component: {fileID: 4680392557082810458}
+  - component: {fileID: 7308105439563293021}
   m_Layer: 5
   m_Name: PopupView
   m_TagString: Untagged
@@ -652,7 +652,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &4680392557082810458
+--- !u!114 &7308105439563293021
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

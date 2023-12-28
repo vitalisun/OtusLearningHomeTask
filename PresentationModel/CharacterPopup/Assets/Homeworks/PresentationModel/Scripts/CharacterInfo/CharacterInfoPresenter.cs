@@ -1,8 +1,9 @@
 using System;
+using UnityEngine;
 
 namespace Lessons.Architecture.PM
 {
-    public sealed class CharacterInfoPresenter
+    public sealed class CharacterInfoPresenter : IDisposable
     {
         private CharacterInfoModel _model;
 
@@ -44,6 +45,14 @@ namespace Lessons.Architecture.PM
         public CharacterStatModel[] GetStats()
         {
             return _model.GetStats();
+        }
+
+        public void Dispose()
+        {
+            _model.OnStatAdded -= StatAddedHandler;
+            _model.OnStatRemoved -= StatRemovedHandler;
+
+            _model = null;
         }
     }
 }

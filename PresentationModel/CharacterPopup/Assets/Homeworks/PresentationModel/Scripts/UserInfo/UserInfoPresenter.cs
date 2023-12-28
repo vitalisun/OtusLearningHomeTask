@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace Lessons.Architecture.PM
 {
-    public sealed class UserInfoPresenter
+    public sealed class UserInfoPresenter : IDisposable
     {
+        private UserInfoModel _model;
         public string Name { get; }
         public string Description { get; }
         public Sprite Icon { get; }
@@ -16,13 +17,14 @@ namespace Lessons.Architecture.PM
 
         public UserInfoPresenter(UserInfoModel model)
         {
-            Name = model.Name;
-            Description = model.Description;
-            Icon = model.Icon;
+            _model = model;
+            Name = _model.Name;
+            Description = _model.Description;
+            Icon = _model.Icon;
 
-            model.OnNameChanged += OnNameChangedHandler;
-            model.OnDescriptionChanged += OnDescriptionChangedHandler;
-            model.OnIconChanged += OnIconChangedHandler;
+            _model.OnNameChanged += OnNameChangedHandler;
+            _model.OnDescriptionChanged += OnDescriptionChangedHandler;
+            _model.OnIconChanged += OnIconChangedHandler;
         }
 
         private void OnNameChangedHandler(string val)
@@ -38,6 +40,15 @@ namespace Lessons.Architecture.PM
         private void OnIconChangedHandler(Sprite val)
         {
             OnIconChanged?.Invoke(val);
+        }
+
+        public void Dispose()
+        {
+            _model.OnNameChanged -= OnNameChangedHandler;
+            _model.OnDescriptionChanged -= OnDescriptionChangedHandler;
+            _model.OnIconChanged -= OnIconChangedHandler;
+
+            _model = null;
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Lessons.Architecture.PM
 {
-    public sealed class PlayerLevelPresenter
+    public sealed class PlayerLevelPresenter : IDisposable
     {
         private PlayerLevelModel _model;
         public string LevelText { get; private set; }
@@ -52,6 +52,14 @@ namespace Lessons.Architecture.PM
             SliderValue = (float)_model.CurrentExperience / _model.RequiredExperience;
 
             OnExperienceChanged?.Invoke();
+        }
+
+        public void Dispose()
+        {
+            _model.OnExperienceChanged -= OnExperienceChangedHandler;
+            _model.OnLevelUp -= OnLevelUpHandler;
+
+            _model = null;
         }
     }
 }

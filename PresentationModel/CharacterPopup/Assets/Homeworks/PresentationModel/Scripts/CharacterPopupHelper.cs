@@ -2,18 +2,24 @@
 using System.Linq;
 using Lessons.Architecture.PM;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.Homeworks.PresentationModel.Scripts
 {
     public class CharacterPopupHelper : MonoBehaviour
     {
-        [SerializeField]
         private UserInfoModelFactory _userInfoModelFactory;
 
         private CharacterPopup _characterPopup;
-        private PlayerLevelPresenter _playerLevelPresenter;
         private UserInfoPresenter _userInfoPresenter;
+        private PlayerLevelPresenter _playerLevelPresenter;
         private CharacterInfoPresenter _characterInfoPresenter;
+
+        [Inject]
+        public void Construct(UserInfoModelFactory userInfoModelFactory)
+        {
+            _userInfoModelFactory = userInfoModelFactory;
+        }
 
         public void ShowPopup()
         {
@@ -34,8 +40,13 @@ namespace Assets.Homeworks.PresentationModel.Scripts
 
         public void ResetPopupPresenters()
         {
+            _userInfoPresenter.Dispose();
             _userInfoPresenter = null;
+
+            _playerLevelPresenter.Dispose();
             _playerLevelPresenter = null;
+
+            _characterInfoPresenter.Dispose();
             _characterInfoPresenter = null;
         }
 

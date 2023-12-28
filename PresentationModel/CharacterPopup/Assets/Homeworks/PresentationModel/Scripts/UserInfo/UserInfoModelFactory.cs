@@ -2,10 +2,14 @@ using Assets.Homeworks.PresentationModel.Scripts.Models;
 using Lessons.Architecture.PM;
 using UnityEngine;
 
-public class UserInfoModelFactory : MonoBehaviour
+public class UserInfoModelFactory
 {
-    [SerializeField]
     private UserInfoData _userInfoData;
+
+    public UserInfoModelFactory(UserInfoData userInfoData)
+    {
+        _userInfoData = userInfoData;
+    }
 
     public UserInfoModel CreateUserInfoModel()
     {
