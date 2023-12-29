@@ -1,5 +1,4 @@
 using System;
-using Assets.Homeworks.PresentationModel.Scripts;
 using UnityEngine;
 
 namespace Lessons.Architecture.PM

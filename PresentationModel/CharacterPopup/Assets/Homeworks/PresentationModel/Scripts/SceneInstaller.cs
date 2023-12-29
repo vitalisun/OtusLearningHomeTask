@@ -1,10 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Assets.Homeworks.PresentationModel.Scripts;
 using Assets.Homeworks.PresentationModel.Scripts.Models;
-using Lessons.Architecture.PM;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 public class SceneInstaller : MonoInstaller

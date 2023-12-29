@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Assets.Homeworks.PresentationModel.Scripts;
 using UnityEngine;
 using Zenject;

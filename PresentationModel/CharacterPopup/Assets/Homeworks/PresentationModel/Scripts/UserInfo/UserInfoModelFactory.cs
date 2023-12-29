@@ -1,6 +1,5 @@
 using Assets.Homeworks.PresentationModel.Scripts.Models;
 using Lessons.Architecture.PM;
-using UnityEngine;
 
 public class UserInfoModelFactory
 {
