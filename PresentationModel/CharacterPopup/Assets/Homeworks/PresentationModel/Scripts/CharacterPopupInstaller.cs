@@ -2,7 +2,7 @@ using Assets.Homeworks.PresentationModel.Scripts.Models;
 using UnityEngine;
 using Zenject;
 
-public class SceneInstaller : MonoInstaller
+public class CharacterPopupInstaller : MonoInstaller
 {
     [SerializeField]
     private UserInfoData _userInfoData;

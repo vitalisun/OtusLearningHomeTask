@@ -1,14 +1,22 @@
 ﻿using Assets.Homeworks.MVxPractice.Task1.Scripts.Data;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.Homeworks.MVxPractice.Task1.Scripts
 {
     public class CharacterSelectorManager : MonoBehaviour
     {
-        [SerializeField] private CharacterSelector _characterSelectorPrefab;
-        [SerializeField] private ScrollIconData[] _scrollIconDataList;
+        private CharacterSelector _characterSelectorPrefab;
+        private ScrollIconData[] _scrollIconDataList;
         private ScrollerPresenter _scrollerPresenter;
         private CharacterSelector _characterSelector;
+
+        [Inject]
+        public void Construct(CharacterSelector characterSelectorPrefab, ScrollIconData[] scrollIconDataList)
+        {
+            _characterSelectorPrefab = characterSelectorPrefab;
+            _scrollIconDataList = scrollIconDataList;
+        }
 
         public void Create()
         {

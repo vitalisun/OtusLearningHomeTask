@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 366d31108b30d2642bd6aaa555da1d67, type: 3}
+  m_Name: ScrollIconDataInstaller
+  m_EditorClassIdentifier: 
+  ScrollIconDataArray:
+  - {fileID: 11400000, guid: c2d5ee4fde5c6a545923d70db094d30f, type: 2}
+  - {fileID: 11400000, guid: e4d1fde13acb25f46867e4a903d6eefe, type: 2}
+  - {fileID: 11400000, guid: 5f1916decf0a30a4381306e26d154c5f, type: 2}
+  - {fileID: 11400000, guid: 725e39d416ed9534d8fee0fddcbdbfe3, type: 2}
+  - {fileID: 11400000, guid: 77f8a085ea148e442b57db8a5d1c91ff, type: 2}
