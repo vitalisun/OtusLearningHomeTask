@@ -35,6 +35,9 @@ public class ScrollerView : MonoBehaviour
     //handle btn clicks
     public void ScrollLeft()
     {
+        if(!IsInDefaultState()) 
+            return;
+
         //data
         _presenter.ScrollLeft();
 
@@ -45,6 +48,9 @@ public class ScrollerView : MonoBehaviour
 
     public void ScrollRight()
     {
+        if(!IsInDefaultState()) 
+            return;
+
         //data
         _presenter.ScrollRight();
 
@@ -96,6 +102,11 @@ public class ScrollerView : MonoBehaviour
         leftCanvas.sortingOrder = leftOrder;
         middleCanvas.sortingOrder = midOrder;
         rightCanvas.sortingOrder = rightOrder;
+    }
+
+    private bool IsInDefaultState()
+    {
+        return _animator.GetCurrentAnimatorStateInfo(0).IsName("Default");
     }
 
     private void OnDestroy()
