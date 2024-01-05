@@ -1,6 +1,4 @@
 using Assets.Homeworks.MVxPractice.Task1.Scripts.Data;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 

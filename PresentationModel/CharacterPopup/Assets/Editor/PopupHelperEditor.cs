@@ -31,7 +31,7 @@ public class PopupHelperEditor : Editor
 
         // Adding a stat (simplified for demo)
         GUILayout.Label("Add Stat");
-        statName = EditorGUILayout.TextField("Stat Name", statName);
+        statName = EditorGUILayout.TextField("Stat SelectedFighterName", statName);
 
         GUILayout.BeginHorizontal();
 
