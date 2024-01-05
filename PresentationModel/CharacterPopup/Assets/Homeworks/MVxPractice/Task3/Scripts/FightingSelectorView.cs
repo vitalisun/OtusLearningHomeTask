@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class FightingSelectorView : MonoBehaviour
 {
+    private const string PositionSlot = "position_slot";
     [SerializeField] private Transform _slotsParent;
     [SerializeField] private FighterView _fighterViewPrefab;
     [SerializeField] Image _selectedFighterImage;
@@ -20,7 +21,7 @@ public class FightingSelectorView : MonoBehaviour
     {
         _slots = _slotsParent
             .GetComponentsInChildren<Transform>()
-            .Where(t => t != _slotsParent)
+            .Where(t => t.CompareTag(PositionSlot))
             .ToArray();
 
         foreach (var fighterData in fighterDatas)

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5895295439858228555}
   m_Layer: 5
   m_Name: Slot2
-  m_TagString: Untagged
+  m_TagString: position_slot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 189160921559260481}
   m_Layer: 5
   m_Name: Slot3
-  m_TagString: Untagged
+  m_TagString: position_slot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,7 +83,7 @@ GameObject:
   - component: {fileID: 5655550775052552705}
   m_Layer: 5
   m_Name: Slot6
-  m_TagString: Untagged
+  m_TagString: position_slot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -355,7 +355,7 @@ GameObject:
   - component: {fileID: 9105508310762268027}
   m_Layer: 5
   m_Name: Slot1
-  m_TagString: Untagged
+  m_TagString: position_slot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 9046543888032276824}
   m_Layer: 5
   m_Name: Slot5
-  m_TagString: Untagged
+  m_TagString: position_slot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -441,7 +441,7 @@ RectTransform:
   m_GameObject: {fileID: 7352620343297248445}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.51, y: 1.51, z: 1.51}
+  m_LocalScale: {x: 3.12, y: 3.12, z: 3.12}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4811659894057555163}
@@ -453,7 +453,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -175.92}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8289327041349819927
@@ -602,7 +602,7 @@ GameObject:
   - component: {fileID: 4931329706932916516}
   m_Layer: 5
   m_Name: Slot4
-  m_TagString: Untagged
+  m_TagString: position_slot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
