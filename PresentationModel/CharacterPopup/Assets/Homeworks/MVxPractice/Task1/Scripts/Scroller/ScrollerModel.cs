@@ -25,6 +25,4 @@ public class ScrollerModel
         CentralIdx = (CentralIdx - 1 + ScrollIconDataList.Length) % ScrollIconDataList.Length;
         OnScrollRight?.Invoke();
     }
-
-
 }
