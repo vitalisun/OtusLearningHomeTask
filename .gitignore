@@ -88,3 +88,11 @@ crashlytics-build.properties
 /PresentationModel/CharacterPopup/UserSettings
 /PresentationModel/CharacterPopup/.vsconfig
 /PresentationModel/CharacterPopup/Assets/Plugins
+/AppStarter/Library/
+/AppStarter/Assets/TextMesh Pro/
+/AppStarter/ProjectSettings/
+/AppStarter/UserSettings/
+/AppStarter/obj/
+/AppStarter/Logs/
+/AppStarter/.vsconfig
+/AppStarter/Packages
