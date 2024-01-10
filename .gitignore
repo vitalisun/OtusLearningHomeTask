@@ -96,3 +96,14 @@ crashlytics-build.properties
 /AppStarter/Logs/
 /AppStarter/.vsconfig
 /AppStarter/Packages
+/SaveLoadData/Assets/Plugins/
+/SaveLoadData/Assets/TextMesh Pro/
+/SaveLoadData/Library
+/SaveLoadData/obj/
+/SaveLoadData/ProjectSettings
+/SaveLoadData/UserSettings
+/SaveLoadData/Packages/
+/SaveLoadData/Assets/TextMesh Pro.meta
+/SaveLoadData/Assets/Resources
+/SaveLoadData/Logs
+/SaveLoadData/Temp
