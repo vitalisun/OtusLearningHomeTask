@@ -107,3 +107,9 @@ crashlytics-build.properties
 /SaveLoadData/Assets/Resources
 /SaveLoadData/Logs
 /SaveLoadData/Temp
+/ModuleMechanicsPractice/Library
+/ModuleMechanicsPractice/Temp/
+/ModuleMechanicsPractice/ProjectSettings
+/ModuleMechanicsPractice/Logs
+/ModuleMechanicsPractice/Assets/Plugins
+/ModuleMechanicsPractice/obj/
