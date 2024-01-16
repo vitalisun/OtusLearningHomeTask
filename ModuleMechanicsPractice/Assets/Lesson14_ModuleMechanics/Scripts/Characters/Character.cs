@@ -18,23 +18,31 @@ namespace Assets.Lesson14_ModuleMechanics.Scripts
         public AtomicEvent Death;
 
         public AtomicVariable<float> Speed;
+        public AtomicVariable<float> RotationSpeed;
         public AtomicVariable<Vector3> MoveDirection;
+        public AtomicVariable<bool> CanMove;
 
         //logic
         private TakeDamageMechanics _takeDamageMechanics;
         private DeathMechanics _deathMechanics;
         private MovementMechanics _movementMechanics;
+        private CanMoveMechanics _canMoveMechanics;
+        private RotateMechanics _rotateMechanics;
 
         private void Awake()
         {
             _takeDamageMechanics = new TakeDamageMechanics(HitPoints, TakeDamage);
             _deathMechanics = new DeathMechanics(HitPoints, IsDead, Death);
-            _movementMechanics = new MovementMechanics(Speed, MoveDirection, transform);
+            _movementMechanics = new MovementMechanics(Speed, MoveDirection, transform, CanMove);
+            _canMoveMechanics = new CanMoveMechanics(CanMove, IsDead);
+            _rotateMechanics = new RotateMechanics(MoveDirection, transform, CanMove, RotationSpeed);
         }
 
         private void Update()
         {
             _movementMechanics.Update();
+            _canMoveMechanics.Update();
+            _rotateMechanics.Update();
         }
 
         private void OnEnable()

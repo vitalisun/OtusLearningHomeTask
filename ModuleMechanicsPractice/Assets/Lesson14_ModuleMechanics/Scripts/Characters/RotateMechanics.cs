@@ -3,19 +3,19 @@ using UnityEngine;
 
 namespace Assets.Lesson14_ModuleMechanics.Scripts
 {
-    public class MovementMechanics
+    public class RotateMechanics
     {
-        private AtomicVariable<float> _speed;
         private AtomicVariable<Vector3> _moveDirection;
         private AtomicVariable<bool> _canMove;
         private Transform _target;
+        private AtomicVariable<float> _rotationSpeed;
 
-        public MovementMechanics(AtomicVariable<float> speed, AtomicVariable<Vector3> moveDirection, Transform target, AtomicVariable<bool> canMove)
+        public RotateMechanics(AtomicVariable<Vector3> moveDirection, Transform target, AtomicVariable<bool> canMove, AtomicVariable<float> rotationSpeed)
         {
-            _speed = speed;
             _moveDirection = moveDirection;
             _target = target;
             _canMove = canMove;
+            _rotationSpeed = rotationSpeed;
         }
 
         public void Update()
@@ -25,7 +25,8 @@ namespace Assets.Lesson14_ModuleMechanics.Scripts
                 return;
             }
 
-            _target.position += _moveDirection.Value * _speed.Value * Time.deltaTime;
+            var rotation = Quaternion.LookRotation(_moveDirection.Value);
+            _target.rotation = Quaternion.Lerp(_target.rotation, rotation, _rotationSpeed.Value * Time.deltaTime);
         }
     }
 }

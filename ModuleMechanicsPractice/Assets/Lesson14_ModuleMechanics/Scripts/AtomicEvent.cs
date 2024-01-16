@@ -1,4 +1,5 @@
 using System;
+using Sirenix.OdinInspector;
 
 namespace Lessons.Lesson14_ModuleMechanics
 {
@@ -17,6 +18,7 @@ namespace Lessons.Lesson14_ModuleMechanics
             _event -= action;
         }
 
+        [Button]
         public void Invoke()
         {
             _event?.Invoke();
@@ -38,6 +40,7 @@ namespace Lessons.Lesson14_ModuleMechanics
             _event -= action;
         }
 
+        [Button]
         public void Invoke(T args)
         {
             _event?.Invoke(args);
