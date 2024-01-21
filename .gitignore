@@ -71,46 +71,10 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
-/ShootEmUp (Dirty)/Library
-/ShootEmUp (Dirty)/Logs/
-/ShootEmUp (Dirty)/obj/
-/ShootEmUp (Dirty)/Temp
-/ShootEmUp (Dirty)/.vsconfig
-/ShootEmUp (Dirty)/UserSettings/
-/PresentationModel/CharacterPopup/Library
-/PresentationModel/CharacterPopup/Logs
-/PresentationModel/CharacterPopup/obj
-/PresentationModel/CharacterPopup/Assets/TextMesh Pro
-/PresentationModel/CharacterPopup/Packages
-/PresentationModel/CharacterPopup/ProjectSettings
-/PresentationModel/CharacterPopup/Temp
-/PresentationModel/CharacterPopup/Assets/TextMesh Pro.meta
-/PresentationModel/CharacterPopup/UserSettings
-/PresentationModel/CharacterPopup/.vsconfig
-/PresentationModel/CharacterPopup/Assets/Plugins
-/AppStarter/Library/
-/AppStarter/Assets/TextMesh Pro/
-/AppStarter/ProjectSettings/
-/AppStarter/UserSettings/
-/AppStarter/obj/
-/AppStarter/Logs/
-/AppStarter/.vsconfig
-/AppStarter/Packages
-/SaveLoadData/Assets/Plugins/
-/SaveLoadData/Assets/TextMesh Pro/
-/SaveLoadData/Library
-/SaveLoadData/obj/
-/SaveLoadData/ProjectSettings
-/SaveLoadData/UserSettings
-/SaveLoadData/Packages/
-/SaveLoadData/Assets/TextMesh Pro.meta
-/SaveLoadData/Assets/Resources
-/SaveLoadData/Logs
-/SaveLoadData/Temp
-/ModuleMechanicsPractice/Library
-/ModuleMechanicsPractice/Temp/
-/ModuleMechanicsPractice/ProjectSettings
-/ModuleMechanicsPractice/Logs
-/ModuleMechanicsPractice/Assets/Plugins
-/ModuleMechanicsPractice/obj/
-/ModuleMechanicsPractice/UserSettings
+/UnityProject/Library/
+/UnityProject/Temp/
+/UnityProject/ProjectSettings
+/UnityProject/Logs
+/UnityProject/obj/
+/UnityProject/UserSettings
+/UnityProject/.vsconfig
