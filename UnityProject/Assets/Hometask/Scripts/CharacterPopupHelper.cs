@@ -129,7 +129,7 @@ namespace Assets.Homeworks.PresentationModel.Scripts
             if (IsPopupHidden())
                 return;
 
-            var stats = _characterInfoPresenter.GetStats().ToList(); // Creating a copy of the stats list
+            var stats = _characterInfoPresenter.GetStats().ToList();
 
             foreach (var stat in stats)
             {

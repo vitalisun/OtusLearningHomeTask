@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Assets.Homeworks.PresentationModel.Scripts.CharacterStat;
 using UnityEngine;
@@ -8,12 +8,11 @@ namespace Lessons.Architecture.PM
     public sealed class CharacterInfoView : MonoBehaviour
     {
         [SerializeField]
-        private Transform statsContainer; // Parent object for stat UI elements
+        private Transform statsContainer;
 
         [SerializeField]
         private Transform[] _statSlots = new Transform[6];
 
-        // Reference to a prefab representing a single stat in the UI
         [SerializeField]
         private GameObject statPrefab;
 
@@ -37,13 +36,10 @@ namespace Lessons.Architecture.PM
             if(statViews.ContainsKey(stat))
                 return;
 
-            // Find the first empty slot
             int emptySlotIndex = Array.FindIndex(_statSlots, slot => slot.childCount == 0);
 
-            // Check if an empty slot is found
             if (emptySlotIndex != -1)
             {
-                // Instantiate the stat view in the empty slot
                 var statViewObject = Instantiate(statPrefab, _statSlots[emptySlotIndex]);
                 var statView = statViewObject.GetComponent<CharacterStatView>();
                 var statPresenter = new CharacterStatPresenter(stat);
@@ -52,7 +48,6 @@ namespace Lessons.Architecture.PM
             }
             else
             {
-                // All slots are filled, display a warning
                 Debug.Log("Maximum amount of stats reached");
             }
         }
@@ -71,7 +66,5 @@ namespace Lessons.Architecture.PM
             _presenter.OnStatAdded -= AddStatUI;
             _presenter.OnStatRemoved -= RemoveStatUI;
         }
-
-        // Additional methods for UI interaction can be added here
     }
 }
