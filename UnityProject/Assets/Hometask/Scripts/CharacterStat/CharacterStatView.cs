@@ -13,19 +13,19 @@ namespace Assets.Homeworks.PresentationModel.Scripts.CharacterStat
         public void Initialize(CharacterStatPresenter presenter)
         {
             _presenter = presenter;
-            _presenter.OnValueChanged += UpdateUI;
+            _presenter.OnValueChanged += UpdateUi;
 
-            UpdateUI(); // Initial UI update
+            UpdateUi(); // Initial UI update
         }
 
-        private void UpdateUI()
+        private void UpdateUi()
         {
             _statText.text = _presenter.StatText;
         }
 
         private void OnDestroy()
         {
-            _presenter.OnValueChanged -= UpdateUI;
+            _presenter.OnValueChanged -= UpdateUi;
         }
     }
 }

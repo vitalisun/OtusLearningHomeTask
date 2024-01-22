@@ -1,4 +1,4 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +10,7 @@ namespace Lessons.Architecture.PM
         private TextMeshProUGUI _levelText;
 
         [SerializeField]
-        private TextMeshProUGUI _XPText;
+        private TextMeshProUGUI _xpText;
 
         [SerializeField]
         private Slider _slider;
@@ -25,7 +25,7 @@ namespace Lessons.Architecture.PM
             _presenter = presenter;
 
             _levelText.text = _presenter.LevelText;
-            _XPText.text = _presenter.XPText;
+            _xpText.text = _presenter.XpText;
             _slider.value = _presenter.SliderValue;
            
             _levelUpButton.onClick.AddListener(LevelUp);
@@ -40,14 +40,14 @@ namespace Lessons.Architecture.PM
 
         private void SetExperience()
         {
-            _XPText.text = _presenter.XPText;
+            _xpText.text = _presenter.XpText;
             _slider.value = _presenter.SliderValue;
         }
 
         private void SetLevel()
         {
             _levelText.text = _presenter.LevelText;
-            _XPText.text = _presenter.XPText;
+            _xpText.text = _presenter.XpText;
             _slider.value = _presenter.SliderValue;
         }
 

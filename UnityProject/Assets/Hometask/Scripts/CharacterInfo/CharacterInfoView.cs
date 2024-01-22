@@ -8,43 +8,43 @@ namespace Lessons.Architecture.PM
     public sealed class CharacterInfoView : MonoBehaviour
     {
         [SerializeField]
-        private Transform statsContainer;
+        private Transform _statsContainer;
 
         [SerializeField]
         private Transform[] _statSlots = new Transform[6];
 
         [SerializeField]
-        private GameObject statPrefab;
+        private GameObject _statPrefab;
 
         private CharacterInfoPresenter _presenter;
-        private Dictionary<CharacterStatModel, GameObject> statViews = new();
+        private Dictionary<CharacterStatModel, GameObject> _statViews = new();
 
         public void Initialize(CharacterInfoPresenter presenter)
         {
             _presenter = presenter;
-            _presenter.OnStatAdded += AddStatUI;
-            _presenter.OnStatRemoved += RemoveStatUI;
+            _presenter.OnStatAdded += AddStatUi;
+            _presenter.OnStatRemoved += RemoveStatUi;
 
             foreach (var stat in _presenter.GetStats())
             {
-                AddStatUI(stat);
+                AddStatUi(stat);
             }
         }
 
-        private void AddStatUI(CharacterStatModel stat)
+        private void AddStatUi(CharacterStatModel stat)
         {
-            if(statViews.ContainsKey(stat))
+            if(_statViews.ContainsKey(stat))
                 return;
 
             int emptySlotIndex = Array.FindIndex(_statSlots, slot => slot.childCount == 0);
 
             if (emptySlotIndex != -1)
             {
-                var statViewObject = Instantiate(statPrefab, _statSlots[emptySlotIndex]);
+                var statViewObject = Instantiate(_statPrefab, _statSlots[emptySlotIndex]);
                 var statView = statViewObject.GetComponent<CharacterStatView>();
                 var statPresenter = new CharacterStatPresenter(stat);
                 statView.Initialize(statPresenter);
-                statViews.Add(stat, statViewObject);
+                _statViews.Add(stat, statViewObject);
             }
             else
             {
@@ -52,19 +52,19 @@ namespace Lessons.Architecture.PM
             }
         }
 
-        private void RemoveStatUI(CharacterStatModel stat)
+        private void RemoveStatUi(CharacterStatModel stat)
         {
-            if (statViews.TryGetValue(stat, out var statViewObject))
+            if (_statViews.TryGetValue(stat, out var statViewObject))
             {
                 Destroy(statViewObject);
-                statViews.Remove(stat);
+                _statViews.Remove(stat);
             }
         }
 
         private void OnDestroy()
         {
-            _presenter.OnStatAdded -= AddStatUI;
-            _presenter.OnStatRemoved -= RemoveStatUI;
+            _presenter.OnStatAdded -= AddStatUi;
+            _presenter.OnStatRemoved -= RemoveStatUi;
         }
     }
 }

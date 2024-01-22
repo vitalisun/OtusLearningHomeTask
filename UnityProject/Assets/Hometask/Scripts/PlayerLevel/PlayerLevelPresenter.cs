@@ -6,7 +6,7 @@ namespace Lessons.Architecture.PM
     {
         private PlayerLevelModel _model;
         public string LevelText { get; private set; }
-        public string XPText { get; private set; }
+        public string XpText { get; private set; }
         public float SliderValue { get; private set; }
 
 
@@ -18,7 +18,7 @@ namespace Lessons.Architecture.PM
         {
             _model = model;
             LevelText = $"Level: {_model.CurrentLevel}";
-            XPText = $"XP: {_model.CurrentExperience}/{_model.RequiredExperience}";
+            XpText = $"XP: {_model.CurrentExperience}/{_model.RequiredExperience}";
             SliderValue = (float)_model.CurrentExperience / _model.RequiredExperience;
 
             _model.OnExperienceChanged += OnExperienceChangedHandler;
@@ -38,7 +38,7 @@ namespace Lessons.Architecture.PM
         private void OnLevelUpHandler()
         {
             LevelText = $"Level: {_model.CurrentLevel}";
-            XPText = $"XP: {_model.CurrentExperience}/{_model.RequiredExperience}";
+            XpText = $"XP: {_model.CurrentExperience}/{_model.RequiredExperience}";
             SliderValue = (float)_model.CurrentExperience / _model.RequiredExperience;
 
             OnLevelUp?.Invoke();
@@ -46,7 +46,7 @@ namespace Lessons.Architecture.PM
 
         private void OnExperienceChangedHandler(int obj)
         {
-            XPText = $"XP: {_model.CurrentExperience}/{_model.RequiredExperience}";
+            XpText = $"XP: {_model.CurrentExperience}/{_model.RequiredExperience}";
             SliderValue = (float)_model.CurrentExperience / _model.RequiredExperience;
 
             OnExperienceChanged?.Invoke();

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -11,17 +11,17 @@ namespace Lessons.Architecture.PM
         public event Action<CharacterStatModel> OnStatRemoved;
 
         private readonly int _maxAmount = 6;
-        private readonly HashSet<CharacterStatModel> stats = new();
+        private readonly HashSet<CharacterStatModel> _stats = new();
 
         public void AddStat(CharacterStatModel stat)
         {
-            if (stats.Count >= _maxAmount)
+            if (_stats.Count >= _maxAmount)
             {
                 Debug.Log("Max amount of stats reached");
                 return;
             }
 
-            if (stats.Add(stat))
+            if (_stats.Add(stat))
             {
                 OnStatAdded?.Invoke(stat);
             }
@@ -29,7 +29,7 @@ namespace Lessons.Architecture.PM
 
         public void RemoveStat(CharacterStatModel stat)
         {
-            if (stats.Remove(stat))
+            if (_stats.Remove(stat))
             {
                 OnStatRemoved?.Invoke(stat);
             }
@@ -37,7 +37,7 @@ namespace Lessons.Architecture.PM
 
         public CharacterStatModel GetStat(string name)
         {
-            foreach (var stat in stats)
+            foreach (var stat in _stats)
             {
                 if (stat.Name == name)
                 {
@@ -50,7 +50,7 @@ namespace Lessons.Architecture.PM
 
         public CharacterStatModel[] GetStats()
         {
-            return stats.ToArray();
+            return _stats.ToArray();
         }
     }
 }
