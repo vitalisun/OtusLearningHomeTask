@@ -1,20 +1,20 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 public abstract class SaveLoader<TData, TService> : ISaveLoader
 {
-    public void SaveGame(IGameRepository gameRepository, SceneContext sceneContext)
+    public void SaveGame(IGameRepository gameRepository, DiContainer container)
     {
-        var service = sceneContext.Container.Resolve<TService>();
+        var service = container.Resolve<TService>();
         var data = ConvertToData(service);
         gameRepository.SetData(data);
 
         Debug.Log($"<color=green> Data saved for {typeof(TService).Name} </color>");
     }
 
-    public void LoadGame(IGameRepository gameRepository, SceneContext sceneContext)
+    public void LoadGame(IGameRepository gameRepository, DiContainer container)
     {
-        var service = sceneContext.Container.Resolve<TService>();
+        var service = container.Resolve<TService>();
 
         if (gameRepository.TryGetData(out TData data))
         {

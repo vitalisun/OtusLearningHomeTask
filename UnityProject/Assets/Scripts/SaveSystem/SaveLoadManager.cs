@@ -13,10 +13,12 @@ namespace Assets.Scripts.SaveSystem
     {
         private ISaveLoader[] _saveLoaders;
         private IGameRepository _gameRepository;
+        private SceneContext _sceneContext;
 
         [Inject]
-        public void Construct(GameRepository gameRepository, ISaveLoader[] saveLoaders)
+        public void Construct(GameRepository gameRepository, ISaveLoader[] saveLoaders, SceneContext sceneContext)
         {
+            _sceneContext = sceneContext;
             _gameRepository = gameRepository;
             _saveLoaders = saveLoaders;
         }
@@ -26,22 +28,19 @@ namespace Assets.Scripts.SaveSystem
         {
             _gameRepository.LoadState();
 
-            var sceneContext = FindObjectOfType<SceneContext>();
-
             foreach (var saveLoader in _saveLoaders)
             {
-                saveLoader.LoadGame(_gameRepository, sceneContext);
+                saveLoader.LoadGame(_gameRepository, _sceneContext.Container);
             }
         }
 
         [Button]
         public void SaveGame()
         {
-            var sceneContext = FindObjectOfType<SceneContext>();
 
             foreach (var saveLoader in _saveLoaders)
             {
-                saveLoader.SaveGame(_gameRepository,sceneContext);
+                saveLoader.SaveGame(_gameRepository, _sceneContext.Container);
             }
 
             _gameRepository.SaveState();
