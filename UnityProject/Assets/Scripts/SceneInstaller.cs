@@ -8,19 +8,19 @@ public class SceneInstaller : MonoInstaller
 {
     [SerializeField] private Transform _unitsContainer;
 
-    [SerializeField] private PrefabCatalog _prefabCatalog;
+    [SerializeField] private Spawner _spawner;
 
     public override void InstallBindings()
     {
-        Container.Bind<UnitManager>().FromInstance(new UnitManager(_unitsContainer)).AsSingle();
+        Container.Bind<UnitManager>().FromInstance(new UnitManager(_unitsContainer, _spawner)).AsSingle();
         Container.Bind<ResourceService>().FromInstance(new ResourceService()).AsSingle();
 
-        Container.Bind<PrefabCatalog>().FromInstance(_prefabCatalog).AsSingle();
         Container.Bind<GameRepository>().AsSingle();
         Container.Bind<SaveLoadManager>().AsSingle();
 
         // Binding implementations of ISaveLoader
-        Container.BindInterfacesTo<UnitsSaveLoader>().AsSingle().NonLazy();
-        Container.BindInterfacesTo<ResourcesSaveLoader>().AsSingle().NonLazy();
+        Container.BindInterfacesTo<UnitsSaveLoader>().AsCached().NonLazy();
+        Container.BindInterfacesTo<ResourcesSaveLoader>().AsCached().NonLazy();
+        Container.Bind<Spawner>().FromComponentInHierarchy().AsCached().NonLazy();
     }
 }

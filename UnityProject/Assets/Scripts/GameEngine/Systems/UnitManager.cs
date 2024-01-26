@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Assets.Scripts.SaveSystem;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -16,13 +17,18 @@ namespace GameEngine
         [ShowInInspector, ReadOnly]
         private HashSet<Unit> sceneUnits = new();
 
-        public UnitManager()
+        [SerializeField]
+        private Spawner spawner;
+
+        public UnitManager(Spawner spawner)
         {
+            this.spawner = spawner;
         }
 
-        public UnitManager(Transform container)
+        public UnitManager(Transform container, Spawner spawner)
         {
             this.container = container;
+            this.spawner = spawner;
         }
         
         public void SetupUnits(IEnumerable<Unit> units)
@@ -38,7 +44,7 @@ namespace GameEngine
         [Button]
         public Unit SpawnUnit(Unit prefab, Vector3 position, Quaternion rotation)
         {
-            var unit = Object.Instantiate(prefab, position, rotation, this.container);
+            var unit = spawner.SpawnUnit(prefab, position, rotation, this.container);
             this.sceneUnits.Add(unit);
             return unit;
         }
