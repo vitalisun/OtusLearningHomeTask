@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
@@ -20,6 +20,11 @@ namespace GameEngine
         public IEnumerable<Resource> GetResources()
         {
             return this.sceneResources.Values;
+        }
+
+        public Resource GetResource(string id)
+        {
+            return this.sceneResources[id];
         }
     }
 }
