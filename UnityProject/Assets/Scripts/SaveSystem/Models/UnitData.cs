@@ -7,7 +7,8 @@ using UnityEngine;
 
 namespace Assets.Scripts.SaveSystem.Models
 {
-    public class UnitDto
+    [Serializable]
+    public struct UnitData
     {
         public string Type { get; set; }
         public float PositionX { get; set; }

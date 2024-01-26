@@ -3,5 +3,5 @@ using Assets.Scripts.SaveSystem.Models;
 
 public struct UnitsData
 {
-    public List<UnitDto> Units;
+    public List<UnitData> Units;
 }

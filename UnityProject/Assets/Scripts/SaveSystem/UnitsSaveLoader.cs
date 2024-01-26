@@ -21,7 +21,7 @@ public class UnitsSaveLoader : SaveLoader<UnitsData, UnitManager>
     {
        return new UnitsData()
        {
-           Units = service.GetAllUnits().Select(unit => new UnitDto()
+           Units = service.GetAllUnits().Select(unit => new UnitData()
            {
                Type = unit.Type,
                PositionX = unit.transform.position.x,
@@ -44,7 +44,7 @@ public class UnitsSaveLoader : SaveLoader<UnitsData, UnitManager>
         SpawnUnits(GetDefaultUnitData(), service);
     }
 
-    private void SpawnUnits(IEnumerable<UnitDto> unitEntities, UnitManager service)
+    private void SpawnUnits(IEnumerable<UnitData> unitEntities, UnitManager service)
     {
 
         foreach (var unitEntity in unitEntities)
@@ -60,9 +60,9 @@ public class UnitsSaveLoader : SaveLoader<UnitsData, UnitManager>
         }
     }
 
-    private List<UnitDto> GetDefaultUnitData()
+    private List<UnitData> GetDefaultUnitData()
     {
-        var defaultUnits = new List<UnitDto>
+        var defaultUnits = new List<UnitData>
         {
             new()
             {

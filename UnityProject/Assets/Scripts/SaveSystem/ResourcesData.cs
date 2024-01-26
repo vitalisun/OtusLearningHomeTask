@@ -4,5 +4,5 @@ using GameEngine;
 
 public struct ResourcesData
 {
-    public IEnumerable<ResourceDto> Resources;
+    public IEnumerable<ResourceData> Resources;
 }
