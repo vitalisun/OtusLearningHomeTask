@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.SaveSystem.Models;
@@ -9,12 +9,12 @@ using Zenject;
 
 public class UnitsSaveLoader : SaveLoader<UnitsData, UnitManager>
 {
-    private List<Unit> _unitPrefabs;
+    private PrefabCatalog _prefabCatalog;
 
     [Inject]
-    public void Construct(List<Unit> unitPrefabs)
+    public void Construct(PrefabCatalog prefabCatalog)
     {
-        _unitPrefabs = unitPrefabs;
+        _prefabCatalog = prefabCatalog;
     }
 
     protected override UnitsData ConvertToData(UnitManager service)
@@ -49,7 +49,7 @@ public class UnitsSaveLoader : SaveLoader<UnitsData, UnitManager>
 
         foreach (var unitEntity in unitEntities)
         {
-            var unit = _unitPrefabs.FirstOrDefault(u => u.Type == unitEntity.Type);
+            var unit = _prefabCatalog.prefabs.FirstOrDefault(u => u.Type == unitEntity.Type);
 
             if (unit != null)
             {
@@ -66,7 +66,7 @@ public class UnitsSaveLoader : SaveLoader<UnitsData, UnitManager>
         {
             new()
             {
-                Type = _unitPrefabs[0].Type,
+                Type = _prefabCatalog.prefabs[0].Type,
                 PositionX = 0,
                 PositionY = 0,
                 PositionZ = 0,
@@ -74,7 +74,7 @@ public class UnitsSaveLoader : SaveLoader<UnitsData, UnitManager>
             },
             new()
             {
-                Type = _unitPrefabs[1].Type,
+                Type = _prefabCatalog.prefabs[1].Type,
                 PositionX = 3,
                 PositionY = 0,
                 PositionZ = 0,
@@ -82,7 +82,7 @@ public class UnitsSaveLoader : SaveLoader<UnitsData, UnitManager>
             },
             new()
             {
-                Type = _unitPrefabs[2].Type,
+                Type = _prefabCatalog.prefabs[2].Type,
                 PositionX = 6,
                 PositionY = 0,
                 PositionZ = 0,
