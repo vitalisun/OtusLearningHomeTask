@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class InputController :  MonoBehaviour
 {
@@ -7,6 +7,8 @@ public class InputController :  MonoBehaviour
 
     private void Update()
     {
+        RotateTowardCursor();
+
         if (Input.GetKey(KeyCode.W))
         {
             _player.MoveDirection.Value = Vector3.forward;
@@ -26,6 +28,20 @@ public class InputController :  MonoBehaviour
         else
         {
             _player.MoveDirection.Value = Vector3.zero;
+        }
+
+    }
+
+    private void RotateTowardCursor()
+    {
+        var mousePosition = Input.mousePosition;
+
+        var ray = Camera.main.ScreenPointToRay(mousePosition);
+
+        if (Physics.Raycast(ray, out var hitInfo))
+        {
+            var targetPosition = hitInfo.point;
+            _player.RotationTargetPoint.Value = targetPosition;
         }
     }
 }
