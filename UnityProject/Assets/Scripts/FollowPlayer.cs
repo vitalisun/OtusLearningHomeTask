@@ -6,9 +6,14 @@ public class FollowPlayer : MonoBehaviour
 {
     [SerializeField]
     private Transform player;
+    public Vector3 offset;
+   
 
-    public Vector3 offset = new Vector3(0, 6, -5);
-
+    private void Awake()
+    {
+        offset = new Vector3(0, 8, -8);
+        transform.rotation = Quaternion.Euler(40, 0, 0);
+    }
 
     void LateUpdate()
     {
