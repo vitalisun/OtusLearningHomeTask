@@ -16,6 +16,6 @@ public class MovementMechanics
 
     public void Update(float deltaTime)
     {
-        _transform.Translate(_moveDirection.Value * _speed.Value * deltaTime, Space.World);
+        _transform.Translate(_moveDirection.Value * _speed.Value * deltaTime);
     }
 }
