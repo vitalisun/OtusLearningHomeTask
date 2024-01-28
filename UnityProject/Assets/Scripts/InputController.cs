@@ -7,8 +7,13 @@ public class InputController :  MonoBehaviour
 
     private void Update()
     {
+        Move();
         RotateTowardCursor();
+        Fire();
+    }
 
+    private void Move()
+    {
         if (Input.GetKey(KeyCode.W))
         {
             _player.MoveDirection.Value = Vector3.forward;
@@ -29,7 +34,6 @@ public class InputController :  MonoBehaviour
         {
             _player.MoveDirection.Value = Vector3.zero;
         }
-
     }
 
     private void RotateTowardCursor()
@@ -42,6 +46,14 @@ public class InputController :  MonoBehaviour
         {
             var targetPosition = hitInfo.point;
             _player.RotationTargetPoint.Value = targetPosition;
+        }
+    }
+
+    private void Fire()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            _player.FireRequest.Invoke();
         }
     }
 }
