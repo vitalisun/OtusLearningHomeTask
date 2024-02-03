@@ -5,6 +5,10 @@ public class InputController :  MonoBehaviour
     [SerializeField]
     private Player _player;
 
+    private readonly float _smoothTime = 0.1f;
+    private Vector3 _currentMoveDirection = Vector3.zero;
+    private Vector3 _velocity = Vector3.zero;
+
     private void Update()
     {
         Move();
@@ -14,26 +18,25 @@ public class InputController :  MonoBehaviour
 
     private void Move()
     {
+        Vector3 targetDirection = Vector3.zero;
         if (Input.GetKey(KeyCode.W))
         {
-            _player.MoveDirection.Value = Vector3.forward;
+            targetDirection = Vector3.forward;
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            _player.MoveDirection.Value = Vector3.back;
+            targetDirection = Vector3.back;
         }
         else if (Input.GetKey(KeyCode.A))
         {
-            _player.MoveDirection.Value = Vector3.left;
+            targetDirection = Vector3.left;
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            _player.MoveDirection.Value = Vector3.right;
+            targetDirection = Vector3.right;
         }
-        else
-        {
-            _player.MoveDirection.Value = Vector3.zero;
-        }
+        _currentMoveDirection = Vector3.SmoothDamp(_currentMoveDirection, targetDirection, ref _velocity, _smoothTime);
+        _player.MoveDirection.Value = _currentMoveDirection;
     }
 
     private void RotateTowardCursor()

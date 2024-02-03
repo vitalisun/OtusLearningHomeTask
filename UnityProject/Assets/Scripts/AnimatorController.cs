@@ -21,7 +21,8 @@ namespace Assets.Scripts
 
         public void Update()
         {
-            _animator.SetInteger("State", GetState());
+            _animator.SetFloat("Horizontal", _player.MoveDirection.Value.x);
+            _animator.SetFloat("Vertical", _player.MoveDirection.Value.z);
         }
 
         private int GetState()
@@ -31,18 +32,15 @@ namespace Assets.Scripts
             {
                 state = 1;
             }
-            
-            if (_player.MoveDirection.Value == Vector3.back)
+            else if (_player.MoveDirection.Value == Vector3.back)
             {
                 state = 2;
             }
-            
-            if (_player.MoveDirection.Value == Vector3.left)
+            else if (_player.MoveDirection.Value == Vector3.left)
             {
                 state = 3;
             }
-            
-            if (_player.MoveDirection.Value == Vector3.right)
+            else if (_player.MoveDirection.Value == Vector3.right)
             {
                 state = 4;
             }
