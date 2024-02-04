@@ -9,8 +9,9 @@ public class Player : MonoBehaviour
 {
     // data
     // speed, move direction
-    public AtomicVariable<int> Speed = new();
+    public AtomicVariable<float> Speed = new();
     public AtomicVariable<Vector3> MoveDirection;
+    public AtomicVariable<bool> CanMove = new();
 
     public AtomicVariable<Vector3> RotationTargetPoint = new();
     public AtomicVariable<int> RotationSpeed = new();
@@ -20,7 +21,7 @@ public class Player : MonoBehaviour
     public AtomicEvent FireEvent = new();
 
     // logic
-    private MovementMechanics _movementMechanics;
+    private CharacterMovementMechanics _movementMechanics;
     private RotateMechanics _rotateMechanics;
     private RestoreBulletsOverTimeMechanics _restoreBulletsOverTimeMechanics;
     private FireMechanics _fireMechanics;
@@ -29,7 +30,8 @@ public class Player : MonoBehaviour
     {
         Speed.Value = 5;
         RotationSpeed.Value = 5;
-        _movementMechanics = new MovementMechanics(Speed, MoveDirection, transform);
+        CanMove.Value = true;
+        _movementMechanics = new CharacterMovementMechanics(Speed, MoveDirection, transform, CanMove);
         _rotateMechanics = new RotateMechanics(RotationTargetPoint, transform, RotationSpeed);
         _restoreBulletsOverTimeMechanics = new RestoreBulletsOverTimeMechanics(BulletAmount);
         _fireMechanics = new FireMechanics(BulletAmount, FireRequest, FireEvent);

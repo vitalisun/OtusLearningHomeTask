@@ -11,8 +11,8 @@ public class FollowPlayer : MonoBehaviour
 
     private void Awake()
     {
-        offset = new Vector3(0, 8, -8);
-        transform.rotation = Quaternion.Euler(40, 0, 0);
+        offset = new Vector3(0, 13, -9);
+        transform.rotation = Quaternion.Euler(50, 0, 0);
     }
 
     void LateUpdate()
