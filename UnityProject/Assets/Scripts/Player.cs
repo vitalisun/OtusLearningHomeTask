@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
 
     public AtomicVariable<int> BulletAmount = new();
     public AtomicEvent FireRequest = new();
+    public AtomicEvent FireEvent = new();
 
     // logic
     private MovementMechanics _movementMechanics;
@@ -31,7 +32,7 @@ public class Player : MonoBehaviour
         _movementMechanics = new MovementMechanics(Speed, MoveDirection, transform);
         _rotateMechanics = new RotateMechanics(RotationTargetPoint, transform, RotationSpeed);
         _restoreBulletsOverTimeMechanics = new RestoreBulletsOverTimeMechanics(BulletAmount);
-        _fireMechanics = new FireMechanics(BulletAmount, FireRequest);
+        _fireMechanics = new FireMechanics(BulletAmount, FireRequest, FireEvent);
     }
 
     private void Update()
