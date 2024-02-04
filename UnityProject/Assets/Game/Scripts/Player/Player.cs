@@ -8,10 +8,8 @@ using static UnityEngine.GraphicsBuffer;
 public class Player : MonoBehaviour
 {
     // data
-    // speed, move direction
     public AtomicVariable<float> Speed = new();
     public AtomicVariable<Vector3> MoveDirection;
-    public AtomicVariable<bool> CanMove = new();
 
     public AtomicVariable<Vector3> RotationTargetPoint = new();
     public AtomicVariable<int> RotationSpeed = new();
@@ -30,8 +28,7 @@ public class Player : MonoBehaviour
     {
         Speed.Value = 5;
         RotationSpeed.Value = 5;
-        CanMove.Value = true;
-        _movementMechanics = new CharacterMovementMechanics(Speed, MoveDirection, transform, CanMove);
+        _movementMechanics = new CharacterMovementMechanics(Speed, MoveDirection, transform);
         _rotateMechanics = new RotateMechanics(RotationTargetPoint, transform, RotationSpeed);
         _restoreBulletsOverTimeMechanics = new RestoreBulletsOverTimeMechanics(BulletAmount);
         _fireMechanics = new FireMechanics(BulletAmount, FireRequest, FireEvent);
