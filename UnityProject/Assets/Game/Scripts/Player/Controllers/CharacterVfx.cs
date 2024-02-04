@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VfxController : MonoBehaviour
+public class CharacterVfx : MonoBehaviour
 {
     [SerializeField] private Player _player;
 
