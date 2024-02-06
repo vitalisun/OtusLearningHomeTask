@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     // data
     public AtomicVariable<float> Speed = new();
     public AtomicVariable<Vector3> MoveDirection;
+    public AtomicVariable<Vector3> LocalMovementDirection;
 
     public AtomicVariable<Vector3> RotationTargetPoint = new();
     public AtomicVariable<int> RotationSpeed = new();
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour
 
     // logic
     private CharacterMovementMechanics _movementMechanics;
+    private GetLocalMovementDirectionMechanics _getLocalMovementDirectionMechanics;
     private RotateMechanics _rotateMechanics;
     private RestoreBulletsOverTimeMechanics _restoreBulletsOverTimeMechanics;
     private FireMechanics _fireMechanics;
@@ -32,6 +34,8 @@ public class Player : MonoBehaviour
         _rotateMechanics = new RotateMechanics(RotationTargetPoint, transform, RotationSpeed);
         _restoreBulletsOverTimeMechanics = new RestoreBulletsOverTimeMechanics(BulletAmount);
         _fireMechanics = new FireMechanics(BulletAmount, FireRequest, FireEvent);
+        _getLocalMovementDirectionMechanics = 
+            new GetLocalMovementDirectionMechanics(MoveDirection, LocalMovementDirection, transform);
     }
 
     private void Update()
@@ -39,6 +43,7 @@ public class Player : MonoBehaviour
         _movementMechanics.Update(Time.deltaTime);
         _rotateMechanics.Update(Time.deltaTime);
         _restoreBulletsOverTimeMechanics.Update(Time.deltaTime);
+        _getLocalMovementDirectionMechanics.Update();
     }
 
     private void OnEnable()

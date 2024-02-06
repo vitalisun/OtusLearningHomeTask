@@ -16,35 +16,23 @@ namespace Assets.Scripts
         public void Awake()
         {
             _animator = GetComponentInChildren<Animator>();
-            _animator.SetInteger("State", 0);
         }
 
         public void Update()
         {
-            _animator.SetFloat("Horizontal", _player.MoveDirection.Value.x);
-            _animator.SetFloat("Vertical", _player.MoveDirection.Value.z);
+            CalculateMovementAnimation();
         }
 
-        private int GetState()
+        private void CalculateMovementAnimation()
         {
-            var state = 0;
-            if (_player.MoveDirection.Value == Vector3.forward)
-            {
-                state = 1;
-            }
-            else if (_player.MoveDirection.Value == Vector3.back)
-            {
-                state = 2;
-            }
-            else if (_player.MoveDirection.Value == Vector3.left)
-            {
-                state = 3;
-            }
-            else if (_player.MoveDirection.Value == Vector3.right)
-            {
-                state = 4;
-            }
-            return state;
+            Vector3 localMovementDirection = _player.LocalMovementDirection.Value;
+            float moveX = localMovementDirection.x;
+            float moveZ = localMovementDirection.z;
+
+            bool isMoving = _player.MoveDirection.Value.magnitude > 0.01f;
+
+            _animator.SetFloat("Horizontal", isMoving ? moveX : 0, 0.1f, Time.deltaTime);
+            _animator.SetFloat("Vertical", isMoving ? moveZ : 0, 0.1f, Time.deltaTime);
         }
     }
 }

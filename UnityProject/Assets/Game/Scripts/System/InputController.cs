@@ -19,22 +19,24 @@ public class InputController :  MonoBehaviour
     private void Move()
     {
         Vector3 targetDirection = Vector3.zero;
+
         if (Input.GetKey(KeyCode.W))
         {
-            targetDirection = Vector3.forward;
+            targetDirection += Vector3.forward;
         }
-        else if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
         {
-            targetDirection = Vector3.back;
+            targetDirection += Vector3.back;
         }
-        else if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
-            targetDirection = Vector3.left;
+            targetDirection += Vector3.left;
         }
-        else if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
         {
-            targetDirection = Vector3.right;
+            targetDirection += Vector3.right;
         }
+
         _currentMoveDirection = Vector3.SmoothDamp(_currentMoveDirection, targetDirection, ref _velocity, _smoothTime);
         _player.MoveDirection.Value = _currentMoveDirection;
     }
