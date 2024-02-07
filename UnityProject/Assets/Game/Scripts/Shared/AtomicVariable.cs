@@ -2,7 +2,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Assets.Scripts.Shared
+namespace Assets.Game.Scripts.Shared
 {
     [Serializable]
     public class AtomicVariable<T>

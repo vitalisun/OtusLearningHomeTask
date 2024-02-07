@@ -1,12 +1,7 @@
-﻿using Assets.Scripts.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Assets.Game.Scripts.Shared;
 using UnityEngine;
 
-namespace Assets.Game.Scripts.Mechanics
+namespace Assets.Game.Scripts.Bullet.Mechanics
 {
     public class BulletMovementMechanics
     {

@@ -1,51 +1,48 @@
-﻿using Assets.Scripts.Shared;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Assets.Game.Scripts.Shared;
+using Assets.Game.Scripts.Zombi.Mechanics;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
-public class Zombi : MonoBehaviour
+namespace Assets.Game.Scripts.Zombi
 {
-    [SerializeField] private GameObject target;
-
-    //data
-    public AtomicVariable<float> Speed = new();
-    public AtomicVariable<Transform> Target;
-
-    //logic
-    private FollowTargetMechanics _followTargetMechanics;
-    private RotateToTargetMechanics _rotateToTargetMechanics;
-
-    private void Awake()
+    public class Zombi : MonoBehaviour
     {
-        Speed.Value = 2;
-        Target.Value = target.transform;
+        //data
+        public AtomicVariable<float> Speed = new();
+        public AtomicVariable<Transform> Target = new();
 
-        _followTargetMechanics = new FollowTargetMechanics(Speed, Target, transform);
-        _rotateToTargetMechanics = new RotateToTargetMechanics(Target, transform);
-    }
+        public AtomicVariable<ZombiStates> State = new();
+        public AtomicEvent TakeDamageEvent = new();
+        public AtomicEvent<Zombi> DeathEvent = new();
 
-    private void Update()
-    {
-        _followTargetMechanics.Update();
-        _rotateToTargetMechanics.Update();
-    }
-}
+        //logic
+        private FollowTargetMechanics _followTargetMechanics;
+        private RotateToTargetMechanics _rotateToTargetMechanics;
+        private TakeDamageMechanics _takeDamageMechanics;
 
-public class RotateToTargetMechanics
-{
-    private AtomicVariable<Transform> _target;
-    private readonly Transform _transform;
+        private void Awake()
+        {
+            Speed.Value = 2;
+            State.Value = ZombiStates.Follow;
 
+            _followTargetMechanics = new FollowTargetMechanics(Speed, Target, transform, State);
+            _rotateToTargetMechanics = new RotateToTargetMechanics(Target, transform, State);
+            _takeDamageMechanics = new TakeDamageMechanics(State, TakeDamageEvent, DeathEvent, this);
+        }
 
-    public RotateToTargetMechanics(AtomicVariable<Transform> target, Transform transform)
-    {
-        _target = target;
-        _transform = transform;
-    }
+        private void Update()
+        {
+            _followTargetMechanics.Update();
+            _rotateToTargetMechanics.Update();
+        }
 
-    public void Update()
-    {
-        _transform.LookAt(_target.Value);
+        private void OnEnable()
+        {
+            _takeDamageMechanics.OnEnable();
+        }
+
+        private void OnDisable()
+        {
+            _takeDamageMechanics.OnDisable();
+        }
     }
 }

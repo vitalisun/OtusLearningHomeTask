@@ -1,7 +1,7 @@
 using System;
 using Sirenix.OdinInspector;
 
-namespace Assets.Scripts.Shared
+namespace Assets.Game.Scripts.Shared
 {
     [Serializable]
     public sealed class AtomicEvent

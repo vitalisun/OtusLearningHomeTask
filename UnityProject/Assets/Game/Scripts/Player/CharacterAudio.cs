@@ -1,24 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CharacterAudio : MonoBehaviour
+namespace Assets.Game.Scripts.Player
 {
-    [SerializeField] private Player _player;
-    [SerializeField] private AudioSource _source;
-
-    private void OnEnable()
+    public class CharacterAudio : MonoBehaviour
     {
-        _player.FireEvent.Subscribe(PlayFireAudio);
-    }
+        [SerializeField] private Player _player;
+        [SerializeField] private AudioSource _source;
 
-    private void OnDisable()
-    {
-        _player.FireEvent.Unsubscribe(PlayFireAudio);
-    }
+        private void OnEnable()
+        {
+            _player.FireEvent.Subscribe(PlayFireAudio);
+        }
 
-    private void PlayFireAudio()
-    {
-        _source.Play();
+        private void OnDisable()
+        {
+            _player.FireEvent.Unsubscribe(PlayFireAudio);
+        }
+
+        private void PlayFireAudio()
+        {
+            _source.Play();
+        }
     }
 }

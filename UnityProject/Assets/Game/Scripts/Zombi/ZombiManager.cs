@@ -1,8 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ZombiManager : MonoBehaviour
+namespace Assets.Game.Scripts.Zombi
 {
-    [SerializeField] private GameObject target;
+    public class ZombiManager : MonoBehaviour
+    {
+        [SerializeField] private GameObject target;
+    }
 }

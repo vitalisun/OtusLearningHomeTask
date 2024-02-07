@@ -1,30 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CharacterVfx : MonoBehaviour
+namespace Assets.Game.Scripts.Player
 {
-    [SerializeField] private Player _player;
-
-    private ParticleSystem _particleSystem;
-
-    private void Awake()
+    public class CharacterVfx : MonoBehaviour
     {
-        _particleSystem = _player.GetComponentInChildren<ParticleSystem>();
-    }
+        [SerializeField] private Player _player;
 
-    private void OnEnable()
-    {
-        _player.FireEvent.Subscribe(PlayFireVfx);
-    }
+        private ParticleSystem _particleSystem;
 
-    private void OnDisable()
-    {
-        _player.FireEvent.Unsubscribe(PlayFireVfx);
-    }
+        private void Awake()
+        {
+            _particleSystem = _player.GetComponentInChildren<ParticleSystem>();
+        }
 
-    private void PlayFireVfx()
-    {
-        _particleSystem.Play();
+        private void OnEnable()
+        {
+            _player.FireEvent.Subscribe(PlayFireVfx);
+        }
+
+        private void OnDisable()
+        {
+            _player.FireEvent.Unsubscribe(PlayFireVfx);
+        }
+
+        private void PlayFireVfx()
+        {
+            _particleSystem.Play();
+        }
     }
 }

@@ -1,22 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class FollowPlayer : MonoBehaviour
+namespace Assets.Game.Scripts
 {
-    [SerializeField]
-    private Transform player;
-    public Vector3 offset;
+    public class FollowPlayer : MonoBehaviour
+    {
+        [SerializeField]
+        private Transform player;
+        public Vector3 offset;
    
 
-    private void Awake()
-    {
-        offset = new Vector3(0, 13, -9);
-        transform.rotation = Quaternion.Euler(50, 0, 0);
-    }
+        private void Awake()
+        {
+            offset = new Vector3(0, 13, -9);
+            transform.rotation = Quaternion.Euler(50, 0, 0);
+        }
 
-    void LateUpdate()
-    {
-        transform.position = player.position + offset;
+        void LateUpdate()
+        {
+            transform.position = player.position + offset;
+        }
     }
 }

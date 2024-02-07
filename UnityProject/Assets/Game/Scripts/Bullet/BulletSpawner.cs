@@ -1,15 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
 
 namespace Assets.Game.Scripts.Bullet
 {
     public class BulletSpawner : MonoBehaviour
     {
-        [SerializeField] private Player _player;
+        [SerializeField] private Player.Player _player;
         [SerializeField] private Bullet _bulletPrefab;
         [SerializeField] private Transform _bulletSpawnPoint;
         [SerializeField] private Transform _bulletContainer;
@@ -34,6 +29,7 @@ namespace Assets.Game.Scripts.Bullet
 
         private void ReturnToPool(Bullet bullet)
         {
+            bullet.UnspawnRequest.Unsubscribe(ReturnToPool);
             _bulletPool.ReturnBulletToPool(bullet, _bulletContainer);
         }
 

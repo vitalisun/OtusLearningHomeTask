@@ -1,64 +1,67 @@
 ﻿using UnityEngine;
 
-public class InputController :  MonoBehaviour
+namespace Assets.Game.Scripts.System
 {
-    [SerializeField]
-    private Player _player;
-
-    private readonly float _smoothTime = 0.1f;
-    private Vector3 _currentMoveDirection = Vector3.zero;
-    private Vector3 _velocity = Vector3.zero;
-
-    private void Update()
+    public class InputController :  MonoBehaviour
     {
-        Move();
-        RotateTowardCursor();
-        Fire();
-    }
+        [SerializeField]
+        private Player.Player _player;
 
-    private void Move()
-    {
-        Vector3 targetDirection = Vector3.zero;
+        private readonly float _smoothTime = 0.1f;
+        private Vector3 _currentMoveDirection = Vector3.zero;
+        private Vector3 _velocity = Vector3.zero;
 
-        if (Input.GetKey(KeyCode.W))
+        private void Update()
         {
-            targetDirection += Vector3.forward;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            targetDirection += Vector3.back;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            targetDirection += Vector3.left;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            targetDirection += Vector3.right;
+            Move();
+            RotateTowardCursor();
+            Fire();
         }
 
-        _currentMoveDirection = Vector3.SmoothDamp(_currentMoveDirection, targetDirection, ref _velocity, _smoothTime);
-        _player.MoveDirection.Value = _currentMoveDirection;
-    }
-
-    private void RotateTowardCursor()
-    {
-        var mousePosition = Input.mousePosition;
-
-        var ray = Camera.main.ScreenPointToRay(mousePosition);
-
-        if (Physics.Raycast(ray, out var hitInfo))
+        private void Move()
         {
-            var targetPosition = hitInfo.point;
-            _player.RotationTargetPoint.Value = targetPosition;
+            Vector3 targetDirection = Vector3.zero;
+
+            if (Input.GetKey(KeyCode.W))
+            {
+                targetDirection += Vector3.forward;
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                targetDirection += Vector3.back;
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                targetDirection += Vector3.left;
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                targetDirection += Vector3.right;
+            }
+
+            _currentMoveDirection = Vector3.SmoothDamp(_currentMoveDirection, targetDirection, ref _velocity, _smoothTime);
+            _player.MoveDirection.Value = _currentMoveDirection;
         }
-    }
 
-    private void Fire()
-    {
-        if (Input.GetMouseButtonDown(0))
+        private void RotateTowardCursor()
         {
-            _player.FireRequest.Invoke();
+            var mousePosition = Input.mousePosition;
+
+            var ray = Camera.main.ScreenPointToRay(mousePosition);
+
+            if (Physics.Raycast(ray, out var hitInfo))
+            {
+                var targetPosition = hitInfo.point;
+                _player.RotationTargetPoint.Value = targetPosition;
+            }
+        }
+
+        private void Fire()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                _player.FireRequest.Invoke();
+            }
         }
     }
 }

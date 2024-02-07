@@ -1,5 +1,5 @@
-﻿using Assets.Game.Scripts.Mechanics;
-using Assets.Scripts.Shared;
+﻿using Assets.Game.Scripts.Bullet.Mechanics;
+using Assets.Game.Scripts.Shared;
 using UnityEngine;
 
 namespace Assets.Game.Scripts.Bullet
@@ -17,6 +17,7 @@ namespace Assets.Game.Scripts.Bullet
         //logic
         private BulletMovementMechanics _movementMechanics;
         private OutOfRangeMechanics _outOfRangeMechanics;
+        private BulletCollisionMechanics _collisionMechanics;
 
         public void Awake()
         {
@@ -26,12 +27,18 @@ namespace Assets.Game.Scripts.Bullet
 
             _movementMechanics = new BulletMovementMechanics(Speed, MoveDirection, transform, CanMove);
             _outOfRangeMechanics = new OutOfRangeMechanics(StartPosition, UnspawnRequest, this);
+            _collisionMechanics = new BulletCollisionMechanics(UnspawnRequest, this);
         }
 
         public void Update()
         {
             _movementMechanics.Update(Time.deltaTime);
             _outOfRangeMechanics.Update();
+        }
+
+        public void OnTriggerEnter(Collider other)
+        {
+            _collisionMechanics.OnTriggerEnter(other);
         }
     }
 }
