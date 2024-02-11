@@ -21,7 +21,7 @@ namespace Assets.Game.Scripts.Bullet.Mechanics
             if (other.gameObject.CompareTag("Enemy"))
             {
                 var zombi = other.gameObject.GetComponent<Zombi.Zombi>();
-                zombi.TakeDamageEvent.Invoke();
+                zombi.TakeDamageEvent.Invoke(1);
             }
         }
     }

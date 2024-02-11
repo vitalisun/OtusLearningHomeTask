@@ -18,12 +18,17 @@ namespace Assets.Game.Scripts.Player
         public AtomicEvent FireRequest = new();
         public AtomicEvent FireEvent = new();
 
+        public AtomicVariable<int> Health = new();
+        public AtomicEvent<int> TakeDamageEvent = new();
+        public AtomicEvent DeathEvent = new();
+
         // logic
         private CharacterMovementMechanics _movementMechanics;
         private GetLocalMovementDirectionMechanics _getLocalMovementDirectionMechanics;
         private RotateMechanics _rotateMechanics;
         private RestoreBulletsOverTimeMechanics _restoreBulletsOverTimeMechanics;
         private FireMechanics _fireMechanics;
+        private PLayerTakeDamageMechanics _takeDamageMechanics;
 
         private void Awake()
         {
@@ -33,8 +38,10 @@ namespace Assets.Game.Scripts.Player
             _rotateMechanics = new RotateMechanics(RotationTargetPoint, transform, RotationSpeed);
             _restoreBulletsOverTimeMechanics = new RestoreBulletsOverTimeMechanics(BulletAmount);
             _fireMechanics = new FireMechanics(BulletAmount, FireRequest, FireEvent);
-            _getLocalMovementDirectionMechanics = 
+            _getLocalMovementDirectionMechanics =
                 new GetLocalMovementDirectionMechanics(MoveDirection, LocalMovementDirection, transform);
+
+            _takeDamageMechanics = new PLayerTakeDamageMechanics(Health, TakeDamageEvent, DeathEvent);
         }
 
         private void Update()
@@ -48,11 +55,13 @@ namespace Assets.Game.Scripts.Player
         private void OnEnable()
         {
             _fireMechanics.OnEnable();
+            _takeDamageMechanics.OnEnable();
         }
 
         private void OnDisable()
         {
             _fireMechanics.OnDisable();
+            _takeDamageMechanics.OnDisable();
         }
     }
 }
