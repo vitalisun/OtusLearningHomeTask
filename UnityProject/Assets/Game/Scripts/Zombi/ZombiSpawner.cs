@@ -13,20 +13,25 @@ namespace Assets.Game.Scripts.Zombi
         [SerializeField] private float _spawnInterval;
         [SerializeField] private float _returnToPoolInterval;
         [SerializeField] private Zombi _zombiPrefab;
-        [SerializeField] private List<Transform> _zombiSpawnPoints;
+        [SerializeField] private Transform _zombiSpawnRoot;
         [SerializeField] private Transform _zombiContainer;
         [SerializeField] private Transform _worldTransform;
         [SerializeField] private GameObject target;
 
         private ZombiPool _zombiPool;
+        private List<Transform> _zombiSpawnPoints;
 
         private void Awake()
         {
             _spawnInterval = 2;
             _returnToPoolInterval = 2;
             _zombiPool = new ZombiPool(10);
+            _zombiPrefab.Target.Value = target.transform;
             _zombiPool.InitPool(_zombiPrefab, _zombiContainer);
 
+            _zombiSpawnPoints = _zombiSpawnRoot.GetComponentsInChildren<Transform>()
+                .Where(x => x != _zombiSpawnRoot)
+                .ToList();
         }
 
         private void Update()
