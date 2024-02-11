@@ -1,10 +1,14 @@
-﻿using Assets.Game.Scripts.Player.Mechanics;
+﻿using Assets.Game.Scripts.GameManager;
+using Assets.Game.Scripts.Player.Mechanics;
 using Assets.Game.Scripts.Shared;
 using UnityEngine;
+using NotImplementedException = System.NotImplementedException;
 
 namespace Assets.Game.Scripts.Player
 {
-    public class Player : MonoBehaviour
+    public class Player : MonoBehaviour,
+        Listeners.IGameStartListener,
+        Listeners.IGameFinishListener
     {
         // data
         public AtomicVariable<float> Speed = new();
@@ -29,6 +33,19 @@ namespace Assets.Game.Scripts.Player
         private RestoreBulletsOverTimeMechanics _restoreBulletsOverTimeMechanics;
         private FireMechanics _fireMechanics;
         private PLayerTakeDamageMechanics _takeDamageMechanics;
+
+        public void OnStart()
+        {
+            gameObject.SetActive(true);
+
+            Health.Value = 10;
+            BulletAmount.Value = 10;
+        }
+
+        public void OnFinish()
+        {
+            gameObject.SetActive(false);
+        }
 
         private void Awake()
         {

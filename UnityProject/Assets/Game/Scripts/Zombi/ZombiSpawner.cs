@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Assets.Game.Scripts.GameManager;
 using UnityEngine;
 
 namespace Assets.Game.Scripts.Zombi
 {
-    public class ZombiSpawner : MonoBehaviour
+    [RequireComponent(typeof(GameManager.GameManager))]
+    public class ZombiSpawner : MonoBehaviour,
+        Listeners.IGameFinishListener
     {
         [SerializeField] private float _spawnInterval;
         [SerializeField] private float _returnToPoolInterval;
@@ -20,6 +20,8 @@ namespace Assets.Game.Scripts.Zombi
 
         private ZombiPool _zombiPool;
         private List<Transform> _zombiSpawnPoints;
+        private HashSet<Zombi> _zombiSet = new HashSet<Zombi>();
+        private GameManager.GameManager _gameManager;
 
         private void Awake()
         {
@@ -32,10 +34,17 @@ namespace Assets.Game.Scripts.Zombi
             _zombiSpawnPoints = _zombiSpawnRoot.GetComponentsInChildren<Transform>()
                 .Where(x => x != _zombiSpawnRoot)
                 .ToList();
+
+            _gameManager = GetComponent<GameManager.GameManager>();
         }
 
         private void Update()
         {
+            if (_gameManager.State != GameState.PLAYING)
+            {
+                return;
+            }
+
             _spawnInterval -= Time.deltaTime;
             if (_spawnInterval <= 0)
             {
@@ -52,6 +61,8 @@ namespace Assets.Game.Scripts.Zombi
             zombi.State.Value = ZombiStates.Follow;
             zombi.DeathEvent.Subscribe(ReturnToPool);
             zombi.Target.Value = target.transform;
+
+            _zombiSet.Add(zombi);
         }
 
         private void ReturnToPool(Zombi zombi)
@@ -65,6 +76,21 @@ namespace Assets.Game.Scripts.Zombi
 
             zombi.DeathEvent.Unsubscribe(ReturnToPool);
             _zombiPool.ReturnZombiToPool(zombi, _zombiContainer);
+
+            _zombiSet.Remove(zombi);
+        }
+
+        public void OnFinish()
+        {
+            var zombiList = _zombiSet.ToList();
+
+            foreach (var zombi in zombiList)
+            {
+                zombi.DeathEvent.Unsubscribe(ReturnToPool);
+                _zombiPool.ReturnZombiToPool(zombi, _zombiContainer);
+
+                _zombiSet.Remove(zombi);
+            }
         }
     }
 }

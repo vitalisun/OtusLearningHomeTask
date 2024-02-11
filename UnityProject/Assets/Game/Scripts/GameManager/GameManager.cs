@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,9 +28,11 @@ namespace Assets.Game.Scripts.GameManager
                 return;
 
             var deltaTime = Time.deltaTime;
+
             for (int i = 0; i < _updateListeners.Count; i++)
             {
                 var listener = _updateListeners[i];
+
                 listener.OnUpdate(deltaTime);
             }
         }
