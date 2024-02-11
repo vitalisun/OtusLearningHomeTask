@@ -26,12 +26,12 @@ namespace Assets.Game.Scripts.Zombi
 
         private void Awake()
         {
-            Speed.Value = 2;
+            Speed.Value = 4;
             State.Value = ZombiStates.Follow;
 
             _followTargetMechanics = new FollowTargetMechanics(Speed, Target, transform, State);
             _rotateToTargetMechanics = new RotateToTargetMechanics(Target, transform, State);
-            _zombiTakeDamageMechanics = new ZombiTakeDamageMechanics(State, TakeDamageEvent, DeathEvent, this);
+            _zombiTakeDamageMechanics = new ZombiTakeDamageMechanics(State, TakeDamageEvent, DeathEvent, Target, this);
             _attackMechanics = new AttackMechanics(State, Target, AttackRequest);
         }
 

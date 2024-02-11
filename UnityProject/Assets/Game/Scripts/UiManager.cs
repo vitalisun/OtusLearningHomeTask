@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Assets.Game.Scripts.GameManager;
+﻿using Assets.Game.Scripts.GameManager;
 using Assets.Game.Scripts.Player;
 using TMPro;
 using UnityEngine;
@@ -38,9 +36,9 @@ public class UiManager : MonoBehaviour
     {
         _restartButton.onClick.AddListener(OnRestart);
 
-
         _player.BulletAmount.Subscribe(UpdateBulletAmount);
         _player.Health.Subscribe(UpdateHealthAmount);
+        _player.KillCount.Subscribe(UpdateKillAmount);
     }
 
     private void OnDisable()
@@ -49,23 +47,27 @@ public class UiManager : MonoBehaviour
 
         _player.BulletAmount.Unsubscribe(UpdateBulletAmount);
         _player.Health.Unsubscribe(UpdateHealthAmount);
+        _player.KillCount.Unsubscribe(UpdateKillAmount);
     }
 
     private void UpdateBulletAmount(int amount)
     {
-        _bulletAmountText.text = amount.ToString();
+        _bulletAmountText.text = $"bullets: {amount} / 10";
     }
 
     private void UpdateHealthAmount(int amount)
     {
-        _healthAmountText.text = amount.ToString();
+        _healthAmountText.text = $"hit points: {amount}";
+    }
+
+    private void UpdateKillAmount(int amount)
+    {
+        _killsAmountText.text = $"kills: {amount}";
     }
 
     private void OnRestart()
     {
-        Debug.Log("Restart");
         _gameOverPanel.SetActive(false);
-
         _gameManager.OnStart();
     }
 }

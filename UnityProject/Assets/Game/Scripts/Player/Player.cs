@@ -21,6 +21,7 @@ namespace Assets.Game.Scripts.Player
         public AtomicVariable<int> BulletAmount = new();
         public AtomicEvent FireRequest = new();
         public AtomicEvent FireEvent = new();
+        public AtomicVariable<int> KillCount = new();
 
         public AtomicVariable<int> Health = new();
         public AtomicEvent<int> TakeDamageEvent = new();
@@ -40,6 +41,7 @@ namespace Assets.Game.Scripts.Player
 
             Health.Value = 10;
             BulletAmount.Value = 10;
+            KillCount.Value = 0;
         }
 
         public void OnFinish()
@@ -53,6 +55,7 @@ namespace Assets.Game.Scripts.Player
             RotationSpeed.Value = 5;
             Health.Value = 10;
             BulletAmount.Value = 10;
+            KillCount.Value = 0;
 
             _movementMechanics = new CharacterMovementMechanics(Speed, MoveDirection, transform);
             _rotateMechanics = new RotateMechanics(RotationTargetPoint, transform, RotationSpeed);
