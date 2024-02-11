@@ -1,4 +1,5 @@
 ﻿using Assets.Game.Scripts.Shared;
+using UnityEngine;
 
 namespace Assets.Game.Scripts.Player.Mechanics
 {
@@ -28,6 +29,7 @@ namespace Assets.Game.Scripts.Player.Mechanics
         private void TakeDamage(int damage)
         {
             _health.Value -= damage;
+
             if (_health.Value <= 0)
             {
                 _deathEvent.Invoke();

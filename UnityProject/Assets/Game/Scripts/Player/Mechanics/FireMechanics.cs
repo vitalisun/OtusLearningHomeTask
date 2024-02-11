@@ -32,8 +32,6 @@ namespace Assets.Game.Scripts.Player.Mechanics
             {
                 _bulletAmount.Value -= 1;
                 _fireEvent.Invoke();
-
-                Debug.Log("Bullet amount after fire: " + _bulletAmount.Value);
             }
         }
     }

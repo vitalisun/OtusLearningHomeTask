@@ -34,6 +34,9 @@ namespace Assets.Game.Scripts.Player
         {
             Speed.Value = 5;
             RotationSpeed.Value = 5;
+            Health.Value = 10;
+            BulletAmount.Value = 10;
+
             _movementMechanics = new CharacterMovementMechanics(Speed, MoveDirection, transform);
             _rotateMechanics = new RotateMechanics(RotationTargetPoint, transform, RotationSpeed);
             _restoreBulletsOverTimeMechanics = new RestoreBulletsOverTimeMechanics(BulletAmount);

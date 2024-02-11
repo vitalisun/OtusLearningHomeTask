@@ -20,8 +20,6 @@ namespace Assets.Game.Scripts.Player.Mechanics
             {
                 _bulletAmount.Value += 1;
                 _restoreTime = 2f;
-
-                Debug.Log("Bullet amount: " + _bulletAmount.Value);
             }
         }
     }

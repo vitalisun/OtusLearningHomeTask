@@ -14,6 +14,8 @@ namespace Assets.Game.Scripts.Zombi
         public AtomicEvent<int> TakeDamageEvent = new();
         public AtomicEvent<Zombi> DeathEvent = new();
 
+        public AtomicEvent AttackRequest = new();
+
         //logic
         private FollowTargetMechanics _followTargetMechanics;
         private RotateToTargetMechanics _rotateToTargetMechanics;
@@ -28,24 +30,25 @@ namespace Assets.Game.Scripts.Zombi
             _followTargetMechanics = new FollowTargetMechanics(Speed, Target, transform, State);
             _rotateToTargetMechanics = new RotateToTargetMechanics(Target, transform, State);
             _zombiTakeDamageMechanics = new ZombiTakeDamageMechanics(State, TakeDamageEvent, DeathEvent, this);
-            _attackMechanics = new AttackMechanics(State, Target);
+            _attackMechanics = new AttackMechanics(State, Target, AttackRequest);
         }
 
         private void Update()
         {
             _followTargetMechanics.Update();
             _rotateToTargetMechanics.Update();
-            _attackMechanics.Update(Time.deltaTime);
         }
 
         private void OnEnable()
         {
             _zombiTakeDamageMechanics.OnEnable();
+            _attackMechanics.OnEnable();
         }
 
         private void OnDisable()
         {
             _zombiTakeDamageMechanics.OnDisable();
+            _attackMechanics.OnDisable();
         }
     }
 }

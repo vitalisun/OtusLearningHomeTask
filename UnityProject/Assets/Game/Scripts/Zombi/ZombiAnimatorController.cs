@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Game.Scripts.Shared;
+using UnityEngine;
 
 namespace Assets.Game.Scripts.Zombi
 {
@@ -6,15 +7,35 @@ namespace Assets.Game.Scripts.Zombi
     {
         [SerializeField] private Zombi _zombi;
         private Animator _animator;
+        private AnimatorEventDispatcher _animatorEventDispatcher;
 
-        public void Awake()
+        private void Awake()
         {
             _animator = GetComponentInChildren<Animator>();
+            _animatorEventDispatcher = GetComponentInChildren<AnimatorEventDispatcher>();
         }
 
-        public void Update()
+        private void Update()
         {
             _animator.SetInteger("State", (int)_zombi.State.Value);
+        }
+
+        private void OnEnable()
+        {
+            _animatorEventDispatcher.OnEventReceived += OnEventReceivedHandler;
+        }
+
+        private void OnDisable()
+        {
+            _animatorEventDispatcher.OnEventReceived -= OnEventReceivedHandler;
+        }
+
+        private void OnEventReceivedHandler(string key)
+        {
+            if (key == "ZombiAttack")
+            {
+                _zombi.AttackRequest.Invoke();
+            }
         }
     }
 }
