@@ -11,13 +11,14 @@ namespace Assets.Game.Scripts.Zombi
         public AtomicVariable<Transform> Target = new();
 
         public AtomicVariable<ZombiStates> State = new();
-        public AtomicEvent TakeDamageEvent = new();
+        public AtomicEvent<int> TakeDamageEvent = new();
         public AtomicEvent<Zombi> DeathEvent = new();
 
         //logic
         private FollowTargetMechanics _followTargetMechanics;
         private RotateToTargetMechanics _rotateToTargetMechanics;
-        private TakeDamageMechanics _takeDamageMechanics;
+        private ZombiTakeDamageMechanics _zombiTakeDamageMechanics;
+        private AttackMechanics _attackMechanics;
 
         private void Awake()
         {
@@ -26,23 +27,25 @@ namespace Assets.Game.Scripts.Zombi
 
             _followTargetMechanics = new FollowTargetMechanics(Speed, Target, transform, State);
             _rotateToTargetMechanics = new RotateToTargetMechanics(Target, transform, State);
-            _takeDamageMechanics = new TakeDamageMechanics(State, TakeDamageEvent, DeathEvent, this);
+            _zombiTakeDamageMechanics = new ZombiTakeDamageMechanics(State, TakeDamageEvent, DeathEvent, this);
+            _attackMechanics = new AttackMechanics(State, Target);
         }
 
         private void Update()
         {
             _followTargetMechanics.Update();
             _rotateToTargetMechanics.Update();
+            _attackMechanics.Update(Time.deltaTime);
         }
 
         private void OnEnable()
         {
-            _takeDamageMechanics.OnEnable();
+            _zombiTakeDamageMechanics.OnEnable();
         }
 
         private void OnDisable()
         {
-            _takeDamageMechanics.OnDisable();
+            _zombiTakeDamageMechanics.OnDisable();
         }
     }
 }

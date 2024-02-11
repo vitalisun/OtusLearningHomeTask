@@ -1,16 +1,19 @@
 ﻿using Assets.Game.Scripts.Shared;
-using UnityEngine;
 
 namespace Assets.Game.Scripts.Zombi.Mechanics
 {
-    public class TakeDamageMechanics
+    public class ZombiTakeDamageMechanics
     {
         private readonly AtomicVariable<ZombiStates> _state;
-        private readonly AtomicEvent _takeDamageEvent;
+        private readonly AtomicEvent<int> _takeDamageEvent;
         private readonly AtomicEvent<Zombi> _deathEvent;
         private readonly Zombi _zombi;
 
-        public TakeDamageMechanics(AtomicVariable<ZombiStates> state, AtomicEvent takeDamageEvent, AtomicEvent<Zombi> deathEvent, Zombi zombi)
+        public ZombiTakeDamageMechanics(
+            AtomicVariable<ZombiStates> state,
+            AtomicEvent<int> takeDamageEvent, 
+            AtomicEvent<Zombi> deathEvent, 
+            Zombi zombi)
         {
             _state = state;
             _takeDamageEvent = takeDamageEvent;
@@ -28,7 +31,7 @@ namespace Assets.Game.Scripts.Zombi.Mechanics
             _takeDamageEvent.Unsubscribe(OnTakeDamage);
         }
 
-        private void OnTakeDamage()
+        private void OnTakeDamage(int damageAmount)
         {
             if (_state.Value == ZombiStates.Death)
             {
