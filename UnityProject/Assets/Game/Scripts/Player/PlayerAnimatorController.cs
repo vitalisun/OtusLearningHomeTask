@@ -2,7 +2,7 @@
 
 namespace Assets.Game.Scripts.Player
 {
-    public class AnimatorController : MonoBehaviour
+    public class PlayerAnimatorController : MonoBehaviour
     {
         [SerializeField]
         private Player _player;
