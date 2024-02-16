@@ -6,16 +6,16 @@ namespace Assets.Game.Scripts.GameManager
 {
     public sealed class GameManager : MonoBehaviour
     {
-        public GameState State => this._state;
+        public GameState State => _state;
 
         private GameState _state;
 
         public event Action OnFinish;
 
-        private List<Listeners.IGameListener> _listeners = new();
-        private List<Listeners.IGameUpdateListener> _updateListeners = new();
-        private List<Listeners.IGameFixedUpdateListener> _fixedUpdateListeners = new();
-        private List<Listeners.IGameLateUpdateListener> _lateUpdateListeners = new();
+        private readonly List<Listeners.IGameListener> _listeners = new();
+        private readonly List<Listeners.IGameUpdateListener> _updateListeners = new();
+        private readonly List<Listeners.IGameFixedUpdateListener> _fixedUpdateListeners = new();
+        private readonly List<Listeners.IGameLateUpdateListener> _lateUpdateListeners = new();
 
         private void Awake()
         {

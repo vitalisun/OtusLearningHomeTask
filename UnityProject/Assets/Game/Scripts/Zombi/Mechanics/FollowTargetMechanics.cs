@@ -5,8 +5,8 @@ namespace Assets.Game.Scripts.Zombi.Mechanics
 {
     public class FollowTargetMechanics
     {
-        private AtomicVariable<float> _speed;
-        private AtomicVariable<Transform> _target;
+        private readonly AtomicVariable<float> _speed;
+        private readonly AtomicVariable<Transform> _target;
         private readonly Transform _transform;
         private readonly AtomicVariable<ZombiStates> _state;
 

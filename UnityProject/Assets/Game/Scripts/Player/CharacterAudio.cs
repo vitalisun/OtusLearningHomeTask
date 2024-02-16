@@ -1,11 +1,19 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace Assets.Game.Scripts.Player
 {
     public class CharacterAudio : MonoBehaviour
     {
-        [SerializeField] private Player _player;
-        [SerializeField] private AudioSource _source;
+        private Player _player;
+        private AudioSource _source;
+
+        [Inject]
+        public void Construct(Player player, AudioSource source)
+        {
+            _player = player;
+            _source = source;
+        }
 
         private void OnEnable()
         {

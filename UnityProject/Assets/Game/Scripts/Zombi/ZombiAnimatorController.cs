@@ -5,12 +5,13 @@ namespace Assets.Game.Scripts.Zombi
 {
     public class ZombiAnimatorController : MonoBehaviour
     {
-        [SerializeField] private Zombi _zombi;
         private Animator _animator;
         private AnimatorEventDispatcher _animatorEventDispatcher;
+        private Zombi _zombi;
 
         private void Awake()
         {
+            _zombi = GetComponent<Zombi>();
             _animator = GetComponentInChildren<Animator>();
             _animatorEventDispatcher = GetComponentInChildren<AnimatorEventDispatcher>();
         }

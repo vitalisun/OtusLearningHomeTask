@@ -1,6 +1,5 @@
 ﻿using Assets.Game.Scripts.Shared;
 using UnityEngine;
-using NotImplementedException = System.NotImplementedException;
 
 namespace Assets.Game.Scripts.Zombi.Mechanics
 {

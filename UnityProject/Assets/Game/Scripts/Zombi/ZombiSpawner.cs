@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Assets.Game.Scripts.GameManager;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.Game.Scripts.Zombi
 {
@@ -12,23 +13,34 @@ namespace Assets.Game.Scripts.Zombi
     {
         [SerializeField] private float _spawnInterval;
         [SerializeField] private float _returnToPoolInterval;
-        [SerializeField] private Zombi _zombiPrefab;
         [SerializeField] private Transform _zombiSpawnRoot;
         [SerializeField] private Transform _zombiContainer;
         [SerializeField] private Transform _worldTransform;
-        [SerializeField] private GameObject target;
 
-        private ZombiPool _zombiPool;
         private List<Transform> _zombiSpawnPoints;
-        private HashSet<Zombi> _zombiSet = new HashSet<Zombi>();
+        private HashSet<Zombi> _zombiSet = new();
         private GameManager.GameManager _gameManager;
+
+        private Zombi _zombiPrefab;
+        private ZombiPool _zombiPool;
+        private Player.Player _target;
+
+        [Inject]
+        public void Construct(
+            Zombi zombiPrefab,
+            ZombiPool zombiPool,
+            Player.Player target)
+        {
+            _zombiPrefab = zombiPrefab;
+            _zombiPool = zombiPool;
+            _target = target;
+        }
 
         private void Awake()
         {
             _spawnInterval = 2;
             _returnToPoolInterval = 2;
-            _zombiPool = new ZombiPool(10);
-            _zombiPrefab.Target.Value = target.transform;
+            _zombiPrefab.Target.Value = _target.transform;
             _zombiPool.InitPool(_zombiPrefab, _zombiContainer);
 
             _zombiSpawnPoints = _zombiSpawnRoot.GetComponentsInChildren<Transform>()
@@ -60,7 +72,7 @@ namespace Assets.Game.Scripts.Zombi
             var zombi = _zombiPool.GetZombiFromPool(_zombiPrefab, randomSpawnPoint, _worldTransform);
             zombi.State.Value = ZombiStates.Follow;
             zombi.DeathEvent.Subscribe(ReturnToPool);
-            zombi.Target.Value = target.transform;
+            zombi.Target.Value = _target.transform;
 
             _zombiSet.Add(zombi);
         }

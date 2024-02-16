@@ -1,5 +1,4 @@
 ﻿using Assets.Game.Scripts.Shared;
-using UnityEngine;
 
 namespace Assets.Game.Scripts.Player.Mechanics
 {

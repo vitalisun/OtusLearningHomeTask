@@ -1,13 +1,12 @@
 ﻿using Assets.Game.Scripts.Shared;
-using UnityEngine;
 
 namespace Assets.Game.Scripts.Player.Mechanics
 {
     public class FireMechanics
     {
-        private AtomicVariable<int> _bulletAmount;
-        private AtomicEvent _fireRequest;
-        private AtomicEvent _fireEvent;
+        private readonly AtomicVariable<int> _bulletAmount;
+        private readonly AtomicEvent _fireRequest;
+        private readonly AtomicEvent _fireEvent;
 
         public FireMechanics(AtomicVariable<int> bulletAmount, AtomicEvent fireRequest, AtomicEvent fireEvent)
         {

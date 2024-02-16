@@ -18,10 +18,10 @@ namespace Assets.Game.Scripts.Player.Mechanics
 
         public void Update(float deltaTime)
         {
-            Vector3 targetDirection = _rotationTargetPoint.Value - _transform.position;
+            var targetDirection = _rotationTargetPoint.Value - _transform.position;
             targetDirection.y = 0;
-            float singleStep = _rotationSpeed.Value * Time.deltaTime;
-            Vector3 newDirection = Vector3.RotateTowards(_transform.forward, targetDirection, singleStep, 0.0f);
+            var singleStep = _rotationSpeed.Value * Time.deltaTime;
+            var newDirection = Vector3.RotateTowards(_transform.forward, targetDirection, singleStep, 0.0f);
 
             Debug.DrawRay(_transform.position, newDirection, Color.red);
 

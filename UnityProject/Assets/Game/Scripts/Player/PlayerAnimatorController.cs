@@ -1,12 +1,18 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace Assets.Game.Scripts.Player
 {
     public class PlayerAnimatorController : MonoBehaviour
     {
-        [SerializeField]
         private Player _player;
         private Animator _animator;
+
+        [Inject]
+        public void Construct(Player player)
+        {
+            _player = player;
+        }
 
         public void Awake()
         {
@@ -20,11 +26,11 @@ namespace Assets.Game.Scripts.Player
 
         private void CalculateMovementAnimation()
         {
-            Vector3 localMovementDirection = _player.LocalMovementDirection.Value;
-            float moveX = localMovementDirection.x;
-            float moveZ = localMovementDirection.z;
+            var localMovementDirection = _player.LocalMovementDirection.Value;
+            var moveX = localMovementDirection.x;
+            var moveZ = localMovementDirection.z;
 
-            bool isMoving = _player.MoveDirection.Value.magnitude > 0.01f;
+            var isMoving = _player.MoveDirection.Value.magnitude > 0.01f;
 
             _animator.SetFloat("Horizontal", isMoving ? moveX : 0, 0.1f, Time.deltaTime);
             _animator.SetFloat("Vertical", isMoving ? moveZ : 0, 0.1f, Time.deltaTime);

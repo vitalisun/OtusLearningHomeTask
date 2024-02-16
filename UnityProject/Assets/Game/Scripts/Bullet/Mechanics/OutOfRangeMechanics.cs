@@ -6,10 +6,10 @@ namespace Assets.Game.Scripts.Bullet.Mechanics
     public class OutOfRangeMechanics
     {
         private readonly AtomicVariable<Vector3> _startPosition;
-        private readonly AtomicEvent<Scripts.Bullet.Bullet> _unspawnRequest;
-        private readonly Scripts.Bullet.Bullet _bullet;
+        private readonly AtomicEvent<Bullet> _unspawnRequest;
+        private readonly Bullet _bullet;
 
-        public OutOfRangeMechanics(AtomicVariable<Vector3> startPosition, AtomicEvent<Scripts.Bullet.Bullet> unspawnRequest, Scripts.Bullet.Bullet bullet)
+        public OutOfRangeMechanics(AtomicVariable<Vector3> startPosition, AtomicEvent<Bullet> unspawnRequest, Bullet bullet)
         {
             _startPosition = startPosition;
             _unspawnRequest = unspawnRequest;

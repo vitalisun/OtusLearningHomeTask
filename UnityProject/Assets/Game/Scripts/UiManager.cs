@@ -3,6 +3,7 @@ using Assets.Game.Scripts.Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class UiManager : MonoBehaviour
 {
@@ -11,8 +12,15 @@ public class UiManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _killsAmountText;
     [SerializeField] private GameObject _gameOverPanel;
     [SerializeField] private Button _restartButton;
-    [SerializeField] private Player _player;
     [SerializeField] private GameManager _gameManager;
+
+    private Player _player;
+
+    [Inject]
+    public void Construct(Player player)
+    {
+        _player = player;
+    }
 
     private void Awake()
     {

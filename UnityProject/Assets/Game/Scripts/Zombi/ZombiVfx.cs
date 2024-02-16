@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Game.Scripts.Zombi
 {
     public class ZombiVfx : MonoBehaviour
     {
-        [SerializeField] private Zombi _zombi;
-
+        private Zombi _zombi;
         private ParticleSystem _particleSystem;
 
         private void Awake()
         {
+            _zombi = GetComponent<Zombi>();
             _particleSystem = _zombi.GetComponentInChildren<ParticleSystem>();
         }
 

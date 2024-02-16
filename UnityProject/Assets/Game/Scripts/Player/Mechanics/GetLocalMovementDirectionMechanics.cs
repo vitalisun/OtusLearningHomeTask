@@ -5,9 +5,9 @@ namespace Assets.Game.Scripts.Player.Mechanics
 {
     public class GetLocalMovementDirectionMechanics
     {
-        private AtomicVariable<Vector3> _moveDirection;
-        private AtomicVariable<Vector3> _localMovementDirection;
-        private Transform _transform;
+        private readonly AtomicVariable<Vector3> _moveDirection;
+        private readonly AtomicVariable<Vector3> _localMovementDirection;
+        private readonly Transform _transform;
 
         public GetLocalMovementDirectionMechanics(AtomicVariable<Vector3> moveDirection,
             AtomicVariable<Vector3> localMovementDirection, Transform transform)

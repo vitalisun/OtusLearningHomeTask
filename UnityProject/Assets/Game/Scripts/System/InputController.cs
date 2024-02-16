@@ -1,17 +1,23 @@
 ﻿using UnityEngine;
+using static Assets.Game.Scripts.GameManager.Listeners;
 
 namespace Assets.Game.Scripts.System
 {
-    public class InputController :  MonoBehaviour
+    public class InputController : IGameUpdateListener
     {
-        [SerializeField]
-        private Player.Player _player;
+        private readonly Player.Player _player;
 
         private readonly float _smoothTime = 0.1f;
         private Vector3 _currentMoveDirection = Vector3.zero;
         private Vector3 _velocity = Vector3.zero;
 
-        private void Update()
+        public InputController(Player.Player player)
+        {
+            _player = player;
+        }
+
+
+        public void OnUpdate(float deltaTime)
         {
             Move();
             RotateTowardCursor();

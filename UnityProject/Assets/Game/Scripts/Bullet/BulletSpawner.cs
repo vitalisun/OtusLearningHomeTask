@@ -1,20 +1,28 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace Assets.Game.Scripts.Bullet
 {
     public class BulletSpawner : MonoBehaviour
     {
-        [SerializeField] private Player.Player _player;
-        [SerializeField] private Bullet _bulletPrefab;
         [SerializeField] private Transform _bulletSpawnPoint;
         [SerializeField] private Transform _bulletContainer;
         [SerializeField] private Transform _worldTransform;
 
+        private Player.Player _player;
+        private Bullet _bulletPrefab;
         private BulletPool _bulletPool;
+
+        [Inject]
+        public void Construct(Player.Player player, Bullet bulletPrefab, BulletPool bulletPool)
+        {
+            _player = player;
+            _bulletPrefab = bulletPrefab;
+            _bulletPool = bulletPool;
+        }
 
         private void Awake()
         {
-            _bulletPool = new BulletPool(10);
             _bulletPool.InitPool(_bulletPrefab, _bulletContainer);
 
             _player.FireEvent.Subscribe(SpawnBullet);

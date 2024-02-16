@@ -5,7 +5,7 @@ namespace Assets.Game.Scripts.Zombi.Mechanics
 {
     public class RotateToTargetMechanics
     {
-        private AtomicVariable<Transform> _target;
+        private readonly AtomicVariable<Transform> _target;
         private readonly Transform _transform;
         private readonly AtomicVariable<ZombiStates> _state;
 

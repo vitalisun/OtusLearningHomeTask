@@ -9,7 +9,7 @@ namespace Assets.Game.Scripts.Shared
 
         public void ReceiveEvent(string key)
         {
-            this.OnEventReceived?.Invoke(key);
+            OnEventReceived?.Invoke(key);
         }
     }
 }

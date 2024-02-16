@@ -1,12 +1,18 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace Assets.Game.Scripts.Player
 {
     public class CharacterVfx : MonoBehaviour
     {
-        [SerializeField] private Player _player;
-
+        private Player _player;
         private ParticleSystem _particleSystem;
+
+        [Inject]
+        public void Construct(Player player)
+        {
+            _player = player;
+        }
 
         private void Awake()
         {

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Game.Scripts.Zombi
 {
-    internal sealed class ZombiPool
+    public sealed class ZombiPool
     {
         private readonly int _initialCount;
         private readonly Queue<Zombi> _pool = new();
