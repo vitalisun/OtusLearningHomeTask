@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 
 namespace EcsEngine.Components
 {
     [Serializable]
-    public struct FireRequest
+    public struct AttackRequest
     {
     }
 }

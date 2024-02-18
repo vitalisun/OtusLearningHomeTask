@@ -1,5 +1,7 @@
 ﻿using System;
+using Assets.Scripts.EcsEngine.Systems;
 using EcsEngine.Components;
+using EcsEngine.Systems;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using Leopotam.EcsLite.Entities;
@@ -48,21 +50,22 @@ namespace EcsEngine
             _systems
 
                 //Game Logic:
-         
+                .Add(new FindTargetSystem())
+                .Add(new AttackSystem())
+
 
                 //Game Listeners:
 
                 //View:
-
+                .Add(new TransformViewSynchronizer())
 
                 //Editor:
 #if UNITY_EDITOR
                 .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
-                .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem(EcsWorlds.Events))
+                .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem(EcsWorlds.Events));
 #endif
-                //Clean Up:
-
-                .DelHere<DeathEvent>();
+            Debug.Log("EcsAdmin Awake");
+            //Clean Up:
         }
 
         private void Start()
