@@ -9,7 +9,7 @@ namespace EcsEngine.Systems
     {
         private readonly EcsFilterInject<Inc<TargetEntity, MoveSpeed, Position, AttackRange>> filter;
         private readonly EcsPoolInject<Rotation> rotationPool;
-        //private readonly EcsPoolInject<AttackRequest> attackRequestPool;
+        private readonly EcsPoolInject<AttackRequest> attackRequestPool;
         private readonly EcsPoolInject<Position> targetPositionPool;
         void IEcsRunSystem.Run(IEcsSystems systems)
         {
@@ -33,17 +33,16 @@ namespace EcsEngine.Systems
                 {
                     position.value = Vector3.MoveTowards(position.value, targetPosition.value, moveSpeed.value * deltaTime);
                 }
-                //else
-                //{
-                //    attackRequestPool.Value.Add(entity);
-                //}
+                else
+                {
+                    attackRequestPool.Value.Add(entity);
+                }
 
                 if (rotationPool.Value.Has(entity))
                 {
                     ref Rotation rotation = ref rotationPool.Value.Get(entity);
                     rotation.value = Quaternion.LookRotation(targetPosition.value - position.value);
                 }
-
             }
         }
     }

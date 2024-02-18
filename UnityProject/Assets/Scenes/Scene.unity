@@ -140,7 +140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.53
+      value: 2.56
       objectReference: {fileID: 0}
     - target: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -148,7 +148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.93
+      value: -9.61
       objectReference: {fileID: 0}
     - target: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -295,7 +295,7 @@ MonoBehaviour:
   _moveSpeed: 2
   _attackCooldown: 2
   _attackRange: 1
-  _targetPosition: {x: 13, y: 2.7, z: -13}
+  _damage: 1
   _team: 1
 --- !u!1001 &348754453
 PrefabInstance:
@@ -617,7 +617,7 @@ MonoBehaviour:
   _moveSpeed: 2
   _attackCooldown: 2
   _attackRange: 1
-  _targetPosition: {x: 13, y: 2.7, z: -13}
+  _damage: 1
   _team: 0
 --- !u!1 &750259623
 GameObject:
@@ -1404,7 +1404,7 @@ MonoBehaviour:
   _moveSpeed: 2
   _attackCooldown: 2
   _attackRange: 7
-  _targetPosition: {x: 13, y: 2.7, z: -13}
+  _damage: 1
   _team: 1
 --- !u!114 &1914976723
 MonoBehaviour:
@@ -1602,7 +1602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1870072543877420728, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.23
+      value: 18.36
       objectReference: {fileID: 0}
     - target: {fileID: 1870072543877420728, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1610,7 +1610,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1870072543877420728, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.98
+      value: 13.18
       objectReference: {fileID: 0}
     - target: {fileID: 1870072543877420728, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1667,7 +1667,7 @@ MonoBehaviour:
   _moveSpeed: 2
   _attackCooldown: 2
   _attackRange: 7
-  _targetPosition: {x: 13, y: 2.7, z: -13}
+  _damage: 1
   _team: 0
 --- !u!114 &1870072545585007309
 MonoBehaviour:
@@ -1790,7 +1790,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.36
+      value: 11.65
       objectReference: {fileID: 0}
     - target: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1798,7 +1798,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.32
+      value: 10.85
       objectReference: {fileID: 0}
     - target: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a, type: 3}
       propertyPath: m_LocalRotation.w

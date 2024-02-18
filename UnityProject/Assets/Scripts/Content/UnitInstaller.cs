@@ -11,7 +11,8 @@ namespace Assets.Scripts.Content
         [SerializeField] private int _moveSpeed;
         [SerializeField] private float _attackCooldown;
         [SerializeField] private float _attackRange;
-        [SerializeField] private Vector3 _targetPosition; //todo: remove after target system implementation
+        [SerializeField] private int _damage;
+
         [SerializeField] private TeamEnum _team;
 
         protected override void Install(Entity entity)
@@ -25,6 +26,7 @@ namespace Assets.Scripts.Content
             entity.AddData(new TargetEntity { value = 0 });
             entity.AddData(new Team { value = _team });
             entity.AddData(new TransformView { value = transform });
+            entity.AddData(new Damage { value = _damage });
         }
 
         protected override void Dispose(Entity entity)

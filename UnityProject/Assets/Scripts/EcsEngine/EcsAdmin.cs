@@ -52,6 +52,7 @@ namespace EcsEngine
                 //Game Logic:
                 .Add(new FindTargetSystem())
                 .Add(new AttackSystem())
+                .Add(new TakeDamageSystem())
 
 
                 //Game Listeners:
