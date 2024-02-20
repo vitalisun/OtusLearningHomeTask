@@ -35,6 +35,7 @@ namespace Assets.Scripts.EcsEngine.Systems
                 ref Position position = ref positionPool.Get(entity);
 
                 Vector3 point = Vector3.positiveInfinity;
+                targetEntity.value = null;
 
                 foreach (int unit in filter.Value)
                 {

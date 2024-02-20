@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using Assets.Scripts;
+using Assets.Scripts.Content;
 using Assets.Scripts.EcsEngine.Systems;
 using EcsEngine.Components;
 using EcsEngine.Systems;
@@ -7,6 +10,7 @@ using Leopotam.EcsLite.Di;
 using Leopotam.EcsLite.Entities;
 using Leopotam.EcsLite.ExtendedSystems;
 using Leopotam.EcsLite.Helpers;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace EcsEngine
@@ -18,8 +22,12 @@ namespace EcsEngine
         private EcsWorld _world;
         private EcsWorld _events;
         private IEcsSystems _systems;
-        private EntityManager _entityManager;
+        private UnitManager _unitManager;
 
+        [ShowInInspector]
+        public Dictionary<TeamEnum, Entity[]> _prefabs = new Dictionary<TeamEnum, Entity[]>();
+        [SerializeField] private Transform _poolContainer;
+ 
         public EcsEntityBuilder CreateEntity(string worldName = null)
         {
             return new EcsEntityBuilder(_systems.GetWorld(worldName));
@@ -39,7 +47,7 @@ namespace EcsEngine
         {
             Instance = this;
 
-            _entityManager = new EntityManager();
+            _unitManager = new UnitManager();
 
             _world = new EcsWorld();
             _events = new EcsWorld();
@@ -53,7 +61,7 @@ namespace EcsEngine
                 .Add(new FindTargetSystem())
                 .Add(new AttackSystem())
                 .Add(new TakeDamageSystem())
-
+                .Add(new UnitDestroySystem())
 
                 //Game Listeners:
 
@@ -71,8 +79,8 @@ namespace EcsEngine
 
         private void Start()
         {
-            _entityManager.Initialize(_world);
-            _systems.Inject(_entityManager);
+            _unitManager.Initialize(_world, _prefabs, _poolContainer);
+            _systems.Inject(_unitManager);
             _systems.Init();
         }
 

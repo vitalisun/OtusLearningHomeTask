@@ -22,9 +22,14 @@ namespace Assets.Scripts.EcsEngine.Systems
 
             foreach (int entity in filter.Value)
             {
-                ref Damage damage = ref damagePool.Value.Get(entity);
                 ref TargetEntity targetEntity = ref targetEntityPool.Value.Get(entity);
-                ref Health health = ref healthPool.Value.Get(targetEntity.value);
+                if (targetEntity.value == null)
+                {
+                    continue;
+                }
+
+                ref Damage damage = ref damagePool.Value.Get(entity);
+                ref Health health = ref healthPool.Value.Get(targetEntity.value.Value);
 
                 health.value = Mathf.Max(0, health.value - damage.value);
 

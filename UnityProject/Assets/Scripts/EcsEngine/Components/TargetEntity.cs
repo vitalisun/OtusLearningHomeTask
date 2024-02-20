@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 
 namespace EcsEngine.Components
 {
     [Serializable]
     public struct TargetEntity
     {
-        public int value;
+        public int? value;
     }
 }

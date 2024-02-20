@@ -23,8 +23,10 @@ namespace EcsEngine.Systems
             foreach (int entity in filter.Value)
             {
                 ref TargetEntity targetEntity = ref targetEntityPool.Get(entity);
+                if (!targetEntity.value.HasValue)
+                    continue;
 
-                Position targetPosition = targetPositionPool.Value.Get(targetEntity.value);
+                Position targetPosition = targetPositionPool.Value.Get(targetEntity.value.Value);
                 MoveSpeed moveSpeed = speedPool.Get(entity);
                 ref Position position = ref positionPool.Get(entity);
                 ref AttackRange attackRange = ref attackRangePool.Get(entity);

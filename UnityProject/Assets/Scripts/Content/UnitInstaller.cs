@@ -2,6 +2,7 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Entities;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 namespace Assets.Scripts.Content
 {
