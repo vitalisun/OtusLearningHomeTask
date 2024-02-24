@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using EcsEngine.Components;
+using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -22,17 +24,25 @@ namespace Assets.Scripts
             }
         }
 
-        public GameObject GetFromPool(GameObject prefab, Transform spawnTransform, Transform worldTransform)
+        public void InitPool(GameObject[] prefabs, Transform container)
+        {
+            for (var i = 0; i < _initialCount; i++)
+            {
+                var randomNum = Random.Range(0, prefabs.Length);
+
+                var obj = Object.Instantiate(prefabs[randomNum], container);
+                _pool.Enqueue(obj);
+            }
+        }
+
+        public GameObject GetFromPool(Vector3 spawnPosition, Transform worldTransform)
         {
             if (_pool.TryDequeue(out var obj))
             {
                 obj.transform.SetParent(worldTransform);
-                obj.transform.position = spawnTransform.position;
+                obj.transform.position = spawnPosition;
             }
-            else
-            {
-                obj = Object.Instantiate(prefab, spawnTransform.position, spawnTransform.rotation, worldTransform);
-            }
+
             return obj;
         }
 

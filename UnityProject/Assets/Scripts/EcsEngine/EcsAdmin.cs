@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Assets.Scripts;
 using Assets.Scripts.Content;
 using Assets.Scripts.EcsEngine.Systems;
@@ -24,10 +25,14 @@ namespace EcsEngine
         private IEcsSystems _systems;
         private UnitManager _unitManager;
 
-        [ShowInInspector]
-        public Dictionary<TeamEnum, Entity[]> _prefabs = new Dictionary<TeamEnum, Entity[]>();
+        public List<Entity> _redTeam;
+        public List<Entity> _blueTeam;
+        public List<Transform> _redSpawnPoints;
+        public List<Transform> _blueSpawnPoints;
+
         [SerializeField] private Transform _poolContainer;
- 
+        [SerializeField] private GameObject _unitsContainer;
+
         public EcsEntityBuilder CreateEntity(string worldName = null)
         {
             return new EcsEntityBuilder(_systems.GetWorld(worldName));
@@ -79,7 +84,29 @@ namespace EcsEngine
 
         private void Start()
         {
-            _unitManager.Initialize(_world, _prefabs, _poolContainer);
+            var prefabs = new Dictionary<TeamEnum, TeamDescription>
+            {
+                {
+                    TeamEnum.Red,
+                    new TeamDescription
+                    {
+                        Entities = _redTeam.ToArray(),
+                        SpawnPoints = _redSpawnPoints.Select(x=>x.position).ToArray(),
+                        UnitsContainer = _unitsContainer
+                    }
+                },
+                {
+                    TeamEnum.Blue,
+                    new TeamDescription
+                    {
+                        Entities = _blueTeam.ToArray(),
+                        SpawnPoints = _blueSpawnPoints.Select(x=>x.position).ToArray(),
+                        UnitsContainer = _unitsContainer
+                    }
+                }
+            };
+
+            _unitManager.Initialize(_world, prefabs, _poolContainer);
             _systems.Inject(_unitManager);
             _systems.Init();
         }

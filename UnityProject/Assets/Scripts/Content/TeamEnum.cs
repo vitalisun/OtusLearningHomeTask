@@ -1,8 +1,8 @@
-namespace Assets.Scripts.Content
+﻿namespace Assets.Scripts.Content
 {
     public enum TeamEnum
     {
-        Blue,
-        Red
+        Blue = 0,
+        Red = 1
     }
 }
