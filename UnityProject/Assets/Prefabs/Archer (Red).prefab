@@ -48,9 +48,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 10
   _moveSpeed: 2
-  _attackCooldown: 2
   _attackRange: 7
   _damage: 1
+  _timeToNextAttack: 4
+  _radius: 3
   _team: 1
 --- !u!114 &1655757417135683036
 MonoBehaviour:

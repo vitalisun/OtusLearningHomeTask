@@ -3,7 +3,7 @@
 namespace EcsEngine.Components
 {
     [Serializable]
-    public struct AttackCooldown
+    public struct EntityRadius
     {
         public float value;
     }

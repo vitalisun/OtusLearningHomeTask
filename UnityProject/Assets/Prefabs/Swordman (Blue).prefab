@@ -62,9 +62,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 10
   _moveSpeed: 2
-  _attackCooldown: 2
-  _attackRange: 1
+  _attackRange: 0
   _damage: 1
+  _timeToNextAttack: 2
+  _radius: 3
   _team: 0
 --- !u!1001 &6529169434181819052
 PrefabInstance:

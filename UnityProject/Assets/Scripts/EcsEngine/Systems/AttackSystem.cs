@@ -1,4 +1,5 @@
-﻿using EcsEngine.Components;
+﻿using Assets.Scripts.EcsEngine.Components;
+using EcsEngine.Components;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
@@ -11,6 +12,9 @@ namespace EcsEngine.Systems
         private readonly EcsPoolInject<Rotation> rotationPool;
         private readonly EcsPoolInject<AttackRequest> attackRequestPool;
         private readonly EcsPoolInject<Position> targetPositionPool;
+        private readonly EcsPoolInject<TimeToNextAttack> timeToNextAttackPool;
+        private readonly EcsPoolInject<EntityRadius> entityRadiusPool;
+
         void IEcsRunSystem.Run(IEcsSystems systems)
         {
             float deltaTime = Time.deltaTime;
@@ -30,15 +34,24 @@ namespace EcsEngine.Systems
                 MoveSpeed moveSpeed = speedPool.Get(entity);
                 ref Position position = ref positionPool.Get(entity);
                 ref AttackRange attackRange = ref attackRangePool.Get(entity);
+                ref TimeToNextAttack timeToNextAttack = ref timeToNextAttackPool.Value.Get(entity);
+                ref EntityRadius entityRadius = ref entityRadiusPool.Value.Get(targetEntity.value.Value);
 
-                if (Vector3.Distance(position.value, targetPosition.value) > attackRange.value)
+                var attackDistance = entityRadius.value + attackRange.value;
+
+                if (Vector3.Distance(position.value, targetPosition.value) > attackDistance)
                 {
                     position.value = Vector3.MoveTowards(position.value, targetPosition.value, moveSpeed.value * deltaTime);
                 }
                 else
                 {
-                    attackRequestPool.Value.Add(entity);
+                    if (timeToNextAttack.value <= 0)
+                    {
+                        attackRequestPool.Value.Add(entity);
+                    }
                 }
+
+                timeToNextAttack.value -= deltaTime;
 
                 if (rotationPool.Value.Has(entity))
                 {

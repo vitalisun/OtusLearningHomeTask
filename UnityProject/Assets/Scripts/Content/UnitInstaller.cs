@@ -1,4 +1,5 @@
-﻿using EcsEngine.Components;
+﻿using Assets.Scripts.EcsEngine.Components;
+using EcsEngine.Components;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Entities;
 using UnityEngine;
@@ -10,9 +11,10 @@ namespace Assets.Scripts.Content
     {
         [SerializeField] private int _health;
         [SerializeField] private int _moveSpeed;
-        [SerializeField] private float _attackCooldown;
         [SerializeField] private float _attackRange;
         [SerializeField] private int _damage;
+        [SerializeField] private float _timeToNextAttack;
+        [SerializeField] private float _radius;
 
         [SerializeField] private TeamEnum _team;
 
@@ -20,7 +22,6 @@ namespace Assets.Scripts.Content
         {
             entity.AddData(new Health { value = _health });
             entity.AddData(new MoveSpeed { value = _moveSpeed });
-            entity.AddData(new AttackCooldown { value = _attackCooldown });
             entity.AddData(new AttackRange { value = _attackRange });
             entity.AddData(new Position { value = transform.position });
             entity.AddData(new Rotation { value = transform.rotation });
@@ -28,6 +29,8 @@ namespace Assets.Scripts.Content
             entity.AddData(new Team { value = _team });
             entity.AddData(new TransformView { value = transform });
             entity.AddData(new Damage { value = _damage });
+            entity.AddData(new TimeToNextAttack(_timeToNextAttack));
+            entity.AddData(new EntityRadius { value = _radius });
         }
 
         protected override void Dispose(Entity entity)
