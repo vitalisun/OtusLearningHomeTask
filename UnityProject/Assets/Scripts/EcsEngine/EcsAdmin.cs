@@ -23,15 +23,16 @@ namespace EcsEngine
         private EcsWorld _world;
         private EcsWorld _events;
         private IEcsSystems _systems;
-        private UnitManager _unitManager;
+
+        public UnitManager UnitManager { get; private set; }
 
         public List<Entity> _redTeam;
         public List<Entity> _blueTeam;
         public List<Transform> _redSpawnPoints;
         public List<Transform> _blueSpawnPoints;
+        public GameObject UnitsContainer;
 
         [SerializeField] private Transform _poolContainer;
-        [SerializeField] private GameObject _unitsContainer;
 
         public EcsEntityBuilder CreateEntity(string worldName = null)
         {
@@ -48,11 +49,12 @@ namespace EcsEngine
             };
         }
 
+
         private void Awake()
         {
             Instance = this;
 
-            _unitManager = new UnitManager();
+            UnitManager = new UnitManager();
 
             _world = new EcsWorld();
             _events = new EcsWorld();
@@ -92,7 +94,7 @@ namespace EcsEngine
                     {
                         Entities = _redTeam.ToArray(),
                         SpawnPoints = _redSpawnPoints.Select(x=>x.position).ToArray(),
-                        UnitsContainer = _unitsContainer
+                        UnitsContainer = UnitsContainer
                     }
                 },
                 {
@@ -101,13 +103,13 @@ namespace EcsEngine
                     {
                         Entities = _blueTeam.ToArray(),
                         SpawnPoints = _blueSpawnPoints.Select(x=>x.position).ToArray(),
-                        UnitsContainer = _unitsContainer
+                        UnitsContainer = UnitsContainer
                     }
                 }
             };
 
-            _unitManager.Initialize(_world, prefabs, _poolContainer);
-            _systems.Inject(_unitManager);
+            UnitManager.Initialize(_world, prefabs, _poolContainer);
+            _systems.Inject(UnitManager);
             _systems.Init();
         }
 

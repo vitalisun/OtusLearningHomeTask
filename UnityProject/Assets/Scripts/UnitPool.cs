@@ -10,6 +10,8 @@ namespace Assets.Scripts
         private readonly int _initialCount;
         private readonly Queue<GameObject> _pool = new();
 
+        private readonly List<GameObject> _prefabs = new();
+
         public UnitPool(int initialCount)
         {
             _initialCount = initialCount;
@@ -17,6 +19,8 @@ namespace Assets.Scripts
 
         public void InitPool(GameObject prefab, Transform container)
         {
+            _prefabs.Add(prefab);
+
             for (var i = 0; i < _initialCount; i++)
             {
                 var obj = Object.Instantiate(prefab, container);
@@ -26,6 +30,8 @@ namespace Assets.Scripts
 
         public void InitPool(GameObject[] prefabs, Transform container)
         {
+            _prefabs.AddRange(prefabs);
+
             for (var i = 0; i < _initialCount; i++)
             {
                 var randomNum = Random.Range(0, prefabs.Length);
@@ -41,6 +47,11 @@ namespace Assets.Scripts
             {
                 obj.transform.SetParent(worldTransform);
                 obj.transform.position = spawnPosition;
+            }
+            else
+            {
+                var randomNum = Random.Range(0, _prefabs.Count);
+                obj = Object.Instantiate(_prefabs[randomNum], spawnPosition, Quaternion.identity, worldTransform);
             }
 
             return obj;
