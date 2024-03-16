@@ -14,6 +14,7 @@ namespace EcsEngine.Systems
         private readonly EcsPoolInject<Position> targetPositionPool;
         private readonly EcsPoolInject<TimeToNextAttack> timeToNextAttackPool;
         private readonly EcsPoolInject<EntityRadius> entityRadiusPool;
+        private readonly EcsPoolInject<AnimatorView> animatorPool;
 
         void IEcsRunSystem.Run(IEcsSystems systems)
         {
@@ -36,19 +37,27 @@ namespace EcsEngine.Systems
                 ref AttackRange attackRange = ref attackRangePool.Get(entity);
                 ref TimeToNextAttack timeToNextAttack = ref timeToNextAttackPool.Value.Get(entity);
                 ref EntityRadius entityRadius = ref entityRadiusPool.Value.Get(targetEntity.value.Value);
+                ref AnimatorView animatorView = ref animatorPool.Value.Get(entity);
 
                 var attackDistance = entityRadius.value + attackRange.value;
 
                 if (Vector3.Distance(position.value, targetPosition.value) > attackDistance)
                 {
                     position.value = Vector3.MoveTowards(position.value, targetPosition.value, moveSpeed.value * deltaTime);
+                    animatorView.value.SetInteger("AnimState", 1);
                 }
                 else
                 {
                     if (timeToNextAttack.value <= 0)
                     {
                         attackRequestPool.Value.Add(entity);
+                        animatorView.value.SetInteger("AnimState", 2);
                     }
+                    else
+                    {
+                        animatorView.value.SetInteger("AnimState", 0);
+                    }
+
                 }
 
                 timeToNextAttack.value -= deltaTime;

@@ -16,7 +16,10 @@ namespace Assets.Scripts.Content
         [SerializeField] private float _timeToNextAttack;
         [SerializeField] private float _radius;
 
-        [SerializeField] private TeamEnum _team;
+        [SerializeField] 
+        private TeamEnum _team;
+
+        private Animator animator;
 
         protected override void Install(Entity entity)
         {
@@ -31,6 +34,9 @@ namespace Assets.Scripts.Content
             entity.AddData(new Damage { value = _damage });
             entity.AddData(new TimeToNextAttack(_timeToNextAttack));
             entity.AddData(new EntityRadius { value = _radius });
+
+            animator = GetComponentInChildren<Animator>();
+            entity.AddData(new AnimatorView { value = animator });
         }
 
         protected override void Dispose(Entity entity)
