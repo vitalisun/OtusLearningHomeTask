@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace UI
 {
@@ -18,6 +18,23 @@ namespace UI
         public HeroListView GetRedPlayer()
         {
             return this.redPlayer;
+        }
+
+        void OnEnable()
+        {
+            this.bluePlayer.OnHeroClicked += this.OnHeroClicked;
+            this.redPlayer.OnHeroClicked += this.OnHeroClicked;
+        }
+
+        void OnDisable()
+        {
+            this.bluePlayer.OnHeroClicked -= this.OnHeroClicked;
+            this.redPlayer.OnHeroClicked -= this.OnHeroClicked;
+        }
+
+        private void OnHeroClicked(HeroView view)
+        {
+            Debug.Log(view.name);
         }
     }
 }

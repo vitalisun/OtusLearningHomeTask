@@ -540,6 +540,7 @@ GameObject:
   - component: {fileID: 389887960}
   - component: {fileID: 389887961}
   - component: {fileID: 389887962}
+  - component: {fileID: 389887963}
   m_Layer: 5
   m_Name: Player (Red)
   m_TagString: Untagged
@@ -673,6 +674,23 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 10
   m_TargetDisplay: 0
+--- !u!114 &389887963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389887956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 55
 --- !u!1001 &459021462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1030,6 +1048,7 @@ GameObject:
   - component: {fileID: 743752123}
   - component: {fileID: 743752126}
   - component: {fileID: 743752127}
+  - component: {fileID: 743752128}
   m_Layer: 5
   m_Name: Player (Blue)
   m_TagString: Untagged
@@ -1163,6 +1182,23 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &743752128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743752121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 55
 --- !u!224 &1141858329 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0, type: 3}
@@ -1409,8 +1445,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92815ed0907157e4688a4d4b0bf0a5a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runOnStart: 1
-  runOnFinish: 1
+  runOnStart: 0
+  runOnFinish: 0
 --- !u!1001 &1827189790
 PrefabInstance:
   m_ObjectHideFlags: 0
