@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Assets.Scripts.Pipeline
+namespace Assets.Scripts.Core.Pipeline
 {
     public abstract class Task
     {

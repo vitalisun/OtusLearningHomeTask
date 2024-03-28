@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Pipeline.Turn.Tasks
+namespace Assets.Scripts.Core.Pipeline.Turn.Tasks
 {
     public sealed class StartTurnTask : Task
     {

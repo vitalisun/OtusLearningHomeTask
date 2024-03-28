@@ -1,8 +1,7 @@
 ﻿using JetBrains.Annotations;
 
-namespace Assets.Scripts.Pipeline.Turn
+namespace Assets.Scripts.Core.Pipeline.Turn
 {
-    [UsedImplicitly]
     public sealed class TurnPipeline : Pipeline
     {
         

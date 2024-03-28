@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.Pipeline.Turn
+namespace Assets.Scripts.Core.Pipeline.Turn
 {
     public sealed class TurnPipelineRunner : MonoBehaviour
     {
@@ -11,26 +11,26 @@ namespace Assets.Scripts.Pipeline.Turn
         
         private TurnPipeline _turnPipeline;
 
-        [Inject]
+        //[Inject]
         private void Construct(TurnPipeline turnPipeline)
         {
             _turnPipeline = turnPipeline;
         }
 
-        private void OnEnable()
-        {
-            _turnPipeline.OnFinished += OnTurnPipelineFinished;
-        }
+        //private void OnEnable()
+        //{
+        //    _turnPipeline.OnFinished += OnTurnPipelineFinished;
+        //}
 
-        private void OnDisable()
-        {
-            _turnPipeline.OnFinished -= OnTurnPipelineFinished;
-        }
+        //private void OnDisable()
+        //{
+        //    _turnPipeline.OnFinished -= OnTurnPipelineFinished;
+        //}
 
         private void Start()
         {
-            if (runOnStart)
-                Run();
+            //if (runOnStart)
+            //    Run();
         }
 
         [Button]
